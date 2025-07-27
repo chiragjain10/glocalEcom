@@ -11,7 +11,7 @@ const Homepage = () => {
   return (
     <div>
       <Navbar />
-      <MenuNavigation/>
+      {/* <MenuNavigation/> */}
       <Banner/>
       <ProductCategories />
       <FeaturedProducts />

@@ -4,7 +4,7 @@ import {
   FaBookOpen, FaTshirt, FaHome, FaCrown, FaTags, FaChevronRight,
 } from "react-icons/fa";
 
-const categories = [
+ export const categories = [
   {
     title: "Audio Video",
     icon: <FaHeadphonesAlt />,
@@ -158,4 +158,4 @@ const MenuNavigation = () => {
   );
 };
 
-export default MenuNavigation;
+export default MenuNavigation
