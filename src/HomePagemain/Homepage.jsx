@@ -6,6 +6,7 @@ import ProductCategories from './ProductCategories.jsx'
 import FeaturedProducts from './FeaturedProducts.jsx'
 import TestimonialSlider from './Testimonials.jsx'
 import MenuNavigation from './MenuNavigation.jsx'
+import WhyChooseUs from './WhyChooseUs.jsx'
 
 const Homepage = () => {
   return (
@@ -13,6 +14,7 @@ const Homepage = () => {
       <Navbar />
       {/* <MenuNavigation/> */}
       <Banner/>
+      <WhyChooseUs/>x``
       <ProductCategories />
       <FeaturedProducts />
       <TestimonialSlider />

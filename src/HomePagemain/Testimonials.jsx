@@ -1,80 +1,69 @@
-
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules'; // ✅ Correct position
-import { FaQuoteLeft } from 'react-icons/fa';
-
-//  Import Swiper core CSS
-import 'swiper/css';
-import 'swiper/css/pagination';
+import React from "react";
+import Slider from "react-slick";
+import { FaQuoteLeft } from "react-icons/fa";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const testimonials = [
   {
-    name: "Anjali Mehta",
-    role: "Artist & Customer",
-    review: "Absolutely beautiful artwork! Loved the packaging and quality. Highly recommend this store!",
-    image: "/img/user1.jpg"
+    text: "Best shopping experience I’ve had in years. The website is clean and easy to use, the quality of the products is top-notch, and the delivery was super fast!",
+    name: "Anjali Sharma",
+    role: "Happy Customer",
   },
   {
-    name: "Rahul Sharma",
-    role: "Regular Buyer",
-    review: "Top-notch Indian art pieces. Fast delivery and amazing customer service.",
-    image: "/img/user2.jpg"
+    text: "Absolutely loved the art pieces. They were even more beautiful in real life. I’ll definitely be recommending this to my friends and family!",
+    name: "Ravi Mehra",
+    role: "Verified Buyer",
   },
   {
-    name: "Priya Nair",
-    role: "Art Lover",
-    review: "Fell in love with the handmade products! Truly reflects Indian tradition.",
-    image: "/img/user3.jpg"
+    text: "The customer service was very helpful. I had a few queries before buying, and they patiently answered everything. Great experience!",
+    name: "Sanya Verma",
+    role: "Art Collector",
   },
-   {
-    name: "Arpit kumar",
-    role: "Art Lover",
-    review: "Fell in love with the handmade products! Truly reflects Indian tradition.",
-    image: "/img/user3.jpg"
-  },
-
-   {
-    name: "Harish kumar",
-    role: "Art Lover",
-    review: "Fell in love with the handmade products! Truly reflects Indian tradition.",
-    image: "/img/user3.jpg"
-  }
-
 ];
 
 const TestimonialSlider = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+     arrows: false,
+    speed: 800,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3500,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
   return (
-    <div className="testimonial-section">
+    <section className="testimonial-section">
       <h2 className="testimonial-title">What Our Customers Say</h2>
-      <Swiper
-        spaceBetween={30}
-        slidesPerView={1}
-        pagination={{ clickable: true }}
-        modules={[Pagination]}
-        className="testimonial-slider"
-        breakpoints={{
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 }
-        }}
-      >
-        {testimonials.map((t, index) => (
-          <SwiperSlide key={index}>
+      <Slider {...settings} className="testimonial-slider">
+        {testimonials.map((item, index) => (
+          <div key={index} className="testimonial-slide">
             <div className="testimonial-card">
               <FaQuoteLeft className="quote-icon" />
-              <p className="review-text">"{t.review}"</p>
-              <div className="reviewer">
-                <img src={t.image} alt={t.name} className="reviewer-img" />
-                <div>
-                  <h4 className="reviewer-name">{t.name}</h4>
-                  <p className="reviewer-role">{t.role}</p>
-                </div>
-              </div>
+              <p className="review-text">"{item.text}"</p>
+              <h4 className="reviewer-name">{item.name}</h4>
+              <span className="reviewer-role">{item.role}</span>
             </div>
-          </SwiperSlide>
+          </div>
         ))}
-      </Swiper>
-    </div>
+      </Slider>
+    </section>
   );
 };
 

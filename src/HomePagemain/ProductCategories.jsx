@@ -34,7 +34,7 @@ const categories = [
 
 const ProductCategories = () => {
   return (
-    <section className="py-10 px-4 md:px-10 font-['Inter']">
+    <section className="py-10 px-4 mt-11 md:px-10 font-['Inter']">
       <div className="mb-6 text-center">
         <h2 className="text-2xl md:text-3xl font-semibold text-gray-800">
           Explore our thoughtful and planet-first ✧ <em className="italic">Categories</em>
@@ -52,7 +52,7 @@ const ProductCategories = () => {
           1024: { slidesPerView: 4 },
         }}
         modules={[Autoplay, Pagination]}
-        className="px-4"
+        className="px-4 mt-5"
       >
         {categories.map((cat, index) => (
           <SwiperSlide key={index}>
@@ -62,13 +62,16 @@ const ProductCategories = () => {
                 alt={cat.name}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-black/40 text-white flex flex-col items-center justify-center text-center px-4">
-                <p className="text-sm text-gray-200 mb-1">Explore</p>
-                <h3 className="text-lg font-semibold italic">{cat.name}</h3>
-                <button className="mt-3 bg-yellow-100 text-black px-4 py-[2px] rounded-full text-sm font-medium w-fit hover:bg-yellow-200 transition">
-                  Shop →
-                </button>
+              <div className=" absolute inset-0 bg-black/40 text-white flex flex-col items-center justify-center text-center px-4">
+                <div className='mt-16'>
+                  <p className="text-sm text-gray-200 mb-1">Explore</p>
+                  <h3 className="text-lg font-semibold italic mt-">{cat.name}</h3>
+                </div>
+                <button className=" mt-20 bg-yellow-100 text-black px-4 py-[4px] rounded-full text-sm font-medium w-fit hover:bg-yellow-200 transition">
+                Shop →
+              </button>
               </div>
+              
             </div>
           </SwiperSlide>
         ))}
