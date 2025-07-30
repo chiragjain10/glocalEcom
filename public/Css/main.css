@@ -448,6 +448,8 @@
 
 .product-card {
   background-color: #fff;
+  border: 1px solid #854c30;
+  padding: 10px;
   border-radius: 10px;
   overflow: hidden;
   width: 100%;
@@ -458,7 +460,6 @@
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 }
 
@@ -481,11 +482,10 @@
 
 .hover-actions {
   position: absolute;
-  bottom: 12px;
-  left: 50%;
+  bottom: 10px;
+  left: 70%;
   transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
   gap: 10px;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -530,8 +530,16 @@
 .product-title {
   font-size: 1rem;
   font-weight: 600;
-  color: #2d2d2d;
+  color: #854c30;
 }
+
+.product-price {
+  color: #444;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 4px;
+}
+
 .view-all-btn {
   display: inline-flex;
   align-items: center;
@@ -554,7 +562,6 @@
 
 /* testimonials */ 
 .testimonial-section {
-  background-color: #f4f2e9;
   padding: 60px 20px;
   text-align: center;
 }
@@ -576,7 +583,7 @@
 }
 
 .testimonial-card {
-  background-color: #fffefb;
+  background-color: #f4f2e9;
   border-radius: 16px;
   padding: 30px 25px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);

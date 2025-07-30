@@ -14,7 +14,7 @@ const Homepage = () => {
       <Navbar />
       {/* <MenuNavigation/> */}
       <Banner/>
-      <WhyChooseUs/>x``
+      <WhyChooseUs/>
       <ProductCategories />
       <FeaturedProducts />
       <TestimonialSlider />
