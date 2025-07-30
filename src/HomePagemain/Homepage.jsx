@@ -8,6 +8,7 @@ import TestimonialSlider from './Testimonials.jsx'
 import MenuNavigation from './MenuNavigation.jsx'
 import WhyChooseUs from './WhyChooseUs.jsx'
 import OfferSection from './OfferSection.jsx'
+import HighlightsSection from './HighlightsSection.jsx'
 
 const Homepage = () => {
   return (
@@ -16,6 +17,7 @@ const Homepage = () => {
       <Banner/>
       <WhyChooseUs/>
       <ProductCategories />
+      <HighlightsSection />
       <FeaturedProducts />
       <OfferSection />
       <TestimonialSlider />

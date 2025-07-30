@@ -594,7 +594,8 @@
 
 .quote-icon {
   font-size: 24px;
-  color: #6c3d25;
+  /* color: linear-gradient(to right, #fbbf24, #f59e0b); */
+  
   margin-bottom: 12px;
 }
 

@@ -3,26 +3,27 @@ import { FaShippingFast, FaShieldAlt, FaPaintBrush, FaHandHoldingHeart } from 'r
 
 const features = [
   {
-    icon: <FaShippingFast className="text-3xl text-[#854c30]" />,
+    icon: <FaShippingFast className="text-3xl bg-[linear-gradient(to_right,_#fbbf24,_#f59e0b)] bg-clip-text" />,
     title: 'Fast & Free Delivery',
     description: 'Get your orders delivered safely and quickly across India.',
   },
   {
-    icon: <FaShieldAlt className="text-3xl text-[#854c30]" />,
+    icon: <FaShieldAlt className="text-3xl bg-[linear-gradient(to_right,_#fbbf24,_#f59e0b)] bg-clip-text" />,
     title: 'Secure Payments',
     description: 'All transactions are protected with end-to-end encryption.',
   },
   {
-    icon: <FaPaintBrush className="text-3xl text-[#854c30]" />,
+    icon: <FaPaintBrush className="text-3xl bg-[linear-gradient(to_right,_#fbbf24,_#f59e0b)] bg-clip-text" />,
     title: 'Authentic Artwork',
     description: 'We deliver original handcrafted Indian art made by skilled artisans.',
   },
   {
-    icon: <FaHandHoldingHeart className="text-3xl text-[#854c30]" />,
+    icon: <FaHandHoldingHeart className="text-3xl bg-[linear-gradient(to_right,_#fbbf24,_#f59e0b)] bg-clip-text" />,
     title: 'Customer Satisfaction',
     description: 'We prioritize your happiness and guarantee top-quality service.',
   },
 ];
+
 
 const WhyChooseUs = () => {
   return (

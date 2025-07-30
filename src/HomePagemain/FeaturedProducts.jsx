@@ -76,11 +76,21 @@ const FeaturedProducts = () => {
       </div>
 
       {/* View All Button */}
-      <div className="flex justify-center mt-10">
-        <button className="bg-black text-white px-6 py-3 rounded-full flex items-center gap-2 hover:bg-gray-800 transition">
-          View All <FaArrowRight />
-        </button>
-      </div>
+        <div className="flex justify-center mt-10">
+      <button className="relative overflow-hidden px-6 py-3 rounded-md flex items-center gap-2 font-semibold text-black 
+        bg-gradient-to-r from-amber-400 to-amber-500 
+        transition-all duration-500 ease-in-out 
+        hover:from-yellow-400 hover:to-orange-500 
+        hover:shadow-xl group">
+        
+        <span className="relative z-10">View All</span>
+
+        <FaArrowRight className="relative z-10 transition-transform duration-500 group-hover:translate-x-1" />
+
+        {/* Optional Glow Layer */}
+        <span className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-500 opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-lg rounded-md"></span>
+      </button>
+    </div>
     </section>
   );
 };
