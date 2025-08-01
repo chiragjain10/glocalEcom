@@ -1,24 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { categories } from './HomePagemain/MenuNavigation';
 
 const CategoryLayout = () => {
-  const [selectedMain, setSelectedMain] = useState(null);
-  const [selectedSub, setSelectedSub] = useState(null);
+  const { mainCategory, subCategory } = useParams();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const firstWithSub = categories.find(cat => Array.isArray(cat.subItems) && cat.subItems.length > 0);
-    if (firstWithSub) {
-      setSelectedMain(firstWithSub);
-      const firstSub = firstWithSub.subItems.find(sub => Array.isArray(sub.subSubItems) && sub.subSubItems.length > 0);
-      if (firstSub) setSelectedSub(firstSub);
-    }
-  }, []);
+  // Find selected categories based on URL params
+  const selectedMain = categories.find(cat => cat.slug === mainCategory) || 
+                      categories.find(cat => cat.subItems?.length > 0);
+  
+  const selectedSub = selectedMain?.subItems?.find(sub => sub.slug === subCategory) || 
+                     selectedMain?.subItems?.find(sub => sub.subSubItems?.length > 0);
 
   const handleMainClick = (cat) => {
-    setSelectedMain(cat);
-    const firstSub = cat.subItems?.find(sub => Array.isArray(sub.subSubItems) && sub.subSubItems.length > 0);
-    if (firstSub) setSelectedSub(firstSub);
-    else setSelectedSub(null);
+    const firstSub = cat.subItems?.find(sub => sub.subSubItems?.length > 0);
+    if (firstSub) {
+      navigate(`/categories/${cat.slug}/${firstSub.slug}`);
+    } else {
+      navigate(`/categories/${cat.slug}`);
+    }
+  };
+
+  const handleSubClick = (sub) => {
+    navigate(`/categories/${selectedMain.slug}/${sub.slug}`);
   };
 
   return (
@@ -30,7 +35,7 @@ const CategoryLayout = () => {
             key={i}
             onClick={() => handleMainClick(cat)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-              selectedMain?.title === cat.title
+              selectedMain?.slug === cat.slug
                 ? 'bg-gradient-to-r from-black to-gray-800 text-white shadow-md'
                 : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
             }`}
@@ -50,9 +55,9 @@ const CategoryLayout = () => {
               {selectedMain.subItems.map((sub, idx) => (
                 <li
                   key={idx}
-                  onClick={() => setSelectedSub(sub)}
+                  onClick={() => handleSubClick(sub)}
                   className={`cursor-pointer px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-                    selectedSub?.title === sub.title
+                    selectedSub?.slug === sub.slug
                       ? 'bg-gradient-to-r from-black to-gray-700 text-white shadow-sm'
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                   }`}
@@ -73,7 +78,8 @@ const CategoryLayout = () => {
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {selectedSub?.subSubItems?.length > 0 ? (
                   selectedSub.subSubItems.map((item, idx) => (
-                    <div
+                    <Link 
+                      to={`/product/${item.slug}`} 
                       key={idx}
                       className="group bg-white p-3 rounded-lg border border-gray-200 hover:border-amber-300 transition-all duration-200 hover:shadow-md text-center cursor-pointer"
                     >
@@ -85,8 +91,8 @@ const CategoryLayout = () => {
                           </svg>
                         </div>
                       </div>
-                      <p className="text-sm font-medium text-gray-700 group-hover:text-amber-600 transition-colors">{item}</p>
-                    </div>
+                      <p className="text-sm font-medium text-gray-700 group-hover:text-amber-600 transition-colors">{item.title}</p>
+                    </Link>
                   ))
                 ) : (
                   <div className="col-span-full py-10 text-center">

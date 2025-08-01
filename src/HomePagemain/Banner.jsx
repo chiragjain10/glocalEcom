@@ -39,37 +39,36 @@ const BannerSlider = () => {
   ];
 
   return (
-    <section className="w-full h-screen relative overflow-hidden">
-      <div className="w-full h-full">
-        <Slider {...settings}>
-          {slides.map((slide, index) => (
-            <div key={index} className="relative w-full h-[100vh]">
-              <img
-                src={slide.img}
-                alt={slide.title}
-                className="w-full h-full object-cover brightness-[.6]"
-              />
+    <section className="w-full h-screen overflow-hidden">
+  <div className="w-full h-[80vh]">
+    <Slider {...settings}>
+      {slides.map((slide, index) => (
+        <div key={index} className="relative w-full h-screen">
+          <img
+            src={slide.img}
+            alt={slide.title}
+            className="w-full h-full object-cover brightness-[.6]"
+          />
+          <div className="absolute inset-0 px-6 md:px-16 pb-14 py-10 flex flex-col justify-end text-white z-10">
+            <p className="text-sm md:text-base font-semibold text-yellow-300 mb-1 tracking-wide uppercase">
+              {slide.highlight}
+            </p>
+            <h2 className="text-3xl md:text-5xl font-bold leading-tight drop-shadow mb-2">
+              {slide.title}
+            </h2>
+            <p className="text-md md:text-lg mb-5 max-w-xl drop-shadow">
+              {slide.subtitle}
+            </p>
+            <button className="flex items-center gap-2 bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-200 transition duration-300 shadow-md w-fit">
+              Shop Now <FaArrowRight />
+            </button>
+          </div>
+        </div>
+      ))}
+    </Slider>
+  </div>
+</section>
 
-              {/* Overlay Content */}
-              <div className="absolute inset-0 px-6 md:px-16 pb-14 py-10 flex flex-col justify-end text-white z-10">
-                <p className="text-sm md:text-base font-semibold text-yellow-300 mb-1 tracking-wide uppercase">
-                  {slide.highlight}
-                </p>
-                <h2 className="text-3xl md:text-5xl font-bold leading-tight drop-shadow mb-2">
-                  {slide.title}
-                </h2>
-                <p className="text-md md:text-lg mb-5 max-w-xl drop-shadow">
-                  {slide.subtitle}
-                </p>
-                <button className="flex items-center gap-2 bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-200 transition duration-300 shadow-md w-fit">
-                  Shop Now <FaArrowRight />
-                </button>
-              </div>
-            </div>
-          ))}
-        </Slider>
-      </div>
-    </section>
   );
 };
 
