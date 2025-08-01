@@ -13,7 +13,6 @@ import HighlightsSection from './HighlightsSection.jsx'
 const Homepage = () => {
   return (
     <div>
-      <Navbar />
       <Banner/>
       <WhyChooseUs/>
       <ProductCategories />
@@ -21,7 +20,7 @@ const Homepage = () => {
       <FeaturedProducts />
       <OfferSection />
       <TestimonialSlider />
-      <Footer />
+    
     </div>
   )
 }
