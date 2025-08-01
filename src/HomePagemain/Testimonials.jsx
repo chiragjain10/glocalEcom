@@ -24,7 +24,7 @@ const testimonials = [
 
 const TestimonialSlider = () => {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
      arrows: false,
     speed: 800,
@@ -49,12 +49,12 @@ const TestimonialSlider = () => {
   };
 
   return (
-    <section className="testimonial-section">
-      <h2 className="testimonial-title">What Our Customers Say</h2>
+    <section className="testimonial-section p-4 bg-[#f4f2e9]">
+      <h2 className="testimonial-titl text-center text-3xl  font-bold text-gray-900  ">What Our Customers Say</h2>
       <Slider {...settings} className="testimonial-slider">
         {testimonials.map((item, index) => (
           <div key={index} className="testimonial-slide">
-            <div className="testimonial-card">
+            <div className="testimonial-card ">
               <FaQuoteLeft className="quote-icon" />
               <p className="review-text">"{item.text}"</p>
               <h4 className="reviewer-name">{item.name}</h4>

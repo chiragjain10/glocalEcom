@@ -32,7 +32,7 @@ const FeaturedProducts = () => {
   return (
     <div className="p-4 bg-[#f4f2e9]">
       {/* Heading */}
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8 p-4">Best Seller</h1>
+      <h2 className="text-3xl font-bold text-gray-900 text-center p-4">Best Seller</h2>
       <p className="text-center text-gray-600 max-w-xl mx-auto mb-8">
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisquam, vero, adipisci velit assumenda dolores enim maiores.
 </p>

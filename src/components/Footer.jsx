@@ -11,11 +11,11 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-[#f4f2e9] text-[#2c2c2c] px-6 py-12">
+    <footer className=" bg-white/70 backdrop-blur-sm text-[#2c2c2c] px-6 py-12">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8">
         {/* Brand */}
         <div className="md:col-span-2">
-          <h2 className="text-2xl font-bold mb-3">GlocalShipeComers</h2>
+          <h2 className="text-2xl lg:text-3xl font-playfair italic font-bold tracking-tight bg-gradient-to-r from-gray-800 to-amber-500 bg-clip-text text-transparent">Glocalship<span className="text-amber-500">Ecommerce</span></h2>
           <p className="text-sm mb-4">Delivering products globally with care and speed.</p>
           <h4 className="font-semibold text-sm mb-2">Subscribe to Newsletter</h4>
           <form className="flex gap-2">

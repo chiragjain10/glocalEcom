@@ -104,7 +104,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="flex items-center flex-shrink-0">
           <Link to="/" className="text-2xl lg:text-3xl font-playfair italic font-bold tracking-tight bg-gradient-to-r from-gray-800 to-amber-500 bg-clip-text text-transparent">
-            Glocalship<span className="text-amber-500">Ecommerc</span>
+            Glocalship<span className="text-amber-500">Ecommerce</span>
           </Link>
         </div>
 

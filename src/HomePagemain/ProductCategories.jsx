@@ -36,7 +36,7 @@ const ProductCategories = () => {
   return (
     <section className="py-10 px-4 md:px-10 font-['Inter'] bg-[#f4f2e9]">
       <div className="mb-6 text-center">
-        <h2 className="text-2xl md:text-3xl font-semibold text-gray-800">
+        <h2 className="text-3xl  font-bold text-gray-800 explore-thought" >
           Explore our thoughtful and planet-first ✧ <em className="italic">Categories</em>
         </h2>
       </div>
