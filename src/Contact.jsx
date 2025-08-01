@@ -3,6 +3,7 @@ import React from "react";
 
 const ContactUs = () => {
   return (
+    <div className="bg-container">
     <div className="contact-wrapper">
       <div className="contact-container">
         {/* Left Panel */}
@@ -86,6 +87,7 @@ const ContactUs = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

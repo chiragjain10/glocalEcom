@@ -2,6 +2,7 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
+import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -34,7 +35,7 @@ const categories = [
 
 const ProductCategories = () => {
   return (
-    <section className="py-10 px-4 md:px-10 font-['Inter'] bg-[#f4f2e9]">
+    <section className="py-10 px-4 md:px-10 font-['Inter'] bg-gray-50">
       <div className="mb-6 text-center">
         <h2 className="text-2xl md:text-3xl font-semibold text-gray-800">
           Explore our thoughtful and planet-first ✧ <em className="italic">Categories</em>
@@ -68,8 +69,8 @@ const ProductCategories = () => {
                 <h3 className="text-lg font-semibold italic text-white">{cat.name}</h3>
 
                 <div className="flex justify-center mt-4">
-                  <button className="relative text-center overflow-hidden bg-gradient-to-r from-amber-400 to-amber-500 text-black px-4 py-[4px] rounded-md text-sm font-medium flex items-center gap-1 group transition-all duration-500 ease-in-out hover:from-yellow-400 hover:to-orange-500 hover:shadow-md">
-                    <span className="relative z-10">Shop</span>
+                  <button className="relative cursor-pointer text-center overflow-hidden bg-gradient-to-r from-amber-400 to-amber-500 text-black px-4 py-[4px] rounded-md text-sm font-medium flex items-center gap-1 group transition-all duration-500 ease-in-out hover:from-yellow-400 hover:to-orange-500 hover:shadow-md">
+                    <Link to="/all-categories"><span className="relative z-10 ">Shop</span></Link>
                     <span className="relative z-10 transition-transform duration-500 group-hover:translate-x-1">→</span>
 
                     {/* Glow layer */}

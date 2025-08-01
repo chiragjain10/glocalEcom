@@ -19,18 +19,17 @@ const ProductCard = ({ item, badge }) => {
   const decreaseQuantity = () => setQuantity(prev => Math.max(prev - 1, 1));
 
   return (
-    <div 
+    <div
       className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group relative border border-gray-100 hover:border-amber-200"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Badge and Wishlist */}
       <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
-        <div className={`px-3 py-1 text-xs font-medium rounded-full shadow-md ${
-          badge === "Trending" 
-            ? "bg-gradient-to-r from-red-500 to-amber-500 text-white" 
+        <div className={`px-3 py-1 text-xs font-medium rounded-full shadow-md ${badge === "Trending"
+            ? "bg-gradient-to-r from-red-500 to-amber-500 text-white"
             : "bg-gradient-to-r from-blue-500 to-cyan-400 text-white"
-        }`}>
+          }`}>
           {badge}
         </div>
         <button className="p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-md hover:bg-amber-50 transition-colors">
@@ -45,11 +44,10 @@ const ProductCard = ({ item, badge }) => {
           alt={item.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
-        
+
         {/* Quick View Button */}
-        <button className={`absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/90 text-amber-600 font-medium px-4 py-2 rounded-full shadow-lg hover:bg-amber-600 hover:text-white transition-all duration-300 ${
-          isHovered ? "opacity-100" : "opacity-0"
-        }`}>
+        <button className={`absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/90 text-amber-600 font-medium px-4 py-2 rounded-full shadow-lg hover:bg-amber-600 hover:text-white transition-all duration-300 ${isHovered ? "opacity-100" : "opacity-0"
+          }`}>
           <FaEye /> Quick View
         </button>
       </div>
@@ -62,7 +60,7 @@ const ProductCard = ({ item, badge }) => {
           </h3>
           <p className="text-sm text-gray-500">Handcrafted by Indian artisans</p>
         </div>
-        
+
         <div className="flex items-center justify-between">
           <p className="text-xl font-extrabold text-amber-500">{item.price}</p>
           <div className="flex items-center text-amber-400">
@@ -72,27 +70,26 @@ const ProductCard = ({ item, badge }) => {
         </div>
 
         {/* Quantity Selector */}
-        <div className={`flex items-center justify-between mt-3 transition-all duration-300 ${
-          isHovered ? "opacity-100" : "opacity-0 h-0 mt-0 overflow-hidden"
-        }`}>
+        <div className={`flex items-center justify-between mt-3 transition-all duration-300 ${isHovered ? "opacity-100" : "opacity-0 h-0 mt-0 overflow-hidden"
+          }`}>
           <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden">
-            <button 
+            <button
               onClick={decreaseQuantity}
               className="px-3 py-2 bg-gray-50 hover:bg-gray-100 text-gray-600 transition-colors"
             >
               <FaMinus className="w-3 h-3" />
             </button>
             <span className="px-4 py-2 bg-white font-medium">{quantity}</span>
-            <button 
+            <button
               onClick={increaseQuantity}
               className="px-3 py-2 bg-gray-50 hover:bg-gray-100 text-gray-600 transition-colors"
             >
               <FaPlus className="w-3 h-3" />
             </button>
           </div>
-          
+
           <button className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-600 hover:to-amber-500 text-white font-medium px-4 py-2 rounded-lg transition-all duration-300 shadow hover:shadow-lg">
-            <FaShoppingCart /> 
+            <FaShoppingCart />
             <span className="hidden sm:inline">Add</span>
           </button>
         </div>
@@ -103,7 +100,7 @@ const ProductCard = ({ item, badge }) => {
 
 const HighlightsSection = () => {
   return (
-    <section className="bg-gradient-to-b from-amber-50 to-white py-16 px-4">
+    <section className="bg-gray-50 to-white py-16 px-4">
       <div className="max-w-7xl mx-auto space-y-16">
 
         {/* 🔥 Trending Products */}

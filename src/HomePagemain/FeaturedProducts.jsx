@@ -33,7 +33,7 @@ const products = [
 
 const FeaturedProducts = () => {
   return (
-    <section className="featured-section bg-[#f4f2e9]">
+    <section className="featured-section bg-gray-50 ">
       <h2 className="featured-heading">Best Sellers</h2>
       <div className="product-grid">
         {products.map((product) => (
@@ -60,9 +60,6 @@ const FeaturedProducts = () => {
           </div>
         ))}
       </div>
-      <button className="view-all-btn">
-        View All <FaArrowRight style={{ marginLeft: '6px' }} />
-      </button>
 
       {/* View All Button */}
         <div className="flex justify-center mt-10">

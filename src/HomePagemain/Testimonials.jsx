@@ -49,21 +49,23 @@ const TestimonialSlider = () => {
   };
 
   return (
+    <div className="bg-container ">
     <section className="testimonial-section">
       <h2 className="testimonial-title">What Our Customers Say</h2>
       <Slider {...settings} className="testimonial-slider">
         {testimonials.map((item, index) => (
           <div key={index} className="testimonial-slide">
             <div className="testimonial-card">
-              <FaQuoteLeft className="quote-icon" />
+             <FaQuoteLeft className="quote-icon text-4xl bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-amber-500" />
               <p className="review-text">"{item.text}"</p>
-              <h4 className="reviewer-name">{item.name}</h4>
+              <h4 className="reviewer-name text-amber-500">{item.name}</h4>
               <span className="reviewer-role">{item.role}</span>
             </div>
           </div>
         ))}
       </Slider>
     </section>
+    </div>
   );
 };
 

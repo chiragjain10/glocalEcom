@@ -22,6 +22,7 @@ const wishlistData = [
 
 const Wishlist = () => {
   return (
+    <div className="bg-container">
     <div className="wishlist-container">
       <div className="wishlist-header">
         <h1>Wishlist</h1>
@@ -58,19 +59,11 @@ const Wishlist = () => {
           </div>
         ))}
       </div>
-
-      {/* <div className="wishlist-newsletter">
-        <h3>Subscribe Our Newsletter</h3>
-        <p>
-          Get updates on new items and discounts directly in your inbox.
-        </p>
-        <form>
-          <input type="email" placeholder="Your email" />
-          <button type="submit" style={{ backgroundColor: "#ffb300"}}>SUBSCRIBE</button>
-        </form>
-      </div> */}
+ 
+    </div>
     </div>
   );
+
 };
 
 export default Wishlist;

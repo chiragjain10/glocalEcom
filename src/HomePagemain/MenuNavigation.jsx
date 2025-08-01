@@ -114,7 +114,7 @@ const MenuNavigation = () => {
   };
 
   return (
-    <div className="flex flex-wrap justify-center items-center gap-6 py-4 border-t relative z-50">
+    <div className="flex flex-wrap justify-center items-center gap-6 py-4 border-t relative z-50 bg-gray-50 ">
       {categories.map((item, index) => (
         <div key={index} className="relative group cursor-pointer">
           {/* Main category */}

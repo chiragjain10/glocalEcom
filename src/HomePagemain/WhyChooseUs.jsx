@@ -27,7 +27,7 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="bg-[#f4f2e9] py-16 px-4">
+    <section className="bg-gray-50  py-16 px-4">
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-semibold text-[#2c2c2c] mb-12">
           Why Choose Us
@@ -38,7 +38,7 @@ const WhyChooseUs = () => {
               key={index}
               className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-xl transition duration-300"
             >
-              <div className="mb-4">{feature.icon}</div>
+              <div className="text-3xl bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-amber-500 mb-4 ">{feature.icon}</div>
               <h3 className="text-xl font-semibold text-[#2c2c2c] mb-2">
                 {feature.title}
               </h3>

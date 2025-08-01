@@ -6,7 +6,6 @@ const CartPage = () => {
     {
       id: 1,
       name: "Warli Painting",
-      description: "A classic tribal artwork from Maharashtra, India, painted with white pigment on a deep red background.",
       size: "18 inches",
       color: "White artwork on terracotta red background",
       price: 1600,
@@ -17,7 +16,6 @@ const CartPage = () => {
     {
       id: 2,
       name: "Narasimha and Lakshmi Statue",
-      description: "A beautifully crafted bronze statue showcasing Narasimha",
       size: "12 inches in height",
       color: "Bronze with gold patina finish",
       price: 680,
@@ -50,105 +48,107 @@ const CartPage = () => {
   const total = subtotal - discount + shipping;
 
   return (
-    <div className="cart-page-container">
-      <div className="cart-header">
-        <h1>Your Cart</h1>
-        <div className="stepper">
-          <div className="step active">
-            <span>1</span>
-            <p>Cart</p>
-          </div>
-          <FiChevronRight className="step-arrow" />
-          <div className="step">
-            <span>2</span>
-            <p>Checkout</p>
-          </div>
-          <FiChevronRight className="step-arrow" />
-          <div className="step">
-            <span>3</span>
-            <p>Payment</p>
+    <div className="bg-container">
+      <div className="cart-page-container">
+        <div className="cart-header">
+          <h1>Your Cart</h1>
+          <div className="stepper">
+            <div className="step active">
+              <span>1</span>
+              <p>Cart</p>
+            </div>
+            <FiChevronRight className="step-arrow" />
+            <div className="step">
+              <span>2</span>
+              <p>Checkout</p>
+            </div>
+            <FiChevronRight className="step-arrow" />
+            <div className="step">
+              <span>3</span>
+              <p>Payment</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="cart-content">
-        <div className="cart-items">
-          {items.map((item) => (
-            <div className="cart-item" key={item.id}>
-              <div className="item-image">
-                <img src={item.image} alt={item.name} />
-              </div>
-              <div className="item-details">
-                <div className="item-header">
-                  <h3>{item.name}</h3>
-                  <div className="item-actions">
-                    <button className="action-btn edit">
-                      <FiEdit2 />
+        <div className="cart-content">
+          <div className="cart-items">
+            {items.map((item) => (
+              <div className="cart-item" key={item.id}>
+                <div className="item-image">
+                  <img src={item.image} alt={item.name} />
+                </div>
+                <div className="item-details">
+                  <div className="item-header">
+                    <h3>{item.name}</h3>
+                    <div className="item-actions">
+                      <button className="action-btn edit">
+                        <FiEdit2 />
+                      </button>
+                      <button className="action-btn delete" onClick={() => removeItem(item.id)}>
+                        <FiTrash2 />
+                      </button>
+                    </div>
+                  </div>
+                  <p className="item-description">{item.description}</p>
+                  <div className="item-specs">
+                    <span>Size: {item.size}</span>
+                    <span>Color: {item.color}</span>
+                  </div>
+                  <div className="item-pricing">
+                    <div className="price-current">₹{item.price.toLocaleString()}</div>
+                    {item.originalPrice > item.price && (
+                      <div className="price-original">₹{item.originalPrice.toLocaleString()}</div>
+                    )}
+                  </div>
+                  <div className="quantity-controls">
+                    <button
+                      className="quantity-btn"
+                      onClick={() => updateQuantity(item.id, -1)}
+                    >
+                      -
                     </button>
-                    <button className="action-btn delete" onClick={() => removeItem(item.id)}>
-                      <FiTrash2 />
+                    <span className="quantity-value">{item.quantity}</span>
+                    <button
+                      className="quantity-btn"
+                      onClick={() => updateQuantity(item.id, 1)}
+                    >
+                      +
                     </button>
                   </div>
                 </div>
-                <p className="item-description">{item.description}</p>
-                <div className="item-specs">
-                  <span>Size: {item.size}</span>
-                  <span>Color: {item.color}</span>
-                </div>
-                <div className="item-pricing">
-                  <div className="price-current">₹{item.price.toLocaleString()}</div>
-                  {item.originalPrice > item.price && (
-                    <div className="price-original">₹{item.originalPrice.toLocaleString()}</div>
-                  )}
-                </div>
-                <div className="quantity-controls">
-                  <button 
-                    className="quantity-btn" 
-                    onClick={() => updateQuantity(item.id, -1)}
-                  >
-                    -
-                  </button>
-                  <span className="quantity-value">{item.quantity}</span>
-                  <button 
-                    className="quantity-btn" 
-                    onClick={() => updateQuantity(item.id, 1)}
-                  >
-                    +
-                  </button>
-                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="order-summary">
+            <h3>Order Summary</h3>
+            <div className="summary-details">
+              <div className="summary-row">
+                <span>Subtotal ({items.length} items)</span>
+                <span>₹{subtotal.toLocaleString()}</span>
+              </div>
+              <div className="summary-row discount">
+                <span>Discount</span>
+                <span>-₹{discount.toLocaleString()}</span>
+              </div>
+              <div className="summary-row">
+                <span>Shipping</span>
+                <span className="free">FREE</span>
+              </div>
+              <div className="summary-row">
+                <span>Tax</span>
+                <span>₹0.00</span>
+              </div>
+              <div className="summary-total">
+                <span>Total</span>
+                <span>₹{total.toLocaleString()}</span>
               </div>
             </div>
-          ))}
-        </div>
-
-        <div className="order-summary">
-          <h3>Order Summary</h3>
-          <div className="summary-details">
-            <div className="summary-row">
-              <span>Subtotal ({items.length} items)</span>
-              <span>₹{subtotal.toLocaleString()}</span>
-            </div>
-            <div className="summary-row discount">
-              <span>Discount</span>
-              <span>-₹{discount.toLocaleString()}</span>
-            </div>
-            <div className="summary-row">
-              <span>Shipping</span>
-              <span className="free">FREE</span>
-            </div>
-            <div className="summary-row">
-              <span>Tax</span>
-              <span>₹0.00</span>
-            </div>
-            <div className="summary-total">
-              <span>Total</span>
-              <span>₹{total.toLocaleString()}</span>
-            </div>
+            <button className="checkout-btn">Proceed to Checkout</button>
+            <p className="delivery-estimate">
+              Estimated delivery by <strong>April 25, 2023</strong>
+            </p>
           </div>
-          <button className="checkout-btn">Proceed to Checkout</button>
-          <p className="delivery-estimate">
-            Estimated delivery by <strong>April 25, 2023</strong>
-          </p>
         </div>
       </div>
     </div>
