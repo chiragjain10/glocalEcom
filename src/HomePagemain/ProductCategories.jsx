@@ -64,7 +64,7 @@ const ProductCategories = () => {
               />
               {/* Overlay moved to bottom */}
               <div className="absolute bottom-0 w-full bg-black/50 py-4 px-4 text-center">
-                <p className="text-sm text-gray-200">Explore</p>
+                {/* <p className="text-sm text-gray-200">Explore</p> */}
                 <h3 className="text-lg font-semibold italic text-white">{cat.name}</h3>
 
                 <div className="flex justify-center mt-4">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 
@@ -138,7 +138,7 @@ const Checkout = () => {
       </div>
 
       {/* RIGHT: ORDER SUMMARY */}
-      <div className="md:w-1/3 mt-8 md:mt-0 bg-[#f4f2e9] rounded-lg shadow p-6 border border-amber-400/50">
+      <div className="md:w-1/3 mt-8 md:mt-0 rounded-lg shadow p-6 border border-amber-400/50">
         <h2 className="text-xl font-semibold mb-4">Your Order</h2>
 
         {cartItems.length === 0 ? (
