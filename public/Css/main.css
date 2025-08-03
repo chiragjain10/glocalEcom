@@ -1242,6 +1242,7 @@ label {
   overflow: hidden;
   transition: 0.3s all ease;
 }
+
 .product-card:hover {
   border: 1px solid rgba(251, 191, 36, 0.5);
 }
