@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FiEdit2, FiTrash2, FiChevronRight } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
   const [items, setItems] = useState([
@@ -24,6 +25,8 @@ const CartPage = () => {
       image: "./img/img4.jpg",
     },
   ]);
+
+  const navigate = useNavigate();
 
   const updateQuantity = (id, delta) => {
     setItems((prev) =>
@@ -73,7 +76,10 @@ const CartPage = () => {
         <div className="cart-content">
           <div className="cart-items">
             {items.map((item) => (
-              <div className="cart-item" key={item.id}>
+              <div
+                className="cart-item rounded-lg shadow p-6 border border-amber-400/50"
+                key={item.id}
+              >
                 <div className="item-image">
                   <img src={item.image} alt={item.name} />
                 </div>
@@ -84,20 +90,26 @@ const CartPage = () => {
                       <button className="action-btn edit">
                         <FiEdit2 />
                       </button>
-                      <button className="action-btn delete" onClick={() => removeItem(item.id)}>
+                      <button
+                        className="action-btn delete"
+                        onClick={() => removeItem(item.id)}
+                      >
                         <FiTrash2 />
                       </button>
                     </div>
                   </div>
-                  <p className="item-description">{item.description}</p>
                   <div className="item-specs">
                     <span>Size: {item.size}</span>
                     <span>Color: {item.color}</span>
                   </div>
                   <div className="item-pricing">
-                    <div className="price-current">₹{item.price.toLocaleString()}</div>
+                    <div className="price-current">
+                      ₹{item.price.toLocaleString()}
+                    </div>
                     {item.originalPrice > item.price && (
-                      <div className="price-original">₹{item.originalPrice.toLocaleString()}</div>
+                      <div className="price-original">
+                        ₹{item.originalPrice.toLocaleString()}
+                      </div>
                     )}
                   </div>
                   <div className="quantity-controls">
@@ -120,7 +132,7 @@ const CartPage = () => {
             ))}
           </div>
 
-          <div className="order-summary">
+          <div className="order-summary rounded-lg shadow p-6 border border-amber-400/50">
             <h3>Order Summary</h3>
             <div className="summary-details">
               <div className="summary-row">
@@ -144,7 +156,12 @@ const CartPage = () => {
                 <span>₹{total.toLocaleString()}</span>
               </div>
             </div>
-            <button className="checkout-btn">Proceed to Checkout</button>
+            <button
+              className="w-full mb-3 py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-black text-sm rounded-md hover:bg-[#6c3d25] cursor-pointer"
+              onClick={() => navigate("/CheckOut")}
+            >
+              Proceed to Checkout
+            </button>
             <p className="delivery-estimate">
               Estimated delivery by <strong>April 25, 2023</strong>
             </p>

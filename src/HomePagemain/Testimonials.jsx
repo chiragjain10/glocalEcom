@@ -49,14 +49,15 @@ const TestimonialSlider = () => {
   };
 
   return (
-    <div className="bg-container ">
-    <section className="testimonial-section">
-      <h2 className="testimonial-title">What Our Customers Say</h2>
-      <Slider {...settings} className="testimonial-slider">
+
+    <section className="testimonial-section p-4  bg-gray-50">
+      <h2 className="testimonial-title text-center text-3xl  font-bold  ">What Our Customers Say</h2>
+      <Slider {...settings} className="testimonial-slider ">
         {testimonials.map((item, index) => (
-          <div key={index} className="testimonial-slide">
-            <div className="testimonial-card">
-             <FaQuoteLeft className="quote-icon text-4xl bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-amber-500" />
+          <div key={index} className="testimonial-slide bg-gray-50">
+            <div className="testimonial-card ">
+              <FaQuoteLeft className="quote-icon" />
+
               <p className="review-text">"{item.text}"</p>
               <h4 className="reviewer-name text-amber-500">{item.name}</h4>
               <span className="reviewer-role">{item.role}</span>
@@ -65,7 +66,7 @@ const TestimonialSlider = () => {
         ))}
       </Slider>
     </section>
-    </div>
+  
   );
 };
 

@@ -8,10 +8,12 @@ import Wishlist from './auth/Wishlist';
 import AddtoCart from './auth/AddtoCart';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import User from './auth/User';
+import Checkout from './HomePagemain/CheckOut';
 import About from './About';
 
 import './App.css';
-import UserDashboard from './auth/User';
+
 
 function App() {
   return (
@@ -28,7 +30,9 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/cart" element={<AddtoCart />} />
-          <Route path='/account' element={<UserDashboard />} />
+          <Route path="/CheckOut" element={<Checkout />} />
+          <Route path="/account" element={<User />} />
+
           {/* Optional: 404 Page */}
           <Route path="*" element={
             <div className="text-center py-20 text-gray-600 text-xl">

@@ -278,23 +278,24 @@
 
 
 /* Testimonials Section */
+
 .testimonial-section {
-   margin-bottom: 40px;
+  background-color: #f4f2e9 !important;
   padding: 60px 20px;
   text-align: center;
   font-family: var(--font-primary);
 }
 
 .testimonial-title {
-  font-size: 2rem;      
-  font-weight: 600;        
-  color: #1f2937;
-  font-family: var(--font-primary);
-  text-align: center;
+  font-size: 2.25rem; 
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #1a1a1a; 
+
 }
 
 .testimonial-slider {
-  padding: 10px;
+  padding: 20px 10px;
 }
 
 .testimonial-slide {
@@ -303,60 +304,68 @@
 }
 
 .testimonial-card {
-  background-color: #fff;
-  border-radius: 16px;
-  padding: 30px 25px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  background: #ffffff;
+    border: 1px solid rgba(251, 191, 36, 0.5) !important;
+  border-radius: 1rem; 
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06); 
+  padding: 35px 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: 320px; 
+  max-width: 460px; 
+  margin: 0 auto; 
   text-align: left;
-  margin-bottom: 20px;
-  transition: transform 0.3s ease;
+
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 1px solid #e5e5e5;
+
 }
 
-.testimonial-card:hover {
-  transform: translateY(-4px);
+.slick-list{
+  background-color: #f4f2e9 !important;
 }
 
 .quote-icon {
-  font-size: 24px;
-  margin-bottom: 12px;
+  font-size: 26px;
+  margin-bottom: 18px;
+  color: #ffb900;
 }
 
 .review-text {
   font-style: italic;
-  font-size: var(--font-size-base);
-  line-height: 1.6;
-  margin-bottom: 16px;
-  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
 .reviewer-name {
-  font-weight: 600;
-  color: var(--color-dark-alt);
-  margin-bottom: 4px;
-  font-family: var(--font-primary);
+  font-weight: 700;
+  /* color: #1a1a1a; */
+  font-size: 1.1rem;
+  margin-bottom: 6px;
 }
 
 .reviewer-role {
-  font-size: var(--font-size-sm);
-  color: var(--color-gray);
-  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  /* color: #7d7d7d; */
 }
 
-/* Swiper dots */
+/* Dots Styling */
+.slick-dots {
+  margin-top: 30px;
+}
+
 .slick-dots li button:before {
-  font-size: var(--font-size-sm);
-  color: var(--color-gray-light);
+  font-size: 12px;
+  
+  opacity: 1;
 }
 
 .slick-dots li.slick-active button:before {
-  color: #222;
-} 
-
-
+  color: #ffb900;
+  opacity: 1;
+}
 
 /* contact us */
 
@@ -365,9 +374,8 @@
   color: var(--color-text);
   min-height: 100vh;
   display: flex;
-  margin-top: 80px;
-  margin-bottom: 40px;
-  background-color: #f9fafb;
+  background-color: #f8f9fa;
+  padding: 50px 0;
 }
 
 .contact-container {
@@ -438,7 +446,6 @@
 .footer-links a:hover {
   color: var(--color-white);
 }
-
 /* Right Panel Styles */
 .contact-right {
   flex: 1.5;
@@ -485,7 +492,7 @@
 
 h2 {
   font-size: var(--font-size-3xl);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   /* color: var(--color-text); */
 }
 
@@ -825,6 +832,11 @@ label {
   }
 }   
 
+.explore-thought{
+  font-family: 'Poppins', sans-serif;
+
+}
+
 /* add to cart */
 .bg-container {
   background-color: #f9fafb;
@@ -909,8 +921,6 @@ label {
   display: flex;
   gap: 20px;
   padding: 25px;
-  border: 1px solid #eee;
-  border-radius: 10px;
   margin-bottom: 20px;
   transition: box-shadow 0.3s;
 }
@@ -1034,8 +1044,6 @@ label {
 .order-summary {
   flex: 1;
   padding: 25px;
-  border: 1px solid #eee;
-  border-radius: 10px;
   height: fit-content;
   position: sticky;
   top: 20px;

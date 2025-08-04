@@ -35,10 +35,35 @@ const categories = [
 ];
 
 const ProductCategories = () => {
+    const settings = {
+    dots: false,
+    infinite: true,
+     arrows: false,
+    speed: 800,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3500,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+  
   return (
     <section className="py-10 px-4 md:px-10 font-['Inter'] bg-gray-50">
       <div className="mb-6 text-center">
-        <h2 className="text-2xl md:text-3xl font-semibold text-gray-800">
+        <h2 className="text-3xl  font-bold text-gray-800 explore-thought" >
           Explore our thoughtful and planet-first ✧ <em className="italic">Categories</em>
         </h2>
       </div>
@@ -64,7 +89,7 @@ const ProductCategories = () => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute bottom-0 w-full bg-black/50 py-4 px-4 text-center">
-                <p className="text-sm text-gray-200">Explore</p>
+                {/* <p className="text-sm text-gray-200">Explore</p> */}
                 <h3 className="text-lg font-semibold italic text-white">{cat.name}</h3>
 
                 <div className="flex justify-center mt-4">
