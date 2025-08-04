@@ -7,15 +7,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const FeaturedProducts = () => {
-<<<<<<< HEAD
-  return (
-    <div className="p-4 bg-gray-50 ">
-      {/* Heading */}
-      <h2 className="text-3xl font-bold text-gray-900 text-center p-4">Best Seller</h2>
-      <p className="text-center text-gray-600 max-w-xl mx-auto mb-8">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisquam, vero, adipisci velit assumenda dolores enim maiores.
-      </p>
-=======
+
   const products = [
     {
       id: 1,
@@ -50,7 +42,6 @@ const FeaturedProducts = () => {
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnXb2_K3vluQzr5AkNu263uZRnNrom71NtMg&s',
     },
   ];
->>>>>>> c824b54cad2573f652a20dc64724a0c952d912df
 
   const settings = {
     dots: false,
@@ -107,23 +98,7 @@ const FeaturedProducts = () => {
         ))}
       </div>
 
-<<<<<<< HEAD
-      {/* View All Button */}
-      <div className="flex justify-center mt-10" style={{marginTop: '50px'}}>
-        <button className="relative  text-white overflow-hidden px-6 py-3 rounded-md flex items-center gap-2 font-semibold text-black 
-          bg-gradient-to-r from-amber-400 to-amber-500 
-          transition-all duration-500 ease-in-out 
-          hover:from-yellow-400 hover:to-orange-500 
-          hover:shadow-xl group">
 
-          <span className="relative z-10">View All</span>
-
-          <FaArrowRight className="relative z-10 transition-transform duration-500 group-hover:translate-x-1" />
-
-          {/* Optional Glow Layer */}
-          <span className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-500 opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-lg rounded-md"></span>
-        </button>
-=======
       {/* Mobile view (slider only on ≤576px) */}
       <div className="featured-slider">
         <Slider {...settings}>
@@ -133,7 +108,7 @@ const FeaturedProducts = () => {
             </div>
           ))}
         </Slider>
->>>>>>> c824b54cad2573f652a20dc64724a0c952d912df
+
       </div>
     </div>
   );

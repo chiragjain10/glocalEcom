@@ -18,21 +18,8 @@ const Footer = () => {
           <h2 className="text-2xl font-bold mb-3">GlocalShipeComers</h2>
           <p className="text-sm mb-4">Delivering products globally with care and speed.</p>
           <h4 className="font-semibold text-sm mb-2">Subscribe to Newsletter</h4>
-<<<<<<< HEAD
-          <form className="flex gap-2">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-3 py-2 rounded-md text-sm focus:outline-none border border-amber-400/50  bg-white/70 backdrop-blur-sm "
-            />
-            <button
-              type="submit"
-              className="bg-gradient-to-r from-amber-400 to-amber-500 text-white text-sm px-4 py-2 rounded-md hover:bg-[#6c3d25]"
-            >
-              Subscribe
-            </button>
-          </form>
-=======
+
+
         <form className="flex flex-col sm:flex-row gap-2 w-full">
   <input
     type="email"
@@ -47,7 +34,7 @@ const Footer = () => {
   </button>
 </form>
 
->>>>>>> c824b54cad2573f652a20dc64724a0c952d912df
+
         </div>
 
         {/* Product Links */}

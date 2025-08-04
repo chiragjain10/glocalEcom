@@ -4,72 +4,91 @@ import { FaArrowRight } from 'react-icons/fa';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const BannerSlider = () => {
+const Banner = () => {
   const settings = {
-    autoplay: true,
-    autoplaySpeed: 3000,
-    dots: true,
+    dots: false,
     arrows: false,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
-    pauseOnHover: false,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: true,
+    fade: true,
+   cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
+    pauseOnFocus: false,
+    pauseOnDotsHover: false 
   };
 
   const slides = [
     {
-      img: "https://media.istockphoto.com/id/1200452868/photo/religious-paintings-on-the-wall-of-sri-dalada-maligawa-or-the-temple-of-the-sacred-tooth.jpg?s=1024x1024&w=is&k=20&c=R5OAkMW_Xj8vg_HolMisHKzxQrNrwPBqCtgW17mfNgQ=",
+      img: "https://media.istockphoto.com/id/813581504/photo/manual-labor-and-art-artistic-in-india-mumba.jpg?s=2048x2048&w=is&k=20&c=LLXtVaqR8dtqOkYXBxrlb1Vup-GbBbRwSxsPAni5TFU=",
       title: "Experience the Richness of Indian Art",
-      subtitle: "Shop authentic cultural creations from artisans across India",
-      highlight: "Unique. Traditional. Handmade."
+      subtitle: "Discover authentic cultural creations handcrafted by skilled artisans from across India.",
+      highlight: "Unique • Traditional • Handmade",
+      buttonText: "Explore Collection"
     },
     {
-      img: "https://media.istockphoto.com/id/177129641/photo/chinese-new-year-ornaments-traditional-dancing-dragon.jpg?s=1024x1024&w=is&k=20&c=W-Rqlsy0ifdsEKlW8ttNGHi7qibwDPWH2JPqB6xgVC8=",
-      title: "Celebrate Tradition with Style",
-      subtitle: "Handpicked heritage products for modern living",
-      highlight: "Colors of Culture. Touch of Class."
+      img: "https://media.istockphoto.com/id/609722026/vector/indian-god-rama-and-sita-for-dussehra-festival-celebration-in.jpg?s=2048x2048&w=is&k=20&c=gqYALaWNRDVm_ljPItmu0uKg-FdkX4hPp8KSoGaf8RU=",
+      title: "Celebrate Tradition with Modern Style",
+      subtitle: "Curated heritage products that blend seamlessly with contemporary living.",
+      highlight: "Colors of Culture • Touch of Class",
+      buttonText: "View Gallery"
     },
     {
-      img: "https://media.istockphoto.com/id/483613330/photo/buddha-statue-candle-holder-for-fragrant-oils-beads.jpg?s=1024x1024&w=is&k=20&c=_7qIEDdmD7rPQRMNAeP1i8pCol31Aqvw0lK-d-bWgig=",
+      img: "https://media.istockphoto.com/id/2217828780/photo/statue-of-lord-brahma-at-wat-saman-rattanaram-thailand.jpg?s=2048x2048&w=is&k=20&c=CWyZr-Nlz4OpIzSZpp5YHMcnz1Vo1sxLEGBYGwgqVZw=",
       title: "Find Peace in Artistic Expressions",
-      subtitle: "Spiritual & decor elements to elevate your space",
-      highlight: "Calm. Inspire. Decorate."
+      subtitle: "Spiritual decor elements that bring harmony to your surroundings.",
+      highlight: "Calm • Inspire • Decorate",
+      buttonText: "Discover More"
     },
   ];
 
   return (
-    <section className="w-full h-screen overflow-hidden">
-  <div className="w-full h-[80vh]">
-    <Slider {...settings}>
-      {slides.map((slide, index) => (
-        <div key={index} className="relative w-full h-screen">
-          <img
-            src={slide.img}
-            alt={slide.title}
-            className="w-full h-full object-cover brightness-[.6]"
-          />
-          <div className="absolute inset-0 px-6 md:px-16 pb-14 py-10 flex flex-col justify-end text-white z-10">
-            <p className="text-sm md:text-base font-semibold text-yellow-300 mb-1 tracking-wide uppercase">
-              {slide.highlight}
-            </p>
-            <h2 className="text-3xl md:text-5xl font-bold leading-tight drop-shadow mb-2">
-              {slide.title}
-            </h2>
-            <p className="text-md md:text-lg mb-5 max-w-xl drop-shadow">
-              {slide.subtitle}
-            </p>
-            <button className="flex items-center text-white  bg-gradient-to-r from-amber-400 to-amber-500  gap-2 bg-white text-black px-6 py-2 rounded-md text-sm font-semibold hover:bg-gray-200 transition duration-300 shadow-md w-fit">
-              Shop Now <FaArrowRight />
-            </button>
-          </div>
-        </div>
-      ))}
-    </Slider>
-  </div>
-</section>
+    <section className="w-full relative mt-4 md:mt-15"> {/* Fixed margins for mobile and desktop */}
+      <Slider {...settings}>
+        {slides.map((slide, index) => (
+          <div key={index} className="relative outline-none">
+            {/* Image container with responsive height */}
+            <div className="h-[50vh] sm:h-[60vh] md:h-[100vh] w-full relative overflow-hidden">
+              <div className="absolute inset-0 bg-black/40 z-0"></div>
+              <img
+                src={slide.img}
+                alt={slide.title}
+                className="w-full h-full object-cover object-center"
+                loading="lazy"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "https://via.placeholder.com/1920x1080?text=Banner+Image";
+                }}
+              />
+            </div>
 
+            {/* Content overlay with better mobile positioning */}
+            <div className="absolute inset-0 flex items-center z-10 px-4 sm:px-6">
+              <div className="container mx-auto mt-8 sm:mt-0"> {/* Added margin-top for mobile */}
+                <div className="max-w-2xl bg-black/30 backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-lg border border-amber-400/20">
+                  <p className="text-xs sm:text-sm md:text-base font-medium text-amber-300 mb-2 tracking-widest">
+                    {slide.highlight}
+                  </p>
+                  <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-2 sm:mb-3 text-white">
+                    {slide.title}
+                  </h2>
+                  <p className="text-xs sm:text-sm md:text-base mb-3 sm:mb-4 text-white/90 max-w-xl">
+                    {slide.subtitle}
+                  </p>
+                  <button className="flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 px-3 py-1 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-md text-xs sm:text-sm md:text-base font-semibold hover:from-amber-500 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95">
+                    {slide.buttonText} <FaArrowRight className="text-xs sm:text-sm" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </Slider>
+    </section>
   );
 };
 
-export default BannerSlider;
+export default Banner;

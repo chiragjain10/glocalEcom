@@ -401,13 +401,7 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-<<<<<<< HEAD
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
-=======
-          </div>
+       
 
           <div className="pt-4 border-t border-gray-200">
             <div className="flex items-center justify-around">
@@ -442,12 +436,11 @@ const Navbar = () => {
               </NavLink>
             </div>
           </div>
-        </div>
+
       </motion.div>
     )}
   </AnimatePresence>
     </header >
->>>>>>> c824b54cad2573f652a20dc64724a0c952d912df
   );
 };
 
