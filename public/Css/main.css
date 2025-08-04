@@ -552,17 +552,14 @@ label {
 }
 
 .submit-btn {
-<<<<<<< HEAD
   background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
   color: white;
-=======
   background: linear-gradient(
     135deg,
     var(--color-primary-light),
     var(--color-primary)
   );
   color: black;
->>>>>>> c824b54cad2573f652a20dc64724a0c952d912df
   border: none;
   padding: 1rem 2rem;
   font-size: var(--font-size-base);
@@ -667,11 +664,8 @@ label {
 /* Wishlist.css */
 
 .wishlist-container {
-<<<<<<< HEAD
   font-family: var(--font-primary);
-=======
   font-family: "Poppins", sans-serif;
->>>>>>> c824b54cad2573f652a20dc64724a0c952d912df
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
@@ -852,12 +846,10 @@ label {
 }
 
 /* add to cart */
-<<<<<<< HEAD
 .bg-container {
   background-color: #f9fafb;
   padding: 20px;
-  font-family: var(--font-primary);
-=======
+  font-family: var(--font-primary);}
 
 /* CartPage.css */
 :root {
@@ -872,10 +864,8 @@ label {
   --text-sm: 15px;
   --text-xs: 14px;
   --text-xxs: 13px;
-
   /* Line Heights */
   --line-height-normal: 1.5;
->>>>>>> c824b54cad2573f652a20dc64724a0c952d912df
 }
 
 .cart-page-container {
@@ -884,7 +874,7 @@ label {
   margin: 0 auto;
   padding: 40px 20px;
   color: #333;
-    margin-top: 70px; ;
+  margin-top: 70px; ;
   margin-bottom: 40px;
 }
 
