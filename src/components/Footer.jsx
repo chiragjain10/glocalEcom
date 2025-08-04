@@ -20,20 +20,20 @@ const Footer = () => {
           <h4 className="font-semibold text-sm mb-2">Subscribe to Newsletter</h4>
 
 
-        <form className="flex flex-col sm:flex-row gap-2 w-full">
-  <input
-    type="email"
-    placeholder="Enter your email"
-    className="w-full sm:w-auto flex-1 px-3 py-2 rounded-md text-sm focus:outline-none border border-amber-400/50 bg-white/70 backdrop-blur-sm"
-  />
-  <button
-    type="submit"
-    className="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 text-black text-sm px-4 py-2 rounded-md hover:bg-[#6c3d25]"
-  >
-    Subscribe
-  </button>
-</form>
 
+          <form className="flex flex-col sm:flex-row gap-2 w-full">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full sm:w-auto flex-1 px-3 py-2 rounded-md text-sm focus:outline-none border border-amber-400/50 bg-white/70 backdrop-blur-sm"
+            />
+            <button
+              type="submit"
+              className="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 text-black text-sm px-4 py-2 rounded-md hover:bg-[#6c3d25]"
+            >
+              Subscribe
+            </button>
+          </form>
 
         </div>
 
@@ -66,18 +66,22 @@ const Footer = () => {
           <h4 className="font-semibold mb-4">Contact Us</h4>
           <ul className="text-sm space-y-3">
             <li className="flex items-center gap-2">
-              <FaEnvelope className="text-2xl bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-amber-500"/>  support@glocalshipe.com
+              <FaEnvelope className="text-amber-500 text-lg" />
+              support@glocalshipe.com
             </li>
             <li className="flex items-center gap-2">
-              <FaPhoneAlt className="text-2xl bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-amber-500" /> +91 9876543210
+              <FaPhoneAlt className="text-amber-500 text-lg" />
+              +91 9876543210
             </li>
             <li className="flex items-center gap-2">
-              <FaMapMarkerAlt className="text-2xl bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-amber-500" /> 3891 Ranchview Dr. CA 62639
+              <FaMapMarkerAlt className="text-amber-500 text-lg" />
+              3891 Ranchview Dr. CA 62639
             </li>
           </ul>
         </div>
       </div>
 
+      {/* Bottom Bar */}
       <div className="border-t mt-12 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
         <p>&copy; {new Date().getFullYear()} GlocalShipeComers. All rights reserved.</p>
         <div className="flex gap-4 mt-4 md:mt-0">

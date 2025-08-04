@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import React, { useState, useRef, useEffect } from "react";
+import { FaChevronDown } from "react-icons/fa";
 
 const accordionData = [
   {
@@ -25,6 +25,17 @@ const accordionData = [
 ];
 
 const AccordionItem = ({ item, isOpen, onClick }) => {
+  const contentRef = useRef(null);
+  const [contentHeight, setContentHeight] = useState("0px");
+
+  useEffect(() => {
+    if (isOpen && contentRef.current) {
+      setContentHeight(`${contentRef.current.scrollHeight}px`);
+    } else {
+      setContentHeight("0px");
+    }
+  }, [isOpen]);
+
   return (
     <div className="p-3 rounded-md border border-amber-400/50 bg-white/70 backdrop-blur-sm">
       <button
@@ -34,17 +45,26 @@ const AccordionItem = ({ item, isOpen, onClick }) => {
         <span className="text-lg font-medium text-gray-800">
           {item.question}
         </span>
-        {isOpen ? (
-          <FaChevronUp className="text-amber-600" />
-        ) : (
-          <FaChevronDown className="text-gray-600" />
-        )}
+        <FaChevronDown
+          className={`rotate-icon ${isOpen ? "open text-amber-600" : "text-gray-600"
+            }`}
+        />
       </button>
-      {isOpen && (
-        <div className="pb-4 text-gray-600 text-sm leading-relaxed">
+
+      {/* Accordion content with fixed height and scroll */}
+      <div
+        className="accordion-content"
+        style={{
+          maxHeight: isOpen ? contentHeight : "0px",
+        }}
+      >
+        <div
+          ref={contentRef}
+          className="overflow-y-auto max-h-32 text-gray-600 text-sm leading-relaxed pr-1"
+        >
           {item.answer}
         </div>
-      )}
+      </div>
     </div>
   );
 };
@@ -58,22 +78,19 @@ const Accordion = () => {
 
   return (
     <section className="bg-[#f4f2e9] py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-10">
-        {/* Left: Accordion content */}
-        <div className="w-full">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center w-full">
-            Frequently Asked Questions
-          </h2>
-          <div className="space-y-4">
-            {accordionData.map((item, index) => (
-              <AccordionItem
-                key={index}
-                item={item}
-                isOpen={index === openIndex}
-                onClick={() => handleToggle(index)}
-              />
-            ))}
-          </div>
+      <div className="max-w-4xl mx-auto flex flex-col items-center gap-6 h-[500px] overflow-y-auto scroll-hidden">
+        <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">
+          Frequently Asked Questions
+        </h2>
+        <div className="w-full space-y-4">
+          {accordionData.map((item, index) => (
+            <AccordionItem
+              key={index}
+              item={item}
+              isOpen={index === openIndex}
+              onClick={() => handleToggle(index)}
+            />
+          ))}
         </div>
       </div>
     </section>

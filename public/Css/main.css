@@ -560,6 +560,8 @@ label {
 }
 
 .submit-btn {
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+  color: white;
   background: linear-gradient(
     135deg,
     var(--color-primary-light),
@@ -851,17 +853,21 @@ label {
 }
 
 /* add to cart */
-/* Cart Page Styles */
-.bg-container {
-  background-color: #f8f8f8;
-  min-height: 100vh;
-  padding: 20px 0;
-}
 
+.bg-container {
+  background-color: #f9fafb;
+  padding: 20px;
+  font-family: var(--font-primary);}
+
+  
+/* CartPage.css */
 .cart-page-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 40px 20px;
+  color: #333;
+  margin-top: 70px; ;
+  margin-bottom: 40px;
 }
 
 .cart-header {
@@ -1141,7 +1147,7 @@ label {
 .featured-grid {
   display: flex;
   flex-wrap: wrap;
-  /* gap: 40px; */
+  gap: 16px;
   justify-content: space-evenly;
   scroll-snap-type: x mandatory;
 }
@@ -1234,7 +1240,7 @@ label {
 
 .best-seller-image {
   width: 100%;
-  height: 280px;
+  height: 240px;
   object-fit: cover;
   display: block;
   transition: transform 0.4s ease;
@@ -1355,3 +1361,29 @@ label {
     margin: 0 auto;
   }
 }
+
+
+/*  accordion    */
+
+/* Accordion.css */
+.accordion-content {
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out;
+}
+
+.rotate-icon {
+  transition: transform 0.3s ease;
+}
+
+.rotate-icon.open {
+  transform: rotate(180deg);
+}
+
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+.scroll-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

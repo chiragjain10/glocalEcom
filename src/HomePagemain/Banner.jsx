@@ -46,12 +46,12 @@ const Banner = () => {
   ];
 
   return (
-    <section className="w-full relative mt-4 md:mt-15"> {/* Fixed margins for mobile and desktop */}
+    <section className="w-full relative pt-16 md:pt-14 ">
       <Slider {...settings}>
         {slides.map((slide, index) => (
           <div key={index} className="relative outline-none">
             {/* Image container with responsive height */}
-            <div className="h-[50vh] sm:h-[60vh] md:h-[100vh] w-full relative overflow-hidden">
+            <div className="h-[70vh] sm:h-[80vh] md:h-[100vh] w-full relative overflow-hidden">
               <div className="absolute inset-0 bg-black/40 z-0"></div>
               <img
                 src={slide.img}
@@ -78,7 +78,7 @@ const Banner = () => {
                   <p className="text-xs sm:text-sm md:text-base mb-3 sm:mb-4 text-white/90 max-w-xl">
                     {slide.subtitle}
                   </p>
-                  <button className="flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 px-3 py-1 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-md text-xs sm:text-sm md:text-base font-semibold hover:from-amber-500 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95">
+                  <button className="flex items-center cursor-pointer; gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 px-3 py-1 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-md text-xs sm:text-sm md:text-base font-semibold hover:from-amber-500 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95">
                     {slide.buttonText} <FaArrowRight className="text-xs sm:text-sm" />
                   </button>
                 </div>

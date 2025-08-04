@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 
 
 const LogInPage = () => {
+     const navigate = useNavigate(); 
+
   return(
     <>
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-amber-400 to-amber-400">
@@ -28,6 +31,12 @@ const LogInPage = () => {
     Login
   </button>
         </form>
+             <div className="text-center mt-6">
+          <p className="text-sm text-gray-600 mb-2">Create Account
+            <a href="/SignUpPage" className="ms-1 text-blue-500 hover:underline font-medium"  onClick={() => navigate("/SignUpPage")}>Signup</a>
+          </p>
+          
+        </div>
       </div>
     </div>
     </>
