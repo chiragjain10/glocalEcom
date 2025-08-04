@@ -7,7 +7,9 @@ import FeaturedProducts from './FeaturedProducts.jsx'
 import TestimonialSlider from './Testimonials.jsx'
 import WhyChooseUs from './WhyChooseUs.jsx'
 import OfferSection from './OfferSection.jsx'
-import HighlightsSection from './HighlightsSection.jsx'
+import Accordion from './AccordionItems.jsx'
+import TrendingProducts from './TrendingProducts.jsx'
+import NewArrival from './NewArrival.jsx'
 
 const Homepage = () => {
   return (
@@ -15,10 +17,13 @@ const Homepage = () => {
       <Banner/>
       <WhyChooseUs/>
       <ProductCategories />
-      <HighlightsSection />
+      <TrendingProducts/>
+      <NewArrival/>
       <FeaturedProducts />
       <OfferSection />
       <TestimonialSlider />
+      <Accordion/>
+      
     </div>
   )
 }

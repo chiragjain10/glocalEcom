@@ -401,10 +401,53 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
+<<<<<<< HEAD
           </motion.div>
         )}
       </AnimatePresence>
     </header>
+=======
+          </div>
+
+          <div className="pt-4 border-t border-gray-200">
+            <div className="flex items-center justify-around">
+              <NavLink
+                to="/wishlist"
+                className={({ isActive }) =>
+                  `p-2 ${isActive ? 'text-amber-500' : 'text-gray-700'} hover:text-amber-500 transition-colors duration-200`
+                }
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <FaHeart className="text-lg" />
+              </NavLink>
+
+              <NavLink
+                to="/cart"
+                className={({ isActive }) =>
+                  `p-2 ${isActive ? 'text-amber-500' : 'text-gray-600'} hover:text-amber-500 transition-colors duration-200`
+                }
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <FaShoppingCart className="text-lg" />
+              </NavLink>
+
+              <NavLink
+                to="/SignUpPag"
+                className={({ isActive }) =>
+                  `p-2 ${isActive ? 'text-amber-500 border-amber-400' : 'text-gray-600 border-gray-300'} hover:text-amber-500 transition-colors duration-200 rounded-full border hover:border-amber-400`
+                }
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <FaUser className="text-lg" />
+              </NavLink>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+    </header >
+>>>>>>> c824b54cad2573f652a20dc64724a0c952d912df
   );
 };
 

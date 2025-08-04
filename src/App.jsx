@@ -10,7 +10,12 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import User from './auth/User';
 import Checkout from './HomePagemain/CheckOut';
+<<<<<<< HEAD
 import About from './About';
+=======
+import SignUpPage from './HomePagemain/SignUpPage';
+import LogInPage from './HomePagemain/LogInPage';
+>>>>>>> c824b54cad2573f652a20dc64724a0c952d912df
 
 import './App.css';
 
@@ -31,7 +36,12 @@ function App() {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/cart" element={<AddtoCart />} />
           <Route path="/CheckOut" element={<Checkout />} />
+<<<<<<< HEAD
           <Route path="/account" element={<User />} />
+=======
+          <Route path="/SignUpPage" element={<SignUpPage />} />
+          <Route path="/LogInPage" element={<LogInPage />} />
+>>>>>>> c824b54cad2573f652a20dc64724a0c952d912df
 
           {/* Optional: 404 Page */}
           <Route path="*" element={

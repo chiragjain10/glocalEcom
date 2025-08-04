@@ -1,34 +1,13 @@
 import React from 'react';
-import { FaStar, FaHeart, FaShoppingCart, FaEye, FaArrowRight } from 'react-icons/fa';
-
-const trendingProducts = [
-  {
-    id: 1,
-    name: "Handmade Pot",
-    price: "₹899",
-    image: "https://cdn.pixabay.com/photo/2017/03/27/14/33/ancient-2179091_1280.jpg",
-  },
-  {
-    id: 2,
-    name: "Tribal Mask",
-    price: "₹1299",
-    image: "https://di2ponv0v5otw.cloudfront.net/posts/2024/10/07/67042fecf8ede7766a0d4b0c/m_670438882d829ae2f368b890.jpeg",
-  },
-  {
-    id: 3,
-    name: "Warli Painting",
-    price: "₹999",
-    image: "https://cdn.pixabay.com/photo/2013/01/05/21/02/art-74050_1280.jpg",
-  },
-  {
-    id: 4,
-    name: "Red Lacquer Toys",
-    price: "₹749",
-    image: "https://cdn.pixabay.com/photo/2017/07/26/22/35/wooden-mask-2543403_1280.jpg",
-  },
-];
+import Slider from 'react-slick';
+import {
+  FaStar, FaCrown, FaHeart, FaEye, FaShoppingCart
+} from 'react-icons/fa';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const FeaturedProducts = () => {
+<<<<<<< HEAD
   return (
     <div className="p-4 bg-gray-50 ">
       {/* Heading */}
@@ -36,57 +15,99 @@ const FeaturedProducts = () => {
       <p className="text-center text-gray-600 max-w-xl mx-auto mb-8">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisquam, vero, adipisci velit assumenda dolores enim maiores.
       </p>
+=======
+  const products = [
+    {
+      id: 1,
+      title: 'Handmade Pot',
+      description: 'Handcrafted by Indian artisans',
+      price: '₹899',
+      rating: 4.8,
+      image: 'https://cdn.pixabay.com/photo/2017/03/27/14/33/ancient-2179091_1280.jpg',
+    },
+    {
+      id: 2,
+      title: 'Decorative Plate',
+      description: 'Painted with cultural motifs',
+      price: '₹499',
+      rating: 4.5,
+      image: 'https://di2ponv0v5otw.cloudfront.net/posts/2024/10/07/67042fecf8ede7766a0d4b0c/m_670438882d829ae2f368b890.jpeg',
+    },
+    {
+      id: 3,
+      title: 'Terracotta Mug',
+      description: 'Eco-friendly and elegant',
+      price: '₹349',
+      rating: 4.6,
+      image: 'https://m.media-amazon.com/images/I/71a+1jseHVL.jpg',
+    },
+    {
+      id: 4,
+      title: 'Artisan Vase',
+      description: 'Traditional design and texture',
+      price: '₹799',
+      rating: 4.7,
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnXb2_K3vluQzr5AkNu263uZRnNrom71NtMg&s',
+    },
+  ];
+>>>>>>> c824b54cad2573f652a20dc64724a0c952d912df
 
-      {/* Product Cards - Matching HighlightsSection Design */}
-      <div className="flex flex-wrap justify-center gap-6">
-        {trendingProducts.map((item) => (
-          <div
-            key={item.id}
-            className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group relative border border-gray-100 hover:border-amber-200 w-72"
-          >
-            {/* Hover Icons */}
-            <div className="absolute top-3 right-3 z-10 flex flex-col items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <button className="p-2 bg-white rounded-full shadow hover:bg-amber-100">
-                <FaHeart className="text-rose-500 w-4 h-4" />
-              </button>
-              <button className="p-2 bg-white rounded-full shadow hover:bg-amber-100">
-                <FaShoppingCart className="text-amber-600 w-4 h-4" />
-              </button>
-              <button className="p-2 bg-white rounded-full shadow hover:bg-amber-100">
-                <FaEye className="text-gray-700 w-4 h-4" />
-              </button>
-            </div>
+  const settings = {
+    dots: false,
+    arrows: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+  };
 
-            {/* Image */}
-            <div className="relative overflow-hidden aspect-square">
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-            </div>
-
-            {/* Content */}
-            <div className="p-4 space-y-3">
-              <div>
-                <h3 className="text-lg font-bold text-gray-900 group-hover:text-amber-600 transition-colors duration-300 truncate">
-                  {item.name}
-                </h3>
-                <p className="text-sm text-gray-500">Handcrafted by Indian artisans</p>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <p className="text-xl font-extrabold text-amber-500">{item.price}</p>
-                <div className="flex items-center text-amber-400">
-                  <FaStar className="w-4 h-4 fill-current" />
-                  <span className="ml-1 text-sm font-medium text-gray-600">4.8</span>
-                </div>
-              </div>
-            </div>
+  const ProductCard = ({ product }) => (
+    <div className="product-card">
+      <div className="product-image-wrapper">
+        <img src={product.image} alt={product.title} className="best-seller-image" />
+        <div className="icon-overlay">
+          <FaHeart className="icon heart-icon" />
+          <FaShoppingCart className="icon cart-icon" />
+          <FaEye className="icon eye-icon" />
+        </div>
+      </div>
+      <div className="product-content">
+        <h2 className="product-title">{product.title}</h2>
+        <p className="product-description">{product.description}</p>
+        <div className="product-footer">
+          <p className="product-price">{product.price}</p>
+          <div className="product-rating">
+            <FaStar className="star-icon" />
+            <span>{product.rating}</span>
           </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="featured-container bg-[#f4f2e9]">
+      <div className="top-sec custom-border-box">
+        <div className="heading-row">
+          <div className="crown-icon">
+            <FaCrown className="crown" />
+          </div>
+          <h2 className="featured-heading">Best Seller</h2>
+        </div>
+        <p className="featured-subtext">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis fugiat, doloribus error, sapiente.
+        </p>
+      </div>
+
+      {/* Desktop view (grid layout) */}
+      <div className="featured-grid">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
 
+<<<<<<< HEAD
       {/* View All Button */}
       <div className="flex justify-center mt-10" style={{marginTop: '50px'}}>
         <button className="relative  text-white overflow-hidden px-6 py-3 rounded-md flex items-center gap-2 font-semibold text-black 
@@ -102,6 +123,17 @@ const FeaturedProducts = () => {
           {/* Optional Glow Layer */}
           <span className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-500 opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-lg rounded-md"></span>
         </button>
+=======
+      {/* Mobile view (slider only on ≤576px) */}
+      <div className="featured-slider">
+        <Slider {...settings}>
+          {products.map((product) => (
+            <div key={product.id}>
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </Slider>
+>>>>>>> c824b54cad2573f652a20dc64724a0c952d912df
       </div>
     </div>
   );
