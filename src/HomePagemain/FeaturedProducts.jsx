@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 import {
   FaStar,
@@ -10,8 +10,11 @@ import {
 } from 'react-icons/fa';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Link } from 'react-router-dom';
+
 
 const FeaturedProducts = () => {
+
 
   const products = [
     {
@@ -59,27 +62,38 @@ const FeaturedProducts = () => {
   };
 
   const ProductCard = ({ product }) => (
-    <div className="product-card">
-      <div className="product-image-wrapper">
-        <img src={product.image} alt={product.title} className="best-seller-image" />
-        <div className="icon-overlay">
-          <FaHeart className="icon heart-icon text-rose-500" />
-          <FaShoppingCart className="icon cart-icon text-amber-600" />
-          <FaEye className="icon eye-icon text-gray-700" />
-        </div>
-      </div>
-      <div className="product-content">
-        <h2 className="product-title">{product.title}</h2>
-        <p className="product-description">{product.description}</p>
-        <div className="product-footer">
-          <p className="product-price">{product.price}</p>
-          <div className="product-rating">
-            <FaStar className="star-icon text-yellow-500" />
-            <span>{product.rating}</span>
+    <div>
+      <div className="product-card">
+        <div className="product-image-wrapper">
+          <img src={product.image} alt={product.title} className="best-seller-image" />
+          <div className="icon-overlay">
+            <Link to='/wishlist'>
+              <FaHeart className="icon heart-icon text-rose-500" />
+            </Link>
+            <Link to='/cart'>
+              <FaShoppingCart className="icon cart-icon text-amber-600" />
+            </Link>
+
+
+            <Link to={'/quickview'}>
+              <FaEye className="icon eye-icon text-gray-700" />
+            </Link>
+
           </div>
         </div>
-      </div>
-    </div>
+        <div className="product-content">
+          <h2 className="product-title">{product.title}</h2>
+          <p className="product-description">{product.description}</p>
+          <div className="product-footer">
+            <p className="product-price">{product.price}</p>
+            <div className="product-rating">
+              <FaStar className="star-icon text-yellow-500" />
+              <span>{product.rating}</span>
+            </div>
+          </div>
+        </div>
+      </div >
+    </div >
   );
 
   return (
@@ -87,10 +101,13 @@ const FeaturedProducts = () => {
       {/* Heading */}
       <div className="top-sec custom-border-box">
         <div className="heading-row">
-          <div className="crown-icon">
-            <FaCrown className="crown" />
+         
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">
+             Best Sellers
+            </h2>
+            <div className="w-20 h-1.5 bg-amber-500 mx-auto"></div>
           </div>
-          <h2 className="featured-heading">Best Seller</h2>
         </div>
         <p className="featured-subtext text-center max-w-xl mx-auto">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis fugiat, doloribus error, sapiente.

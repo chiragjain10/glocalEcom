@@ -51,9 +51,12 @@ const TestimonialSlider = () => {
   return (
     <section className="py-16 px-4  bg-gray-50 ">
       <div className="container mx-auto">
-        <h2 className="text-center text-3xl md:text-4xl font-bold mb-12 text-gray-800">
-          What Our Customers Say
-        </h2>
+        <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">
+                                 What Our Customers Say
+                        </h2>
+                        <div className="w-20 h-1.5 bg-amber-500 mx-auto"></div>
+                    </div>
         
         <Slider {...settings} className="testimonial-slider">
           {testimonials.map((item, index) => (

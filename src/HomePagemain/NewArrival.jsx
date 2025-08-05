@@ -99,10 +99,12 @@ const NewArrival = () => {
     <div className="featured-container bg-[#f4f2e9]">
       <div className="top-sec custom-border-box">
         <div className="heading-row">
-          <div className="new-arrival-icon ">
-            <FaStar className="crown" />
-          </div>
-          <h2 className="featured-heading">New Arrivals</h2>
+         <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">
+                            New Arrivals  
+                        </h2>
+                        <div className="w-20 h-1.5 bg-amber-500 mx-auto"></div>
+                    </div>
         </div>
         <p className="featured-subtext">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis

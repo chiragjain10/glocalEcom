@@ -77,11 +77,14 @@ const Accordion = () => {
   };
 
   return (
-    <section className="bg-[#f4f2e9] py-12 px-4 sm:px-6 lg:px-8">
+    <section className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto flex flex-col items-center gap-6 h-[500px] overflow-y-auto scroll-hidden">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">
-          Frequently Asked Questions
-        </h2>
+     <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">
+                           Frequently Asked Questions
+                        </h2>
+                        <div className="w-20 h-1.5 bg-amber-500 mx-auto"></div>
+                    </div>
         <div className="w-full space-y-4">
           {accordionData.map((item, index) => (
             <AccordionItem

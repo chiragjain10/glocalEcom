@@ -14,7 +14,6 @@ import About from './About';
 import SignUpPage from './HomePagemain/SignUpPage';
 import LogInPage from './HomePagemain/LogInPage';
 
-
 import './App.css';
 
 function App() {
@@ -32,6 +31,7 @@ function App() {
           <Route path="/account" element={<User />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LogInPage />} />
+        
 
           {/* Category paths */}
           <Route path="/all-categories" element={<CetegoriesPagelayout />} />

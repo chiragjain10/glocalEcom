@@ -60,11 +60,10 @@ const ProductCard = ({ item, badge }) => {
       {/* Badge */}
       <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
         <div
-          className={`px-3 py-1 text-xs font-medium rounded-full shadow-md ${
-            badge === "Trending"
+          className={`px-3 py-1 text-xs font-medium rounded-full shadow-md ${badge === "Trending"
               ? "bg-gradient-to-r from-red-500 to-amber-500 text-white"
               : "bg-gradient-to-r from-blue-500 to-cyan-400 text-white"
-          }`}
+            }`}
         >
           {badge}
         </div>
@@ -124,7 +123,12 @@ const HighlightsSection = () => {
               <div className="p-3 bg-gradient-to-r from-red-500 to-amber-500 rounded-xl shadow-lg">
                 <FaFire className="text-white text-2xl" />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900">Trending Products</h2>
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">
+                  Our Cultural Journey
+                </h2>
+                <div className="w-20 h-1.5 bg-amber-500 mx-auto"></div>
+              </div>
             </div>
             <p className="text-gray-500">Most loved by our customers</p>
           </div>

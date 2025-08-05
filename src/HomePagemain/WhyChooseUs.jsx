@@ -33,8 +33,12 @@ const WhyChooseUs = () => {
   return (
     <section className="bg-gray-50  py-16 px-4">
       <div className="max-w-7xl mx-auto text-center">
-
-        <h2 className="text-3xl font-bold text-gray-900 mb-12">Why Choose Us</h2>
+ <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">
+                          Why Choose Us
+                        </h2>
+                        <div className="w-20 h-1.5 bg-amber-500 mx-auto"></div>
+                    </div>
 
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
