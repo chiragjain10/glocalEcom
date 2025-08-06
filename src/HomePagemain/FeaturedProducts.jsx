@@ -15,7 +15,6 @@ import { Link } from 'react-router-dom';
 
 const FeaturedProducts = () => {
 
-
   const products = [
     {
       id: 1,
@@ -53,15 +52,32 @@ const FeaturedProducts = () => {
 
   const settings = {
     dots: false,
-    arrows: false,
     infinite: true,
-    speed: 500,
-    slidesToShow: 1,
+    speed: 600,
+    arrows: false,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 3000,
+    pauseOnHover: false,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: { slidesToShow: 3 },
+      },
+      {
+        breakpoint: 768,
+        settings: { slidesToShow: 2 },
+      },
+      {
+        breakpoint: 480,
+        settings: { slidesToShow: 1 },
+      },
+    ],
   };
 
   const ProductCard = ({ product }) => (
+
     <div>
       <div className="product-card">
         <div className="product-image-wrapper">
@@ -78,6 +94,7 @@ const FeaturedProducts = () => {
             <Link to={'/quickview'}>
               <FaEye className="icon eye-icon text-gray-700" />
             </Link>
+
 
           </div>
         </div>
@@ -97,41 +114,31 @@ const FeaturedProducts = () => {
   );
 
   return (
-    <div className="featured-container bg-[#f4f2e9]">
-      {/* Heading */}
-      <div className="top-sec custom-border-box">
-        <div className="heading-row">
-         
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">
-             Best Sellers
-            </h2>
-            <div className="w-20 h-1.5 bg-amber-500 mx-auto"></div>
+
+    <div className="slider-section bg-gary-50">
+      {/* Header */}
+      <div className="slider-top">
+        <div className="slider-heading-row">
+          <div className="slider-icon">
+            <FaCrown className="icon-star text-white" />
           </div>
+          <h2 className="slider-heading">Featured Products</h2>
+
         </div>
-        <p className="featured-subtext text-center max-w-xl mx-auto">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis fugiat, doloribus error, sapiente.
+        <p className="slider-subtext">
+          Discover the latest additions to our collection, carefully curated for your unique style.
         </p>
       </div>
 
-      {/* Desktop Grid View */}
-      <div className="featured-grid">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
-
-      {/* Mobile Slider View */}
-      <div className="featured-slider sm:hidden block mt-10">
-
+      {/* Slider Section */}
+      <div className="slider-wrapper">
         <Slider {...settings}>
           {products.map((product) => (
-            <div key={product.id}>
+            <div key={product.id} className="slider-slide">
               <ProductCard product={product} />
             </div>
           ))}
         </Slider>
-
       </div>
 
       {/* View All Button */}
@@ -145,7 +152,6 @@ const FeaturedProducts = () => {
           <FaArrowRight className="relative z-10 transition-transform duration-500 group-hover:translate-x-1" />
           <span className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-500 opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-lg rounded-md"></span>
         </button>
-
       </div>
     </div>
   );

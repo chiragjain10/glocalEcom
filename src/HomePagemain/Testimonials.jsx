@@ -60,7 +60,7 @@ const TestimonialSlider = () => {
         
         <Slider {...settings} className="testimonial-slider">
           {testimonials.map((item, index) => (
-            <div key={index} className="px-4">
+            <div key={index} className="px-4 bg-gray-50">
               <div className="testimonial-card bg-white p-8 rounded-lg shadow-md h-full border-b-4 border-amber-500 transition-all duration-300 hover:shadow-lg">
                 <FaQuoteLeft className="text-4xl mb-6 text-amber-500" />
                 <p className="text-gray-600 mb-6 text-lg leading-relaxed">

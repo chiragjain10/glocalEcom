@@ -2,7 +2,6 @@ import React from "react";
 import Slider from "react-slick";
 import {
   FaStar,
-  FaCrown,
   FaHeart,
   FaEye,
   FaShoppingCart,
@@ -18,8 +17,7 @@ const NewArrival = () => {
       description: "Handcrafted by Indian artisans",
       price: "₹899",
       rating: 4.8,
-      image:
-        "https://cdn.pixabay.com/photo/2017/03/27/14/33/ancient-2179091_1280.jpg",
+      image: "https://cdn.pixabay.com/photo/2017/03/27/14/33/ancient-2179091_1280.jpg",
     },
     {
       id: 2,
@@ -27,8 +25,7 @@ const NewArrival = () => {
       description: "Painted with cultural motifs",
       price: "₹499",
       rating: 4.5,
-      image:
-        "https://di2ponv0v5otw.cloudfront.net/posts/2024/10/07/67042fecf8ede7766a0d4b0c/m_670438882d829ae2f368b890.jpeg",
+      image: "https://di2ponv0v5otw.cloudfront.net/posts/2024/10/07/67042fecf8ede7766a0d4b0c/m_670438882d829ae2f368b890.jpeg",
     },
     {
       id: 3,
@@ -44,49 +41,57 @@ const NewArrival = () => {
       description: "Traditional design and texture",
       price: "₹799",
       rating: 4.7,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnXb2_K3vluQzr5AkNu263uZRnNrom71NtMg&s",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnXb2_K3vluQzr5AkNu263uZRnNrom71NtMg&s",
     },
   ];
 
   const settings = {
     dots: false,
-    arrows: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
+  infinite: true,
+  speed: 600,
+  arrows: false, 
+  autoplay: true,
+  autoplaySpeed: 3000,
+  pauseOnHover: false,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: { slidesToShow: 3 },
+      },
+      {
+        breakpoint: 768,
+        settings: { slidesToShow: 2 },
+      },
+      {
+        breakpoint: 480,
+        settings: { slidesToShow: 1 },
+      },
+    ],
   };
 
   const ProductCard = ({ product }) => (
-    <div className="product-card relative">
-      {/* 🔥 Trending Badge */}
+    <div className="slider-card relative">
       <div className="absolute top-3 left-3 z-10 flex items-center gap-1 px-3 py-1 text-xs font-semibold rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 text-white shadow">
-        <span>New</span>
+        <span className="new-badge">New</span>
       </div>
 
-      {/* 📸 Image with overlay icons */}
-      <div className="product-image-wrapper">
-        <img
-          src={product.image}
-          alt={product.title}
-          className="best-seller-image"
-        />
-        <div className="icon-overlay">
+      <div className="slider-image-wrapper">
+        <img src={product.image} alt={product.title} className="slider-image" />
+        <div className="slider-icon-overlay">
           <FaHeart className="icon heart-icon" />
           <FaShoppingCart className="icon cart-icon" />
           <FaEye className="icon eye-icon" />
         </div>
       </div>
 
-      {/* 📋 Content */}
-      <div className="product-content">
-        <h2 className="product-title">{product.title}</h2>
-        <p className="product-description">{product.description}</p>
-        <div className="product-footer">
-          <p className="product-price">{product.price}</p>
-          <div className="product-rating">
+      <div className="slider-content">
+        <h2 className="slider-title">{product.title}</h2>
+        <p className="slider-description">{product.description}</p>
+        <div className="slider-footer">
+          <p className="slider-price">{product.price}</p>
+          <div className="slider-rating">
             <FaStar className="star-icon" />
             <span>{product.rating}</span>
           </div>
@@ -96,7 +101,8 @@ const NewArrival = () => {
   );
 
   return (
-    <div className="featured-container bg-[#f4f2e9]">
+
+    <div className="featured-container bg-gray-50">
       <div className="top-sec custom-border-box">
         <div className="heading-row">
          <div className="text-center mb-16">
@@ -112,18 +118,11 @@ const NewArrival = () => {
         </p>
       </div>
 
-      {/* Desktop view (grid layout) */}
-      <div className="featured-grid">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
 
-      {/* Mobile view (slider only on ≤576px) */}
-      <div className="featured-slider">
+      <div className="slider-wrapper">
         <Slider {...settings}>
           {products.map((product) => (
-            <div key={product.id}>
+            <div key={product.id} className="slider-slide">
               <ProductCard product={product} />
             </div>
           ))}
