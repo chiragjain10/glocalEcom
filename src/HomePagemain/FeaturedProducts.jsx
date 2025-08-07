@@ -1,5 +1,7 @@
-import React from 'react';
+// src/components/FeaturedProducts.jsx
+import React, { useContext } from 'react';
 import Slider from 'react-slick';
+import { ProductContext } from '../HomePagemain/ProductContext';
 import {
   FaStar,
   FaCrown,
@@ -10,42 +12,10 @@ import {
 } from 'react-icons/fa';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Link } from 'react-router-dom';
 
 const FeaturedProducts = () => {
-  const products = [
-    {
-      id: 1,
-      title: 'Handmade Pot',
-      description: 'Handcrafted by Indian artisans',
-      price: '₹899',
-      rating: 4.8,
-      image: 'https://cdn.pixabay.com/photo/2017/03/27/14/33/ancient-2179091_1280.jpg',
-    },
-    {
-      id: 2,
-      title: 'Decorative Plate',
-      description: 'Painted with cultural motifs',
-      price: '₹499',
-      rating: 4.5,
-      image: 'https://di2ponv0v5otw.cloudfront.net/posts/2024/10/07/67042fecf8ede7766a0d4b0c/m_670438882d829ae2f368b890.jpeg',
-    },
-    {
-      id: 3,
-      title: 'Terracotta Mug',
-      description: 'Eco-friendly and elegant',
-      price: '₹349',
-      rating: 4.6,
-      image: 'https://m.media-amazon.com/images/I/71a+1jseHVL.jpg',
-    },
-    {
-      id: 4,
-      title: 'Artisan Vase',
-      description: 'Traditional design and texture',
-      price: '₹799',
-      rating: 4.7,
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnXb2_K3vluQzr5AkNu263uZRnNrom71NtMg&s',
-    },
-  ];
+  const { products } = useContext(ProductContext);
 
   const settings = {
     dots: false,
@@ -76,11 +46,17 @@ const FeaturedProducts = () => {
   const ProductCard = ({ product }) => (
     <div className="slider-card relative">
       <div className="slider-image-wrapper">
-        <img src={product.image} alt={product.title} className="slider-image" />
+       <img
+  src={product.imgs?.[0]}
+  alt={product.title}
+  className="slider-image"
+/>
         <div className="slider-icon-overlay">
           <FaHeart className="icon heart-icon" />
           <FaShoppingCart className="icon cart-icon" />
-          <FaEye className="icon eye-icon" />
+          <Link to={`/product/${product.id}`}>
+            <FaEye className="icon eye-icon cursor-pointer" />
+          </Link>
         </div>
       </div>
 
@@ -99,14 +75,14 @@ const FeaturedProducts = () => {
   );
 
   return (
-    <div className="slider-section bg-[#f4f2e9]">
+    <div className="slider-section bg-[#F4F2E9]">
       {/* Header */}
       <div className="slider-top">
         <div className="slider-heading-row">
           <div className="slider-icon">
             <FaCrown className="icon-star text-white" />
           </div>
-          <h2 className="slider-heading">Featured Products</h2>
+          <h2 className="slider-heading">Best Seller</h2>
         </div>
         <p className="slider-subtext">
           Discover the latest additions to our collection, carefully curated for your unique style.

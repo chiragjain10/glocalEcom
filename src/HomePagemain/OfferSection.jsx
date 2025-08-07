@@ -34,7 +34,7 @@ const OfferSection = () => {
   }, []);
 
   return (
-    <section className="px-4 py-12 sm:px-6 lg:px-8 bg-gray-50 text-black font-sans">
+    <section className="px-4 py-12 sm:px-6 lg:px-8 bg-[#F4F2E9] text-black font-sans">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         {/* Left: Image Grid */}
         <div className="grid grid-cols-2 grid-rows-2 gap-4 h-[400px] sm:h-[500px] md:h-[600px] overflow-hidden rounded-2xl shadow-xl">
@@ -91,7 +91,7 @@ const OfferSection = () => {
         </div>
 
         {/* Right: Countdown Section */}
-        <div className="p-6 sm:p-8 flex flex-col justify-center items-center space-y-6 border border-amber-400/50 rounded-2xl bg-white/70 backdrop-blur-sm text-gray-800">
+        <div className="p-6 sm:p-8 flex flex-col justify-center items-center space-y-6 border border-amber-400/50 rounded-2xl bg-white backdrop-blur-sm text-gray-800">
           <div className="text-center space-y-3">
             <span className="text-amber-600 font-medium tracking-wide text-sm sm:text-base">
               FLASH SALE

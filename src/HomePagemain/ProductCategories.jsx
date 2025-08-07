@@ -36,7 +36,7 @@ const categories = [
 
 const ProductCategories = () => {
     const settings = {
-    dots: false,
+    dots:false,
     infinite: true,
      arrows: false,
     speed: 800,
@@ -61,17 +61,17 @@ const ProductCategories = () => {
   };
   
   return (
-    <section className="py-10 px-4 md:px-10 font-['Inter'] bg-gray-50">
-      <div className="mb-6 text-center">
-        <h2 className="text-3xl  font-bold text-gray-800 explore-thought" >
-          Explore our thoughtful and planet-first ✧ <em className="italic">Categories</em>
+    <section className="py-10 px-4 md:px-10 bg-[#F4F2E9]">
+      <div className="mb-6 text-center slider-heading-row">
+        <div className="slider-icon text-white text-2xl">✧</div>
+        <h2 className="slider-heading " >
+            Explore Our Categories
         </h2>
       </div>
       <Swiper
         spaceBetween={20}
         slidesPerView={1}
         autoplay={{ delay: 2500, disableOnInteraction: false }}
-        pagination={{ clickable: true }}
         className="custom-swiper px-4 mt-5 pb-14" // 👈 more bottom padding
         breakpoints={{
           640: { slidesPerView: 2 },
@@ -82,7 +82,7 @@ const ProductCategories = () => {
       >
         {categories.map((cat, index) => (
           <SwiperSlide key={index}>
-            <div className="relative h-[300px] rounded-lg overflow-hidden shadow-lg bg-white transition-transform hover:scale-[1.02]">
+            <div className="relative h-[300px] overflow-hidden shadow-lg bg-white transition-transform hover:scale-[1.02]">
               <img
                 src={cat.image}
                 alt={cat.name}

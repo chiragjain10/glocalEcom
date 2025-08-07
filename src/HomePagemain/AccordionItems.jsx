@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaPlus, FaTimes } from "react-icons/fa";
 
 const accordionData = [
   {
@@ -37,7 +37,7 @@ const AccordionItem = ({ item, isOpen, onClick }) => {
   }, [isOpen]);
 
   return (
-    <div className="p-3 rounded-md border border-amber-400/50 bg-white/70 backdrop-blur-sm">
+    <div className="p-3 border-l-3 rounded border-amber-400 bg-white/70 backdrop-blur-sm">
       <button
         onClick={onClick}
         className="w-full flex justify-between items-center py-4 text-left focus:outline-none cursor-pointer"
@@ -45,22 +45,23 @@ const AccordionItem = ({ item, isOpen, onClick }) => {
         <span className="text-lg font-medium text-gray-800">
           {item.question}
         </span>
-        <FaChevronDown
-          className={`rotate-icon ${isOpen ? "open text-amber-600" : "text-gray-600"
-            }`}
+        <FaPlus
+          className={`transition-transform duration-300 text-xl ${
+            isOpen ? "rotate-45 text-amber-600" : "text-amber-500"
+          }`}
         />
       </button>
 
-      {/* Accordion content with fixed height and scroll */}
       <div
-        className="accordion-content"
+        className="accordion-content transition-max-height duration-300 ease-in-out overflow-hidden"
         style={{
           maxHeight: isOpen ? contentHeight : "0px",
         }}
       >
         <div
           ref={contentRef}
-          className="overflow-y-auto max-h-32 text-gray-600 text-sm leading-relaxed pr-1"
+          className="overflow-y-auto max-h-32 text-gray-600
+ text-sm leading-relaxed pr-1"
         >
           {item.answer}
         </div>
@@ -77,20 +78,43 @@ const Accordion = () => {
   };
 
   return (
-    <section className="bg-[#f4f2e9] py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto flex flex-col items-center gap-6 h-[500px] overflow-y-auto scroll-hidden">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">
-          Frequently Asked Questions
+    <section className="bg-[#F4F2E9] py-12 px-4 sm:px-6 lg:px-8">
+      <div className=" mx-auto">
+        {/* Heading Outside the Flex Container */}
+        <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">
+          Frequently Asked&nbsp;
+          <span
+            className="bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-transparent
+"
+          >
+            Questions
+          </span>
         </h2>
-        <div className="w-full space-y-4">
-          {accordionData.map((item, index) => (
-            <AccordionItem
-              key={index}
-              item={item}
-              isOpen={index === openIndex}
-              onClick={() => handleToggle(index)}
+
+        {/* Content + Image Side-by-Side */}
+        <div className="bg-white shadow-lg flex flex-col lg:flex-row justify-center items-center gap-10 rounded-md overflow-hidden">
+          {/* Left Column: FAQ Content */}
+          <div className="flex-1 w-full max-h-[500px] overflow-y-auto scroll-hidden ps-4">
+            <div className="space-y-4">
+              {accordionData.map((item, index) => (
+                <AccordionItem
+                  key={index}
+                  item={item}
+                  isOpen={index === openIndex}
+                  onClick={() => handleToggle(index)}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column: Image */}
+          <div className="w-full lg:w-[45%]">
+            <img
+              src="/images/FAQ-removebg-preview.png"
+              alt="FAQ Illustration"
+              className="w-full rounded-md h-auto  object-cover"
             />
-          ))}
+          </div>
         </div>
       </div>
     </section>

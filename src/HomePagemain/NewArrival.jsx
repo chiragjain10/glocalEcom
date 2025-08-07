@@ -101,7 +101,7 @@ const NewArrival = () => {
   );
 
   return (
-    <div className="slider-section bg-[#f4f2e9]">
+    <div className="slider-section bg-[#F4F2E9]">
 <div className="slider-top">
   <div className="slider-heading-row">
     <div className="new-arrival-icon">
