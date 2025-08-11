@@ -97,7 +97,7 @@ const ProductCategories = () => {
 
                 <div className="flex justify-center mt-4">
                   <button className="relative cursor-pointer text-center  text-white overflow-hidden bg-gradient-to-r from-amber-400 to-amber-500 text-black px-4 py-[4px] rounded-md text-sm font-medium flex items-center gap-1 group transition-all duration-500 ease-in-out hover:from-yellow-400 hover:to-orange-500 hover:shadow-md">
-                    <Link to="/all-categories"><span className="relative z-10">Shop</span></Link>
+                    <Link to="/all-categories"><span className="relative z-10 font-semibold font-bold">Shop</span></Link>
                     <span className="relative z-10 transition-transform duration-500 group-hover:translate-x-1">→</span>
                     <span className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-500 opacity-0 group-hover:opacity-30 blur-sm transition-opacity duration-500 rounded-md"></span>
                   </button>

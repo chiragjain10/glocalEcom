@@ -2,17 +2,20 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Homepage from './HomePagemain/Homepage';
-import CetegoriesPagelayout from './CetegoriesPagelayout';
-import Contact from './Contact';
+import CetegoriesPagelayout from './Pages/CetegoriesPagelayout';
+import Contact from './Pages/Contact';
 import Wishlist from './auth/Wishlist';
 import AddtoCart from './auth/AddtoCart';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import User from './auth/User';
 import Checkout from './HomePagemain/CheckOut';
-import About from './About';
+import About from './Pages/About';
 import SignUpPage from './HomePagemain/SignUpPage';
 import LogInPage from './HomePagemain/LogInPage';
+import QuickViewPage from './auth/QuickView';
+import ProductDetails from './Pages/Producat'
+
 
 import './App.css';
 
@@ -31,6 +34,12 @@ function App() {
           <Route path="/account" element={<User />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LogInPage />} />
+          <Route path="/quick-view/:id" element={<QuickViewPage />} />
+      
+          <Route path="/product/:id" element={<ProductDetails/>}/>   
+
+
+
         
 
           {/* Category paths */}

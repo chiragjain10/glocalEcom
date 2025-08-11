@@ -157,7 +157,7 @@ const CartPage = () => {
               </div>
             </div>
             <button
-              className="w-full mb-3 py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-black text-sm rounded-md hover:bg-[#6c3d25] cursor-pointer"
+              className="w-full mb-3 py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-white font-semibold font-bold text-sm rounded-md hover:bg-[#6c3d25] cursor-pointer"
               onClick={() => navigate("/CheckOut")}
             >
               Proceed to Checkout
