@@ -10,6 +10,7 @@ import {
   FaPaperPlane,
   FaArrowRight,
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -17,11 +18,14 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10">
         {/* Brand */}
         <div className="md:col-span-2">
-          <h2 className="text-3xl font-bold mb-4 text-gray-900">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-amber-600">
-              GlocalShipeComers
-            </span>
-          </h2>
+            <Link to="/" className="inline-block mb-4 bg-gray-50 rounded ">
+              <img
+                src="/images/glocal.png"
+                alt="GlocalShipeComers"
+                className="h-20 w-auto  max-w-[740px] object-contain drop-shadow-md brightness-0"
+              />
+            </Link>
+
           <p className="text-gray-600 mb-6 text-sm leading-relaxed">
             Revolutionizing global logistics with cutting-edge technology and unparalleled service to connect markets worldwide.
           </p>
@@ -118,13 +122,17 @@ const Footer = () => {
               <div className="mt-1 text-amber-500">
                 <FaEnvelope />
               </div>
-              <div>
+              <div className="min-w-0"> {/* prevent overflow issues */}
                 <p className="text-gray-500 text-sm">Email</p>
-                <a href="mailto:support@glocalshipe.com" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
+                <a
+                  href="mailto:support@glocalshipe.com"
+                  className="text-gray-700 hover:text-amber-600 transition-colors font-medium m-0 break-all"
+                >
                   support@glocalshipe.com
                 </a>
               </div>
             </li>
+
             <li className="flex items-start gap-3">
               <div className="mt-1 text-amber-500">
                 <FaPhoneAlt />
@@ -150,7 +158,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        
+
       </div>
 
       {/* Bottom Bar */}

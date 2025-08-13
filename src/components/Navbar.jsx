@@ -96,14 +96,22 @@ const Navbar = () => {
         </div>
 
         {/* Logo */}
-        <div className="flex items-center flex-shrink-0">
-          <Link to="/" className="text-2xl lg:text-3xl font-playfair italic font-bold tracking-tight bg-gradient-to-r from-gray-800 to-amber-500 bg-clip-text text-transparent">
-            Glocalship<span className="text-amber-500">Ecommerce</span>
-          </Link>
+        <div className="flex justify-center w-1/2 lg:w-auto 
+        ">
+          <div className="flex-shrink-0 relative overflow-visible">
+            <Link to="/" className="block focus:outline-none">
+              <img
+                src="/images/glocal.png"
+                alt="GlocalShipeComers"
+                className="h-10 lg:h-12 w-auto max-w-[400px] object-contain object-center  pb-0 drop-shadow-md brightness-0   translate-y-2 md:translate-y-3 lg:translate-y-4 transition-transform"
+              />
+            </Link>
+          </div>
         </div>
 
+
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+        <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 mt-2">
           <NavLink
             to="/about"
             className={({ isActive }) =>
@@ -184,7 +192,7 @@ const Navbar = () => {
 
           {/* Desktop Search */}
           <form
-            className={`hidden lg:flex items-center overflow-hidden ${isSearchExpanded ? 'w-64' : 'w-10'} bg-gray-100/80 hover:bg-gray-200/60 rounded-full transition-all duration-200`}
+            className={`hidden lg:flex mt-2 items-center overflow-hidden ${isSearchExpanded ? 'w-64' : 'w-10'} bg-gray-100/80 hover:bg-gray-200/60 rounded-full transition-all duration-200`}
             onSubmit={handleSearchSubmit}
           >
             <button
@@ -206,7 +214,7 @@ const Navbar = () => {
           </form>
 
           {/* Desktop Icons */}
-          <div className="hidden lg:flex items-center space-x-3 sm:space-x-4">
+          <div className="hidden lg:flex items-center space-x-3 sm:space-x-4 mt-2">
             <NavLink
               to="/wishlist"
               className={({ isActive }) =>
@@ -275,7 +283,7 @@ const Navbar = () => {
               <Link to="/" className="text-xl font-playfair italic font-bold tracking-tight bg-gradient-to-r from-gray-800 to-amber-500 bg-clip-text text-transparent">
                 Glocalship<span className="text-amber-500">Ecommerce</span>
               </Link>
-              <button 
+              <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="p-2 ms-2 mt-2 text-gray-600 hover:text-amber-500"
               >

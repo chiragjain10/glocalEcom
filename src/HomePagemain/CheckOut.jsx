@@ -204,7 +204,7 @@ const Checkout = () => {
 
               <button
                 onClick={() => navigate("/payment")}
-                className="w-full mt-6 py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-black text-sm rounded-md hover:bg-[#6c3d25] cursor-pointer"
+                className="w-full mt-6 py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-white font-semibold font-bold text-sm rounded-md hover:bg-[#6c3d25] cursor-pointer"
                 disabled={cartItems.length === 0}
               >
                 Proceed to Payment

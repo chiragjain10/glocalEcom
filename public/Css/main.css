@@ -445,6 +445,7 @@
 .footer-links a:hover {
   color: var(--color-white);
 }
+
 /* Right Panel Styles */
 .contact-right {
   flex: 1.5;
@@ -491,9 +492,11 @@
 
 h2 {
   font-size: var(--font-size-3xl);
-  margin-bottom: 1.5rem;
+  /* margin-bottom: 1.5rem; */
   /* color: var(--color-text); */
 }
+
+
 
 /* Form Styles */
 .contact-form {
@@ -1153,15 +1156,17 @@ label {
 }
 
 /*  */
-.slider-section {
+ .slider-section {
   padding: 24px 16px;
   overflow: hidden;
+  
 }
 
 .slider-top {
   text-align: center;
   padding: 12px;
   margin-bottom: 20px;
+ 
 }
 
 .slider-heading-row {
@@ -1175,6 +1180,7 @@ label {
 
 .slider-slide {
   padding: 0 12px;
+
 }
 .slider-icon {
   width: 48px;
@@ -1241,17 +1247,19 @@ label {
 }
 .slider-card {
   background-color: white;
-  /* border-radius: 12px; */
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border: 1px solid rgba(251, 191, 36, 0.5);
-  /* width: 100%; */
   max-width: 280px;
-  height:370px;
+  height: 370px;
   overflow: hidden;
   transition: 0.3s all ease;
   margin: auto;
 }
 
+
+ .slider-card:hover {
+  border: 1px solid rgba(251, 191, 36, 0.5);
+} 
 
 .slider-image {
   width: 100%;
@@ -1365,7 +1373,7 @@ label {
   background: linear-gradient(to right, #ef4444, #f59e0b);
   color: white;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
+} 
 
 
 /* Accordion.css */

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { categories } from './HomePagemain/MenuNavigation';
+import { categories } from '../HomePagemain/MenuNavigation';
+import { FiShoppingCart, FiEye, FiHeart } from 'react-icons/fi';
 
 const CategoryLayout = () => {
   const [selectedMain, setSelectedMain] = useState(null);
   const [selectedSub, setSelectedSub] = useState(null);
   const [expandedSub, setExpandedSub] = useState(null);
+  const [hoveredItem, setHoveredItem] = useState(null);
 
   useEffect(() => {
     const firstWithSub = categories.find(cat => Array.isArray(cat.subItems) && cat.subItems.length > 0);
@@ -110,13 +112,15 @@ const CategoryLayout = () => {
                 {selectedSub?.title || 'Browse Items'}
               </h2>
               
-              {/* Enhanced Card Grid */}
+              {/* Enhanced Card Grid with Action Icons */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                 {selectedSub?.subSubItems?.length > 0 ? (
                   selectedSub.subSubItems.map((item, idx) => (
                     <div
                       key={idx}
-                      className="group bg-white p-4 rounded-xl border border-gray-200 hover:border-amber-300 transition-all duration-200 hover:shadow-lg overflow-hidden cursor-pointer"
+                      className="group relative bg-white p-4 rounded-xl border border-gray-200 hover:border-amber-300 transition-all duration-300 hover:shadow-lg overflow-hidden cursor-pointer"
+                      onMouseEnter={() => setHoveredItem(idx)}
+                      onMouseLeave={() => setHoveredItem(null)}
                     >
                       <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg aspect-square mb-3 overflow-hidden">
                         {/* Placeholder for item image */}
@@ -129,6 +133,28 @@ const CategoryLayout = () => {
                         <span className="absolute top-2 right-2 bg-amber-500 text-white text-xs px-2 py-1 rounded-full">
                           New
                         </span>
+                        
+                        {/* Improved Action Icons */}
+                        <div className={`absolute inset-0 bg-gradient-to-t from-black/30 to-transparent flex items-end justify-center gap-3 pb-4 transition-opacity duration-300 ${hoveredItem === idx ? 'opacity-100' : 'opacity-0'}`}>
+                          <button 
+                            className="p-2 bg-white/90 backdrop-blur-sm rounded-full text-amber-600 hover:bg-amber-500 hover:text-white transition-all transform hover:scale-110 shadow-md"
+                            title="Add to cart"
+                          >
+                            <FiShoppingCart className="w-4 h-4" />
+                          </button>
+                          <button 
+                            className="p-2 bg-white/90 backdrop-blur-sm rounded-full text-amber-600 hover:bg-amber-500 hover:text-white transition-all transform hover:scale-110 shadow-md"
+                            title="Quick view"
+                          >
+                            <FiEye className="w-4 h-4" />
+                          </button>
+                          <button 
+                            className="p-2 bg-white/90 backdrop-blur-sm rounded-full text-amber-600 hover:bg-amber-500 hover:text-white transition-all transform hover:scale-110 shadow-md"
+                            title="Add to wishlist"
+                          >
+                            <FiHeart className="w-4 h-4" />
+                          </button>
+                        </div>
                       </div>
                       <div className="text-center">
                         <h3 className="text-sm font-medium text-gray-700 group-hover:text-amber-600 transition-colors mb-1">

@@ -9,6 +9,9 @@ import {
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react';
+import { FiShoppingCart, FiEye, FiHeart } from 'react-icons/fi';
+
 const NewArrival = () => {
   const products = [
     {
@@ -43,32 +46,68 @@ const NewArrival = () => {
       rating: 4.7,
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnXb2_K3vluQzr5AkNu263uZRnNrom71NtMg&s",
     },
+    {
+      id: 5,
+      title: 'Limited Edition',
+      category: 'Hindu',
+      price: "$1299.97",
+      image: "https://via.placeholder.com/300x300?text=Limited"
+    },
+    {
+      id: 6,
+      title: 'Economy Choice',
+      category: 'Hindu',
+      price: "$79.97",
+      image: "https://via.placeholder.com/300x300?text=Economy"
+    }
   ];
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 600,
-    arrows: false,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    pauseOnHover: false,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: 3 },
-      },
-      {
-        breakpoint: 768,
-        settings: { slidesToShow: 2 },
-      },
-      {
-        breakpoint: 480,
-        settings: { slidesToShow: 1 },
-      },
-    ],
+  const [visibleCards, setVisibleCards] = useState(4);
+  const [activeDot, setActiveDot] = useState(0);
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 576) {
+        setVisibleCards(1);
+      } else if (window.innerWidth < 768) {
+        setVisibleCards(2);
+      } else if (window.innerWidth < 1024) {
+        setVisibleCards(3);
+      } else {
+        setVisibleCards(4);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    const handleScroll = () => {
+      const cardWidth = slider.firstChild?.offsetWidth + 20;
+      const scrollPosition = slider.scrollLeft;
+      const newActiveDot = Math.round(scrollPosition / (visibleCards * cardWidth));
+      setActiveDot(newActiveDot);
+    };
+
+    slider.addEventListener('scroll', handleScroll);
+    return () => slider.removeEventListener('scroll', handleScroll);
+  }, [visibleCards]);
+
+  const scrollToSlide = (index) => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    const cardWidth = slider.firstChild?.offsetWidth + 20;
+    slider.scrollTo({
+      left: index * visibleCards * cardWidth,
+      behavior: 'smooth'
+    });
   };
 
   const ProductCard = ({ product }) => (
@@ -82,9 +121,9 @@ const NewArrival = () => {
         <div className="slider-icon-overlay">
           <FaHeart className="icon heart-icon" />
           <FaShoppingCart className="icon cart-icon" />
-            <Link to={`/product/${product.id}`}>
-    <FaEye className="icon eye-icon cursor-pointer" />
-  </Link>
+          <Link to={`/product/${product.id}`}>
+            <FaEye className="icon eye-icon cursor-pointer" />
+          </Link>
         </div>
       </div>
 
@@ -102,23 +141,41 @@ const NewArrival = () => {
     </div>
   );
 
+  // Touch swipe handling
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 50) {
+      scrollToSlide(Math.min(activeDot + 1, Math.ceil(products.length / visibleCards) - 1));
+    }
+
+    if (touchStart - touchEnd < -50) {
+      scrollToSlide(Math.max(activeDot - 1, 0));
+    }
+  };
+
   return (
     <div className="slider-section bg-[#F4F2E9]">
       <div className="slider-top">
         <div className="slider-heading-row">
-         
-              <div className="heading-with-line">
-      <h2 className="slider-heading ">Featured Products</h2>
-      <div className="heading-underline-new"></div>
-    </div>
+          <div className="heading-with-line">
+            <h2 className="slider-heading ">Featured Products</h2>
+            <div className="heading-underline-new"></div>
+          </div>
         </div>
-        
         <p className="slider-subtext">
           Discover the latest additions to our collection, carefully curated for your unique style.
         </p>
       </div>
-
-     
 
       <div className="slider-wrapper">
         <Slider {...settings}>
@@ -134,26 +191,3 @@ const NewArrival = () => {
 };
 
 export default NewArrival;
-
-
-
-      // <div className="flex justify-center mt-10">
-      //   <button
-      //     className="relative text-white overflow-hidden px-6 py-3 rounded-md flex items-center gap-2 font-semibold text-black 
-      //       bg-gradient-to-r from-amber-400 to-amber-500 
-      //       transition-all duration-500 ease-in-out 
-      //       hover:from-yellow-400 hover:to-orange-500 
-      //       hover:shadow-xl group"
-      //   >
-      //     <span className="relative z-10">View All</span>
-      //     <FaArrowRight className="relative z-10 transition-transform duration-500 group-hover:translate-x-1" />
-      //     <span
-      //       className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-500 opacity-0 
-      //         group-hover:opacity-30 transition-opacity duration-200 blur-lg rounded-md"
-      //     ></span>
-      //   </button>
-      // </div>
-
-
-
-    

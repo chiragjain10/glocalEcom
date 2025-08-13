@@ -1,11 +1,8 @@
-// ProductCategories.jsx
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules'; // Pagination removed
 import { Link } from 'react-router-dom';
 import 'swiper/css';
-import 'swiper/css/pagination';
-import './ProductCategories.css';
 
 const categories = [
   {
@@ -35,31 +32,6 @@ const categories = [
 ];
 
 const ProductCategories = () => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    arrows: false,
-    speed: 800,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3500,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  };
-
   return (
     <section className="py-10 px-4 md:px-10 bg-[#F4F2E9]">
       <div className="mb-6 text-center slider-heading-row">
@@ -68,6 +40,7 @@ const ProductCategories = () => {
           Explore Our Categories
         </h2>
       </div>
+      
       <Swiper
         spaceBetween={20}
         slidesPerView={1}
@@ -78,26 +51,27 @@ const ProductCategories = () => {
           768: { slidesPerView: 3 },
           1024: { slidesPerView: 4 },
         }}
-        modules={[Autoplay, Pagination]}
+        modules={[Autoplay]} // Removed Pagination module
       >
         {categories.map((cat, index) => (
           <SwiperSlide key={index}>
-            <div className="relative h-[300px] overflow-hidden shadow-lg bg-white transition-transform hover:scale-[1.02]">
+            <div className="relative h-[300px] rounded-lg overflow-hidden shadow-lg bg-white transition-transform hover:scale-[1.02] group">
               <img
                 src={cat.image}
                 alt={cat.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute bottom-0 w-full bg-black/50 py-4 px-4 text-center">
-                {/* <p className="text-sm text-gray-200">Explore</p> */}
-                <h3 className="text-lg font-semibold italic text-white">{cat.name}</h3>
-
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
+              <div className="absolute bottom-0 w-full py-4 px-4 text-center">
+                <h3 className="text-lg font-semibold italic text-white drop-shadow-lg">{cat.name}</h3>
                 <div className="flex justify-center mt-4">
-                  <button className="relative cursor-pointer text-center  text-white overflow-hidden bg-gradient-to-r from-amber-400 to-amber-500 text-black px-4 py-[4px] rounded-md text-sm font-medium flex items-center gap-1 group transition-all duration-500 ease-in-out hover:from-yellow-400 hover:to-orange-500 hover:shadow-md">
-                    <Link to="/all-categories"><span className="relative z-10">Shop</span></Link>
-                    <span className="relative z-10 transition-transform duration-500 group-hover:translate-x-1">→</span>
-                    <span className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-500 opacity-0 group-hover:opacity-30 blur-sm transition-opacity duration-500 rounded-md"></span>
-                  </button>
+                  <Link 
+                    to="/all-categories" 
+                    className="relative inline-flex items-center gap-1 text-white bg-gradient-to-r from-amber-400 to-amber-500 px-4 py-1 rounded-md text-sm font-bold transition-all duration-300 hover:shadow-md hover:from-amber-500 hover:to-amber-600"
+                  >
+                    <span>Shop</span>
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  </Link>
                 </div>
               </div>
             </div>

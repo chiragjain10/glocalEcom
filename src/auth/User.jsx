@@ -5,7 +5,7 @@ import { MdPayment } from "react-icons/md";
 const UserDashboard = () => {
     // State for active tab
     const [activeTab, setActiveTab] = useState("profile");
-    
+
     // Address management state
     const [addresses, setAddresses] = useState([
         {
@@ -29,7 +29,7 @@ const UserDashboard = () => {
             isDefault: false
         }
     ]);
-    
+
     // Payment methods state
     const [paymentMethods, setPaymentMethods] = useState([
         {
@@ -47,7 +47,7 @@ const UserDashboard = () => {
             isDefault: false
         }
     ]);
-    
+
     // Profile state
     const [profile, setProfile] = useState({
         name: "Arpit Kumar",
@@ -55,10 +55,10 @@ const UserDashboard = () => {
         phone: "+91-9876543210",
         dob: "January 15, 1990"
     });
-    
+
     // Authentication state
     const [isLoggedIn, setIsLoggedIn] = useState(true);
-    
+
     // New address form state
     const [newAddress, setNewAddress] = useState({
         type: "",
@@ -69,7 +69,7 @@ const UserDashboard = () => {
         phone: "",
         isDefault: false
     });
-    
+
     // UI state
     const [showAddressForm, setShowAddressForm] = useState(false);
     const [showProfileEdit, setShowProfileEdit] = useState(false);
@@ -99,11 +99,11 @@ const UserDashboard = () => {
         });
         setShowAddressForm(false);
     };
-    
+
     const handleRemoveAddress = (id) => {
         setAddresses(addresses.filter(address => address.id !== id));
     };
-    
+
     const handleSetDefaultAddress = (id) => {
         setAddresses(addresses.map(address => ({
             ...address,
@@ -115,7 +115,7 @@ const UserDashboard = () => {
     const handleRemovePayment = (id) => {
         setPaymentMethods(paymentMethods.filter(payment => payment.id !== id));
     };
-    
+
     const handleSetDefaultPayment = (id) => {
         setPaymentMethods(paymentMethods.map(payment => ({
             ...payment,
@@ -128,7 +128,7 @@ const UserDashboard = () => {
         e.preventDefault();
         setShowProfileEdit(false);
     };
-    
+
     const handlePasswordChange = (e) => {
         e.preventDefault();
         setShowPasswordChange(false);
@@ -150,7 +150,7 @@ const UserDashboard = () => {
                     </div>
                     <h2 className="text-2xl font-bold text-red-600 mb-2">Please Login</h2>
                     <p className="text-gray-600 mb-6">You need to be logged in to view this page.</p>
-                    <button 
+                    <button
                         className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-amber-400 to-amber-500 text-white rounded-md hover:from-amber-500 hover:to-amber-600 transition-all shadow-md"
                         onClick={() => {
                             setIsLoggedIn(true);
@@ -173,7 +173,7 @@ const UserDashboard = () => {
                             </div>
                             <h2 className="text-2xl font-bold text-gray-800">{profile.name}</h2>
                             <p className="text-gray-600">{profile.email}</p>
-                            <button 
+                            <button
                                 className="mt-4 flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-400 to-amber-500 text-white rounded-md hover:from-amber-500 hover:to-amber-600 transition-all shadow-md"
                                 onClick={() => setShowProfileEdit(true)}
                             >
@@ -188,49 +188,49 @@ const UserDashboard = () => {
                                     <div className="grid md:grid-cols-2 gap-4 mb-4">
                                         <div>
                                             <label className="block text-gray-700 mb-1">Full Name</label>
-                                            <input 
-                                                type="text" 
+                                            <input
+                                                type="text"
                                                 value={profile.name}
-                                                onChange={(e) => setProfile({...profile, name: e.target.value})}
+                                                onChange={(e) => setProfile({ ...profile, name: e.target.value })}
                                                 className="w-full p-2 border rounded"
                                             />
                                         </div>
                                         <div>
                                             <label className="block text-gray-700 mb-1">Email</label>
-                                            <input 
-                                                type="email" 
+                                            <input
+                                                type="email"
                                                 value={profile.email}
-                                                onChange={(e) => setProfile({...profile, email: e.target.value})}
+                                                onChange={(e) => setProfile({ ...profile, email: e.target.value })}
                                                 className="w-full p-2 border rounded"
                                             />
                                         </div>
                                         <div>
                                             <label className="block text-gray-700 mb-1">Phone</label>
-                                            <input 
-                                                type="tel" 
+                                            <input
+                                                type="tel"
                                                 value={profile.phone}
-                                                onChange={(e) => setProfile({...profile, phone: e.target.value})}
+                                                onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
                                                 className="w-full p-2 border rounded"
                                             />
                                         </div>
                                         <div>
                                             <label className="block text-gray-700 mb-1">Date of Birth</label>
-                                            <input 
-                                                type="text" 
+                                            <input
+                                                type="text"
                                                 value={profile.dob}
-                                                onChange={(e) => setProfile({...profile, dob: e.target.value})}
+                                                onChange={(e) => setProfile({ ...profile, dob: e.target.value })}
                                                 className="w-full p-2 border rounded"
                                             />
                                         </div>
                                     </div>
                                     <div className="flex gap-3">
-                                        <button 
+                                        <button
                                             type="submit"
                                             className="px-4 py-2 bg-amber-500 text-white rounded hover:bg-amber-600"
                                         >
                                             Save Changes
                                         </button>
-                                        <button 
+                                        <button
                                             type="button"
                                             className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100"
                                             onClick={() => setShowProfileEdit(false)}
@@ -259,7 +259,7 @@ const UserDashboard = () => {
                                         <p><strong className="text-gray-700">2FA:</strong> Disabled</p>
                                         <p><strong className="text-gray-700">Last Login:</strong> Today, 10:30 AM</p>
                                     </div>
-                                    <button 
+                                    <button
                                         className="mt-4 flex items-center gap-2 px-4 py-2 border border-amber-600 text-amber-600 rounded-md hover:bg-amber-50 transition"
                                         onClick={() => setShowPasswordChange(true)}
                                     >
@@ -276,34 +276,34 @@ const UserDashboard = () => {
                                     <div className="space-y-4 mb-4">
                                         <div>
                                             <label className="block text-gray-700 mb-1">Current Password</label>
-                                            <input 
-                                                type="password" 
+                                            <input
+                                                type="password"
                                                 className="w-full p-2 border rounded"
                                             />
                                         </div>
                                         <div>
                                             <label className="block text-gray-700 mb-1">New Password</label>
-                                            <input 
-                                                type="password" 
+                                            <input
+                                                type="password"
                                                 className="w-full p-2 border rounded"
                                             />
                                         </div>
                                         <div>
                                             <label className="block text-gray-700 mb-1">Confirm New Password</label>
-                                            <input 
-                                                type="password" 
+                                            <input
+                                                type="password"
                                                 className="w-full p-2 border rounded"
                                             />
                                         </div>
                                     </div>
                                     <div className="flex gap-3">
-                                        <button 
+                                        <button
                                             type="submit"
                                             className="px-4 py-2 bg-amber-500 text-white rounded hover:bg-amber-600"
                                         >
                                             Change Password
                                         </button>
-                                        <button 
+                                        <button
                                             type="button"
                                             className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100"
                                             onClick={() => setShowPasswordChange(false)}
@@ -361,7 +361,7 @@ const UserDashboard = () => {
                     <div className="space-y-6 mt-15">
                         <div className="flex justify-between items-center mb-6">
                             <h2 className="text-2xl font-bold text-gray-800">Saved Addresses</h2>
-                            <button 
+                            <button
                                 className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-400 to-amber-500 text-white rounded-md hover:from-amber-500 hover:to-amber-600 transition-all shadow-md"
                                 onClick={() => setShowAddressForm(true)}
                             >
@@ -375,78 +375,78 @@ const UserDashboard = () => {
                                 <div className="grid md:grid-cols-2 gap-4 mb-4">
                                     <div>
                                         <label className="block text-gray-700 mb-1">Address Type</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             placeholder="Home/Work/Other"
                                             value={newAddress.type}
-                                            onChange={(e) => setNewAddress({...newAddress, type: e.target.value})}
+                                            onChange={(e) => setNewAddress({ ...newAddress, type: e.target.value })}
                                             className="w-full p-2 border rounded"
                                         />
                                     </div>
                                     <div>
                                         <label className="block text-gray-700 mb-1">Full Name</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             value={newAddress.name}
-                                            onChange={(e) => setNewAddress({...newAddress, name: e.target.value})}
+                                            onChange={(e) => setNewAddress({ ...newAddress, name: e.target.value })}
                                             className="w-full p-2 border rounded"
                                         />
                                     </div>
                                     <div>
                                         <label className="block text-gray-700 mb-1">Street Address</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             value={newAddress.street}
-                                            onChange={(e) => setNewAddress({...newAddress, street: e.target.value})}
+                                            onChange={(e) => setNewAddress({ ...newAddress, street: e.target.value })}
                                             className="w-full p-2 border rounded"
                                         />
                                     </div>
                                     <div>
                                         <label className="block text-gray-700 mb-1">City</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             value={newAddress.city}
-                                            onChange={(e) => setNewAddress({...newAddress, city: e.target.value})}
+                                            onChange={(e) => setNewAddress({ ...newAddress, city: e.target.value })}
                                             className="w-full p-2 border rounded"
                                         />
                                     </div>
                                     <div>
                                         <label className="block text-gray-700 mb-1">State/Zip</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             value={newAddress.state}
-                                            onChange={(e) => setNewAddress({...newAddress, state: e.target.value})}
+                                            onChange={(e) => setNewAddress({ ...newAddress, state: e.target.value })}
                                             className="w-full p-2 border rounded"
                                         />
                                     </div>
                                     <div>
                                         <label className="block text-gray-700 mb-1">Phone</label>
-                                        <input 
-                                            type="tel" 
+                                        <input
+                                            type="tel"
                                             value={newAddress.phone}
-                                            onChange={(e) => setNewAddress({...newAddress, phone: e.target.value})}
+                                            onChange={(e) => setNewAddress({ ...newAddress, phone: e.target.value })}
                                             className="w-full p-2 border rounded"
                                         />
                                     </div>
                                 </div>
                                 <div className="flex items-center mb-4">
-                                    <input 
-                                        type="checkbox" 
+                                    <input
+                                        type="checkbox"
                                         id="defaultAddress"
                                         checked={newAddress.isDefault}
-                                        onChange={(e) => setNewAddress({...newAddress, isDefault: e.target.checked})}
+                                        onChange={(e) => setNewAddress({ ...newAddress, isDefault: e.target.checked })}
                                         className="mr-2"
                                     />
                                     <label htmlFor="defaultAddress">Set as default address</label>
                                 </div>
                                 <div className="flex gap-3">
-                                    <button 
+                                    <button
                                         className="px-4 py-2 bg-amber-500 text-white rounded hover:bg-amber-600"
                                         onClick={handleAddAddress}
                                     >
                                         Save Address
                                     </button>
-                                    <button 
+                                    <button
                                         className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100"
                                         onClick={() => setShowAddressForm(false)}
                                     >
@@ -474,14 +474,14 @@ const UserDashboard = () => {
                                         <button className="flex items-center text-amber-600 hover:text-amber-700">
                                             Edit <FaArrowRight className="ml-1" />
                                         </button>
-                                        <button 
+                                        <button
                                             className="flex items-center text-red-600 hover:text-red-700"
                                             onClick={() => handleRemoveAddress(address.id)}
                                         >
                                             Remove <FaArrowRight className="ml-1" />
                                         </button>
                                         {!address.isDefault && (
-                                            <button 
+                                            <button
                                                 className="flex items-center text-amber-600 hover:text-amber-700"
                                                 onClick={() => handleSetDefaultAddress(address.id)}
                                             >
@@ -509,9 +509,8 @@ const UserDashboard = () => {
                             <div key={payment.id} className="border rounded-lg p-6">
                                 <div className="flex justify-between items-center mb-4">
                                     <div className="flex items-center gap-3">
-                                        <div className={`w-10 h-6 rounded-sm flex items-center justify-center text-white font-bold ${
-                                            payment.type === "VISA" ? "bg-blue-500" : "bg-gray-200 text-gray-600"
-                                        }`}>
+                                        <div className={`w-10 h-6 rounded-sm flex items-center justify-center text-white font-bold ${payment.type === "VISA" ? "bg-blue-500" : "bg-gray-200 text-gray-600"
+                                            }`}>
                                             {payment.type === "VISA" ? "VISA" : "MC"}
                                         </div>
                                         <span className="font-medium">
@@ -527,14 +526,14 @@ const UserDashboard = () => {
                                     <button className="flex items-center text-amber-600 hover:text-amber-700">
                                         Edit <FaArrowRight className="ml-1" />
                                     </button>
-                                    <button 
+                                    <button
                                         className="flex items-center text-red-600 hover:text-red-700"
                                         onClick={() => handleRemovePayment(payment.id)}
                                     >
                                         Remove <FaArrowRight className="ml-1" />
                                     </button>
                                     {!payment.isDefault && (
-                                        <button 
+                                        <button
                                             className="flex items-center text-amber-600 hover:text-amber-700"
                                             onClick={() => handleSetDefaultPayment(payment.id)}
                                         >
@@ -555,7 +554,7 @@ const UserDashboard = () => {
                         </div>
                         <h2 className="text-2xl font-bold text-red-600 mb-2">Logged Out Successfully</h2>
                         <p className="text-gray-600 mb-6">You have been securely logged out of your account.</p>
-                        <button 
+                        <button
                             className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-amber-400 to-amber-500 text-white rounded-md hover:from-amber-500 hover:to-amber-600 transition-all shadow-md"
                             onClick={() => {
                                 setIsLoggedIn(true);
@@ -580,23 +579,24 @@ const UserDashboard = () => {
                     <aside className="w-full lg:w-80 flex-shrink-0">
                         <div className="bg-white rounded-xl shadow-sm p-6 sticky top-24">
                             <div className="flex items-center gap-3 mb-8">
-                                <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center">
+                                <div className="flex-shrink-0 w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center">
                                     <FaUser className="text-xl text-amber-600" />
                                 </div>
-                                <div>
+                                <div className="leading-tight m-0">
                                     {isLoggedIn ? (
                                         <>
-                                            <h2 className="font-bold text-gray-800">{profile.name}</h2>
-                                            <p className="text-sm text-gray-500">Premium Member</p>
+                                            <h2 className="font-bold text-gray-800 leading-snug ">{profile.name}</h2>
+                                            <p className="text-sm text-gray-500 leading-snug pb-4">Premium Member</p>
                                         </>
                                     ) : (
                                         <>
-                                            <h2 className="font-bold text-gray-800">Guest User</h2>
-                                            <p className="text-sm text-gray-500">Please login</p>
+                                            <h2 className="font-bold text-gray-800  leading-snug">Guest User</h2>
+                                            <p className="text-sm text-gray-500  leading-snug">Please login</p>
                                         </>
                                     )}
                                 </div>
                             </div>
+
 
                             <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">Account Menu</h3>
                             <ul className="space-y-2">

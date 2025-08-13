@@ -70,7 +70,7 @@ const Banner = () => {
   ];
 
   return (
-    <section className="relative w-[94%] max-w-[2000px] mx-auto mt-6 py-12 h-[90vh] sm:h-[95vh] lg:h-[80vh] overflow-hidden border border-gray-400 shadow-md rounded-lg">
+    <section className="relative w-[94%] max-w-[2000px] mx-auto mt-8 py-12 h-[90vh] sm:h-[95vh] lg:h-[80vh] overflow-hidden border border-gray-400 shadow-md rounded-lg">
       {/* Background pattern */}
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/old-map.png')] bg-cover opacity-5 z-0"></div>
 
