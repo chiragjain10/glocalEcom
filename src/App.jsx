@@ -14,7 +14,6 @@ import About from './About';
 import SignUpPage from './HomePagemain/SignUpPage';
 import LogInPage from './HomePagemain/LogInPage';
 
-
 import './App.css';
 import FeaturedProducts from './HomePagemain/FeaturedProducts';
 import ProductDetails from './HomePagemain/ProductDetails';
@@ -23,7 +22,7 @@ import { ProductProvider } from './HomePagemain/ProductContext';
 function App() {
   return (
     <Router>
-      <ProductProvider> {/* ✅ Wrap everything inside */}
+      <ProductProvider> {/* ✅ Wrap everything inside ProductProvider */}
         <div className="app">
           <Navbar />
           <Routes>
@@ -38,7 +37,7 @@ function App() {
             <Route path="/login" element={<LogInPage />} />
             <Route path="/featuredproducts" element={<FeaturedProducts />} />
             <Route path="/product/:id" element={<ProductDetails />} />
-            
+
             {/* Category paths */}
             <Route path="/all-categories" element={<CetegoriesPagelayout />} />
             <Route path="/all-categories/:mainCategory" element={<CetegoriesPagelayout />} />

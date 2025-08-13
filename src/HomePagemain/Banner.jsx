@@ -1,12 +1,14 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight, FaQuoteLeft } from 'react-icons/fa';
+import { GiIndiaGate, GiHand, GiJewelCrown } from 'react-icons/gi';
+import { motion } from 'framer-motion';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const Banner = () => {
   const settings = {
-    dots: false,
+    dots: true,
     arrows: false,
     infinite: true,
     speed: 1000,
@@ -16,72 +18,110 @@ const Banner = () => {
     autoplaySpeed: 3000,
     pauseOnHover: true,
     fade: true,
-   cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
+    cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
     pauseOnFocus: false,
-    pauseOnDotsHover: false 
+    customPaging: () => (
+      <div className="w-2.5 h-2.5 rounded-full bg-white/50 hover:bg-amber-400 transition-all duration-300"></div>
+    ),
+    appendDots: dots => (
+      <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2">
+        <ul className="flex space-x-2 sm:space-x-3">{dots}</ul>
+      </div>
+    ),
   };
 
   const slides = [
     {
-      img: "https://media.istockphoto.com/id/813581504/photo/manual-labor-and-art-artistic-in-india-mumba.jpg?s=2048x2048&w=is&k=20&c=LLXtVaqR8dtqOkYXBxrlb1Vup-GbBbRwSxsPAni5TFU=",
-      title: "Experience the Richness of Indian Art",
-      subtitle: "Discover authentic cultural creations handcrafted by skilled artisans from across India.",
-      highlight: "Unique • Traditional • Handmade",
-      buttonText: "Explore Collection"
+      img: "https://images.unsplash.com/photo-1609444074870-2860a9a613e3?q=80&w=1025&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "शाही हस्तशिल्प | Royal Artisan Legacy",
+      subtitle: "Museum-grade collectibles handcrafted by 5th-generation master artisans from Jaipur, Varanasi & Mysore",
+      highlight: "Certified Heritage • Limited Editions",
+      buttonText: "Explore Masterpieces",
+      icon: <GiHand className="text-amber-500 text-3xl sm:text-4xl" />,
+      testimonial: {
+        text: "These pieces belong in the collections of connoisseurs and royalty alike.",
+        author: "— Dr. Vikram Rathore, Curator, National Museum"
+      }
     },
     {
-      img: "https://media.istockphoto.com/id/609722026/vector/indian-god-rama-and-sita-for-dussehra-festival-celebration-in.jpg?s=2048x2048&w=is&k=20&c=gqYALaWNRDVm_ljPItmu0uKg-FdkX4hPp8KSoGaf8RU=",
-      title: "Celebrate Tradition with Modern Style",
-      subtitle: "Curated heritage products that blend seamlessly with contemporary living.",
-      highlight: "Colors of Culture • Touch of Class",
-      buttonText: "View Gallery"
+      img: "https://images.unsplash.com/photo-1539077982779-d62f6cd9e23a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fFNhbmN0aWZpZWQlMjBDb2xsZWN0aW9uc3xlbnwwfHwwfHx8MA%3D%3D",
+      title: "दिव्य प्राणप्रतिष्ठा | Sanctified Collections",
+      subtitle: "Temple-quality idols & puja essentials blessed by Vedic priests in Varanasi and Ujjain",
+      highlight: "Ritually Consecrated • Panchdhatu Crafted",
+      buttonText: "Discover Sacred Art",
+      icon: <GiIndiaGate className="text-white text-3xl sm:text-4xl" />,
+      testimonial: {
+        text: "The spiritual energy in these pieces rivals that of ancient temple artifacts.",
+        author: "— Shankaracharya Jyotishpeeth"
+      }
     },
     {
-      img: "https://media.istockphoto.com/id/2217828780/photo/statue-of-lord-brahma-at-wat-saman-rattanaram-thailand.jpg?s=2048x2048&w=is&k=20&c=CWyZr-Nlz4OpIzSZpp5YHMcnz1Vo1sxLEGBYGwgqVZw=",
-      title: "Find Peace in Artistic Expressions",
-      subtitle: "Spiritual decor elements that bring harmony to your surroundings.",
-      highlight: "Calm • Inspire • Decorate",
-      buttonText: "Discover More"
+      img: "https://images.unsplash.com/photo-1554583797-69a28298654c?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "कोहिनूर वस्त्र | Regal Textiles",
+      subtitle: "Heirloom-quality Banarasi silks & gold-zari brocades once woven exclusively for Maharajas",
+      highlight: "22K Gold Zari • Patron's Collection",
+      buttonText: "View Royal Fabrics",
+      icon: <GiJewelCrown className="text-amber-500 text-3xl sm:text-4xl" />,
+      testimonial: {
+        text: "Each thread tells the story of India's textile aristocracy.",
+        author: "— Lakshmi Kumari, Former Princess of Jaipur"
+      }
     },
   ];
 
   return (
-    <section className="w-full relative pt-16 md:pt-14 ">
+    <section className="relative w-[94%] max-w-[2000px] mx-auto mt-6 py-12 h-[90vh] sm:h-[95vh] lg:h-[80vh] overflow-hidden border border-gray-400 shadow-md rounded-lg">
+      {/* Background pattern */}
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/old-map.png')] bg-cover opacity-5 z-0"></div>
+
       <Slider {...settings}>
         {slides.map((slide, index) => (
-          <div key={index} className="relative outline-none">
-            {/* Image container with responsive height */}
-            <div className="h-[70vh] sm:h-[80vh] md:h-[100vh] w-full relative overflow-hidden">
-              <div className="absolute inset-0 bg-black/40 z-0"></div>
+          <div key={index} className="relative">
+            <div className="h-[70vh] sm:h-[85vh] w-full relative overflow-hidden">
+              <div className="absolute inset-0 bg-black/50 z-10"></div>
               <img
                 src={slide.img}
                 alt={slide.title}
-                className="w-full h-full object-cover object-center"
-                loading="lazy"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = "https://via.placeholder.com/1920x1080?text=Banner+Image";
-                }}
+                className="w-full h-full object-cover object-center z-0"
               />
             </div>
 
-            {/* Content overlay with better mobile positioning */}
-            <div className="absolute inset-0 flex items-center z-10 px-4 sm:px-6">
-              <div className="container mx-auto mt-8 sm:mt-0"> {/* Added margin-top for mobile */}
-                <div className="max-w-2xl bg-black/30 backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-lg border border-amber-400/20">
-                  <p className="text-xs sm:text-sm md:text-base font-medium text-amber-300 mb-2 tracking-widest">
+            <div className="absolute inset-0 flex items-center px-4 sm:px-8 z-20">
+              <div className="max-w-2xl bg-black/70 backdrop-blur-sm p-6 sm:p-10 rounded-lg border-l-4 border-amber-500 shadow-xl">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-2 bg-amber-500/10 rounded-full border border-amber-500/30">
+                    {slide.icon}
+                  </div>
+                  <p className="text-xs sm:text-sm text-amber-400 uppercase tracking-wide font-semibold">
                     {slide.highlight}
                   </p>
-                  <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-2 sm:mb-3 text-white">
-                    {slide.title}
-                  </h2>
-                  <p className="text-xs sm:text-sm md:text-base mb-3 sm:mb-4 text-white/90 max-w-xl">
-                    {slide.subtitle}
-                  </p>
-                  <button className="flex items-center cursor-pointer; gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 px-3 py-1 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-md text-xs sm:text-sm md:text-base font-semibold hover:from-amber-500 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95">
-                    {slide.buttonText} <FaArrowRight className="text-xs sm:text-sm" />
-                  </button>
                 </div>
+
+                <h2 className="text-xl sm:text-3xl lg:text-5xl text-white font-bold mb-3 leading-tight">
+                  {slide.title}
+                </h2>
+
+                <p className="text-sm sm:text-base text-white/90 mb-5">
+                  {slide.subtitle}
+                </p>
+
+                <button className=" bg-gradient-to-r from-amber-400 to-amber-500  cursor-pointer hover:bg-amber-600 text-white px-5 py-2.5 rounded-md font-semibold text-sm sm:text-base flex items-center gap-2">
+                  {slide.buttonText} <FaArrowRight className="text-sm" />
+                </button>
+
+                <div className="text-white/80 text-xs sm:text-sm italic mt-4">
+                  <FaQuoteLeft className="inline mr-2 text-amber-400/70 text-base" />
+                  {slide.testimonial.text}
+                  <div className="mt-1 text-amber-300 font-medium">
+                    {slide.testimonial.author}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="absolute bottom-6 right-6 hidden md:block z-10">
+              <div className="text-amber-400/20 text-6xl font-serif italic font-bold select-none">
+                {String(index + 1).padStart(2, '0')}
               </div>
             </div>
           </div>

@@ -271,9 +271,6 @@
   background-color: black;
   color: var(--color-light);
 }
-*/
-
-
 
 /* Testimonials Section */
 
@@ -1206,6 +1203,14 @@ label {
   align-items: center;
   justify-content: center;
 }
+
+.heading-underline-new {
+  width: 90px;
+  height: 4px;
+  background-color: #fbbf24;
+  margin: 8px auto 0;
+}
+
 .fire {
   color: white;
   font-size: 20px;

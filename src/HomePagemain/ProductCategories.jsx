@@ -5,7 +5,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import './ProductCategories.css'; 
+import './ProductCategories.css';
 
 const categories = [
   {
@@ -35,10 +35,10 @@ const categories = [
 ];
 
 const ProductCategories = () => {
-    const settings = {
-    dots:false,
+  const settings = {
+    dots: false,
     infinite: true,
-     arrows: false,
+    arrows: false,
     speed: 800,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -59,13 +59,13 @@ const ProductCategories = () => {
       },
     ],
   };
-  
+
   return (
     <section className="py-10 px-4 md:px-10 bg-[#F4F2E9]">
       <div className="mb-6 text-center slider-heading-row">
         <div className="slider-icon text-white text-2xl">✧</div>
-        <h2 className="slider-heading " >
-            Explore Our Categories
+        <h2 className="slider-heading ">
+          Explore Our Categories
         </h2>
       </div>
       <Swiper

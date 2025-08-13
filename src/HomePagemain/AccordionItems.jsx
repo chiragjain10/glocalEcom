@@ -60,8 +60,7 @@ const AccordionItem = ({ item, isOpen, onClick }) => {
       >
         <div
           ref={contentRef}
-          className="overflow-y-auto max-h-32 text-gray-600
- text-sm leading-relaxed pr-1"
+          className="overflow-y-auto max-h-32 text-gray-600 text-sm leading-relaxed pr-1"
         >
           {item.answer}
         </div>
@@ -84,8 +83,7 @@ const Accordion = () => {
         <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">
           Frequently Asked&nbsp;
           <span
-            className="bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-transparent
-"
+            className="bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-transparent"
           >
             Questions
           </span>

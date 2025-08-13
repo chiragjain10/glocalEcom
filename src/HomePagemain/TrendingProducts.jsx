@@ -10,7 +10,6 @@ import {
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-
 const TrendingProducts = () => {
   const products = [
     {
@@ -48,40 +47,39 @@ const TrendingProducts = () => {
   ];
 
   const settings = {
-  dots: false,
-  infinite: true,
-  speed: 600,
-  arrows: false, 
-  autoplay: true,
-  autoplaySpeed: 3000,
-  pauseOnHover: false,
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1024, // tablets
-      settings: {
-        slidesToShow: 3,
+    dots: false,
+    infinite: true,
+    speed: 600,
+    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: false,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+        },
       },
-    },
-    {
-      breakpoint: 768, // mobile large
-      settings: {
-        slidesToShow: 2,
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
       },
-    },
-    {
-      breakpoint: 480, // mobile small
-      settings: {
-        slidesToShow: 1,
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        },
       },
-    },
-  ],
-};
-
+    ],
+  };
 
   const ProductCard = ({ product }) => (
-    <div className="slider-card relative">
+    <div className="slider-card relative ">
       <div className="absolute top-3 left-3 z-10">
         <span className="trending-badge">Trending</span>
       </div>
@@ -111,17 +109,23 @@ const TrendingProducts = () => {
 
   return (
     <div className="slider-section bg-[#F4F2E9]">
-<div className="slider-top">
-  <div className="slider-heading-row">
-    <div className="slider-icon">
-      <FaFire className="icon-star text-white" />
+      <div className="slider-top">
+        <div className="slider-heading-row">
+          <div className="slider-icon">
+            <FaStar className="icon-star text-white" />
+          </div>
+              <div className="heading-with-line">
+      <h2 className="slider-heading ">Trending Products</h2>
+      <div className="heading-underline-new"></div>
     </div>
-    <h2 className="slider-heading">Trending Products</h2>
-  </div>
-  <p className="slider-subtext">
-    Discover the latest additions to our collection, carefully curated for your unique style.
-  </p>
-</div>
+        </div>
+        
+        <p className="slider-subtext">
+          Discover the latest additions to our collection, carefully curated for your unique style.
+        </p>
+      </div>
+
+     
 
       <div className="slider-wrapper">
         <Slider {...settings}>
