@@ -26,7 +26,7 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="prdt-details-container max-w-6xl mx-auto px-4 py-10 mt-20">
+    <div className="prdt-details-container bg-gray-50 max-w-6xl mx-auto px-4 py-10 mt-20">
       <div className="prdt-layout flex flex-col md:flex-row items-start gap-10">
         {/* Left: Image Gallery and Features */}
         <div className="w-full md:w-1/2">

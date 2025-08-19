@@ -1,9 +1,9 @@
-    // src/context/ProductContext.js
-import React, { createContext } from 'react';
+// src/Context/ProducatContext.jsx
+import React, { createContext, useEffect, useState } from "react";
 
 export const ProductContext = createContext();
 
-const products = [
+const Products = [
   {
     id: 1,
     title: 'Handcrafted Terracotta Pot ',
@@ -45,11 +45,76 @@ const products = [
     imgs: ['https://cdn.pixabay.com/photo/2019/10/23/09/59/lamp-4571084_1280.jpg',
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnXb2_K3vluQzr5AkNu263uZRnNrom71NtMg&s'
     ]
-  },
-];
+  },];
 
-export const ProductProvider = ({ children }) => (
-  <ProductContext.Provider value={{ products }}>
-    {children}
-  </ProductContext.Provider>
-);
+export const ProductProvider = ({ children }) => {
+  const [products, setProducts] = useState(Products);
+  const [cart, setCart] = useState(() => {
+    try {
+      const raw = localStorage.getItem("cart");
+      return raw ? JSON.parse(raw) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  // persist cart to localStorage whenever it changes
+  useEffect(() => {
+    try {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    } catch (err) {
+      console.error("Failed saving cart to localStorage", err);
+    }
+  }, [cart]);
+
+  // addToCart: item = {id, title, price, image, ...}, qty = number
+  const addToCart = (item, qty = 1) => {
+    if (!item || !item.id) return;
+
+    setCart((prev) => {
+      const existing = prev.find((p) => p.id === item.id);
+      if (existing) {
+        // update quantity
+        return prev.map((p) =>
+          p.id === item.id ? { ...p, quantity: (p.quantity || 0) + qty } : p
+        );
+      }
+      // push new
+      return [...prev, { ...item, quantity: qty }];
+    });
+  };
+
+  const removeFromCart = (id) => {
+    setCart((prev) => prev.filter((p) => p.id !== id));
+  };
+
+  const updateQuantity = (id, qty) => {
+    setCart((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, quantity: Math.max(1, qty) } : p))
+    );
+  };
+
+  const clearCart = () => setCart([]);
+
+  // If you fetch products from an API, do it inside useEffect and setProducts(result)
+  // Example:
+  // useEffect(() => {
+  //   fetch('/api/products').then(r=>r.json()).then(setProducts)
+  // }, [])
+
+  return (
+    <ProductContext.Provider
+      value={{
+        products,
+        setProducts,
+        cart,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
+      }}
+    >
+      {children}
+    </ProductContext.Provider>
+  );
+};

@@ -11,11 +11,13 @@ import OfferSection from "./OfferSection.jsx";
 import Accordion from "./AccordionItems.jsx";
 import TrendingProducts from "./TrendingProducts.jsx";
 import NewArrival from "./NewArrival.jsx";
+import Popup from "./Popup.jsx";
 
 
 const Homepage = () => {
   return (
     <div>
+      <Popup />
       <Banner />
       <WhyChooseUs />
       <ProductCategories />

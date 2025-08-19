@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { ProductContext } from "../Context/ProducatContext";
 import {
   FaChevronDown,
@@ -10,13 +10,14 @@ import {
   FaStar,
   FaRegStar,
   FaChevronUp,
-  FaChevronRight
 } from "react-icons/fa";
 import { FiTruck } from "react-icons/fi";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { products } = useContext(ProductContext);
+  const navigate = useNavigate();
+
+  const { products, addToCart } = useContext(ProductContext);
   const product = products.find((p) => p.id === parseInt(id));
 
   const [showDetails, setShowDetails] = useState(false);
@@ -24,7 +25,16 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
 
-  const images = product?.imgs || product?.image || [];
+  // Normalize images array from different possible keys
+  const images =
+    product?.imgs && Array.isArray(product.imgs)
+      ? product.imgs
+      : product?.image
+      ? Array.isArray(product.image)
+        ? product.image
+        : [product.image]
+      : [];
+
   const selectedImage = images[selectedIndex] || "";
 
   if (!product) {
@@ -36,6 +46,62 @@ const ProductDetails = () => {
       </div>
     );
   }
+
+  // Safe numeric price for calculations even if price is like "₹899"
+  const priceNum =
+    typeof product.price === "number"
+      ? product.price
+      : Number(String(product.price).replace(/[^\d.]/g, "")) || 0;
+
+  // Updated addToCart: supports silent alert and optional redirect
+  const handleAddToCart = (e, { silent = false, redirectToCart = true } = {}) => {
+    e?.preventDefault?.();
+    e?.stopPropagation?.();
+
+    const cartItem = {
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      image: selectedImage || images[0] || "",
+      quantity,
+    };
+
+    try {
+      if (typeof addToCart === "function") {
+        addToCart(cartItem, quantity);
+      } else {
+        const cartItems = JSON.parse(localStorage.getItem("cart") || "[]");
+        const existingIndex = cartItems.findIndex((item) => item.id === cartItem.id);
+
+        if (existingIndex >= 0) {
+          cartItems[existingIndex].quantity += quantity;
+        } else {
+          cartItems.push(cartItem);
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+      }
+
+      if (!silent) {
+        alert(`${product.title} added to cart!`);
+      }
+      if (redirectToCart) {
+        navigate("/cart");
+      }
+      console.log("Add to cart successful:", cartItem);
+    } catch (error) {
+      console.error("Failed to add to cart:", error);
+      alert("Failed to add to cart. Please try again.");
+    }
+  };
+
+  const handleBuyNow = (e) => {
+    e?.preventDefault?.();
+    e?.stopPropagation?.();
+    // Add to cart silently (no alert), and don't redirect to /cart
+    handleAddToCart(null, { silent: true, redirectToCart: false });
+    navigate("/checkout");
+  };
 
   return (
     <div className="bg-gray-50 min-h-screen mt-14">
@@ -69,11 +135,17 @@ const ProductDetails = () => {
 
               {/* Main Image */}
               <div className="flex-1 bg-white p-4 rounded-lg border border-gray-200">
-                <img
-                  src={selectedImage}
-                  alt={product.title}
-                  className="w-full h-auto max-h-[400px] object-contain"
-                />
+                {selectedImage ? (
+                  <img
+                    src={selectedImage}
+                    alt={product.title}
+                    className="w-full h-auto max-h-[400px] object-contain"
+                  />
+                ) : (
+                  <div className="w-full h-[300px] flex items-center justify-center text-sm text-gray-400">
+                    No Image Available
+                  </div>
+                )}
               </div>
             </div>
 
@@ -113,9 +185,7 @@ const ProductDetails = () => {
                 <span className="inline-block text-xs font-medium text-amber-600 bg-amber-50 px-2 py-1 rounded-full mb-2">
                   Best Seller
                 </span>
-                <h1 className="text-2xl font-bold text-gray-800">
-                  {product.title}
-                </h1>
+                <h1 className="text-2xl font-bold text-gray-800">{product.title}</h1>
                 <div className="flex items-center mt-1">
                   <div className="flex text-amber-400">
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -124,20 +194,14 @@ const ProductDetails = () => {
                       </span>
                     ))}
                   </div>
-                  <span className="text-xs text-gray-500 ml-1">
-                    (42 reviews)
-                  </span>
+                  <span className="text-xs text-gray-500 ml-1">(42 reviews)</span>
                 </div>
               </div>
 
               {/* Price Section */}
               <div className="flex items-center mb-4">
-                <span className="text-2xl font-bold text-amber-600">
-                  {product.price}
-                </span>
-                <span className="text-sm text-gray-500 ml-2 line-through">
-                  ₹{Math.round(product.price * 1.2)}
-                </span>
+                <span className="text-2xl font-bold text-amber-600">{product.price}</span>
+                <span className="text-sm text-gray-500 ml-2 line-through">₹{Math.round(priceNum * 1.2)}</span>
                 <span className="text-xs font-medium text-white bg-green-500 ml-2 px-1.5 py-0.5 rounded">
                   20% OFF
                 </span>
@@ -145,16 +209,12 @@ const ProductDetails = () => {
 
               {/* Description */}
               <div className="mb-5">
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {product.description}
-                </p>
+                <p className="text-sm text-gray-600 leading-relaxed">{product.description}</p>
               </div>
 
               {/* Quantity Selector */}
               <div className="mb-5">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Quantity:
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Quantity:</label>
                 <div className="flex w-fit items-center border border-amber-400 rounded-md overflow-hidden">
                   <button
                     onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
@@ -176,12 +236,20 @@ const ProductDetails = () => {
 
               {/* Action Buttons */}
               <div className="space-y-3">
-                <button className="w-full px-4 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-md font-medium flex items-center justify-center gap-2 hover:from-amber-600 hover:to-amber-700 transition-all text-sm">
+                <button
+                  type="button"
+                  onClick={(e) => handleAddToCart(e, { silent: false, redirectToCart: true })}
+                  className="w-full px-4 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-md font-medium flex items-center justify-center gap-2 hover:from-amber-600 hover:to-amber-700 transition-all text-sm"
+                >
                   <FaShoppingCart className="text-sm" />
                   Add to Cart
                 </button>
 
-                <button className="w-full px-4 py-2.5 bg-gray-800 text-white rounded-md font-medium flex items-center justify-center gap-2 hover:bg-gray-700 transition-all text-sm">
+                <button
+                  type="button"
+                  onClick={handleBuyNow}
+                  className="w-full px-4 py-2.5 bg-gray-800 text-white rounded-md font-medium flex items-center justify-center gap-2 hover:bg-gray-700 transition-all text-sm"
+                >
                   <FaBolt className="text-sm" />
                   Buy Now
                 </button>
@@ -216,8 +284,7 @@ const ProductDetails = () => {
                     />
                   </svg>
                   <p className="text-xs text-gray-600">
-                    <span className="font-medium">Delivery:</span> Get it by{" "}
-                    <strong>Friday, August 12</strong> with standard shipping
+                    <span className="font-medium">Delivery:</span> Get it by <strong>Friday, August 12</strong> with standard shipping
                   </p>
                 </div>
               </div>
@@ -237,33 +304,23 @@ const ProductDetails = () => {
                 <div className="px-4 pb-4 pt-1 text-sm text-gray-600">
                   <ul className="space-y-2">
                     <li className="flex">
-                      <span className="text-gray-500 w-28 flex-shrink-0">
-                        Material:
-                      </span>
+                      <span className="text-gray-500 w-28 flex-shrink-0">Material:</span>
                       <span>Terracotta (Natural Clay)</span>
                     </li>
                     <li className="flex">
-                      <span className="text-gray-500 w-28 flex-shrink-0">
-                        Usage:
-                      </span>
+                      <span className="text-gray-500 w-28 flex-shrink-0">Usage:</span>
                       <span>Water Storage, Home Décor, Planters</span>
                     </li>
                     <li className="flex">
-                      <span className="text-gray-500 w-28 flex-shrink-0">
-                        Artisan:
-                      </span>
+                      <span className="text-gray-500 w-28 flex-shrink-0">Artisan:</span>
                       <span>Handcrafted by rural Indian potters</span>
                     </li>
                     <li className="flex">
-                      <span className="text-gray-500 w-28 flex-shrink-0">
-                        Dimensions:
-                      </span>
+                      <span className="text-gray-500 w-28 flex-shrink-0">Dimensions:</span>
                       <span>6-8 inches height</span>
                     </li>
                     <li className="flex">
-                      <span className="text-gray-500 w-28 flex-shrink-0">
-                        Care:
-                      </span>
+                      <span className="text-gray-500 w-28 flex-shrink-0">Care:</span>
                       <span>Hand wash, avoid extreme temperatures</span>
                     </li>
                   </ul>

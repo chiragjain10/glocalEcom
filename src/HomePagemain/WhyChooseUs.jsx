@@ -31,7 +31,7 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="bg-[#F4F2E9] backdrop-blur-sm py-16 px-4">
+    <section className="bg-gray-50 backdrop-blur-sm py-16 px-4">
       <div className="max-w-7xl mx-auto text-center">
  <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">

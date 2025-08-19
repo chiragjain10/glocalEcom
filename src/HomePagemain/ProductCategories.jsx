@@ -33,7 +33,7 @@ const categories = [
 
 const ProductCategories = () => {
   return (
-    <section className="py-10 px-4 md:px-10 bg-[#F4F2E9]">
+    <section className="py-10 px-4 md:px-10 bg-gray-50">
       <div className="mb-6 text-center slider-heading-row">
         <div className="slider-icon text-white text-2xl">✧</div>
         <h2 className="slider-heading ">

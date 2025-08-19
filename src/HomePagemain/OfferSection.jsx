@@ -34,7 +34,7 @@ const OfferSection = () => {
   }, []);
 
   return (
-    <section className="px-4 py-12 sm:px-6 lg:px-8 bg-[#F4F2E9] text-black font-sans">
+    <section className="px-4 py-12 sm:px-6 lg:px-8 bg-gray-50 text-black font-sans">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         {/* Left: Image Grid */}
         <div className="grid grid-cols-2 grid-rows-2 gap-4 h-[400px] sm:h-[500px] md:h-[600px] overflow-hidden rounded-2xl shadow-xl">

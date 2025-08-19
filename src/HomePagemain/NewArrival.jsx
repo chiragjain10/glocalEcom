@@ -143,16 +143,16 @@ const NewArrival = () => {
   };
 
   return (
-    <div className="slider-section bg-[#F4F2E9]">
+    <div className="slider-section bg-gray-50">
       <div className="slider-top">
         <div className="slider-heading-row">
-          <div className="new-arrival-icon">
-            <FaStar className="icon-star text-white" />
-          </div>
-          <div className="heading-with-line">
-            <h2 className="slider-heading">New Arrivals</h2>
-            <div className="heading-underline-new"></div>
-          </div>
+        <div className="text-center mb-16">
+        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">
+          New Arrivals
+        </h2>
+        <div className="w-20 h-1.5 bg-amber-500 mx-auto"></div>
+      </div>
+
         </div>
         <p className="slider-subtext">
           Discover the latest additions to our collection, carefully curated for your unique style.

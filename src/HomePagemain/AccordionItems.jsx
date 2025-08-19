@@ -77,10 +77,11 @@ const Accordion = () => {
   };
 
   return (
-    <section className="bg-[#F4F2E9] py-12 px-4 sm:px-6 lg:px-8">
+    <section className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className=" mx-auto">
         {/* Heading Outside the Flex Container */}
-        <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">
+        <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">
           Frequently Asked&nbsp;
           <span
             className="bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-transparent"
@@ -88,6 +89,8 @@ const Accordion = () => {
             Questions
           </span>
         </h2>
+          <div className="w-20 h-1.5 bg-amber-500 mx-auto mb-10"></div>
+        </div>
 
         {/* Content + Image Side-by-Side */}
         <div className="bg-white shadow-lg flex flex-col lg:flex-row justify-center items-center gap-10 rounded-md overflow-hidden">
