@@ -3,7 +3,7 @@ import React from "react";
 import { FiEdit2, FiTrash2, FiChevronRight } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { ProductContext } from "../Context/ProducatContext"; // fix path if you renamed file
+import { ProductContext } from "../Context/ProductContext"; 
 
 const CartPage = () => {
   const navigate = useNavigate();

@@ -2,11 +2,15 @@ import { useState, useEffect, useRef } from 'react';
 import { FiShoppingCart, FiEye, FiHeart } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
+import { useWishlist } from "./WishlistContext"; // ✅ Import Wishlist context
+import { useNavigate } from "react-router-dom";
 
 const NewArrival = () => {
   const [visibleCards, setVisibleCards] = useState(4);
   const [activeDot, setActiveDot] = useState(0);
   const sliderRef = useRef(null);
+    const navigate = useNavigate();
+  const { addToWishlist } = useWishlist();
 
   const trendingItems = [
     {
@@ -145,18 +149,13 @@ const NewArrival = () => {
   return (
     <div className="slider-section bg-gray-50">
       <div className="slider-top">
-        <div className="slider-heading-row">
-        <div className="text-center mb-16">
+
+       <div className="text-center mb-">
         <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">
-          New Arrivals
+          New Arrival
         </h2>
         <div className="w-20 h-1.5 bg-amber-500 mx-auto"></div>
       </div>
-
-        </div>
-        <p className="slider-subtext">
-          Discover the latest additions to our collection, carefully curated for your unique style.
-        </p>
       </div>
 
       <div className="max-w-7xl mx-auto">
@@ -196,7 +195,9 @@ const NewArrival = () => {
                     </button>
                   </Link>
                   <Link to="/wishlist">
-                    <button className="bg-white cursor-pointer p-2 rounded-full shadow-md hover:bg-amber-50 hover:text-amber-500 transition-all duration-300 transform hover:scale-110">
+                    <button
+                    onClick={() => addToWishlist(item)}
+                     className="bg-white cursor-pointer p-2 rounded-full shadow-md hover:bg-amber-50 hover:text-amber-500 transition-all duration-300 transform hover:scale-110">
                       <FiHeart className="w-5 h-5" />
                     </button>
                   </Link>

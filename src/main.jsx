@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.jsx';
-import { ProductProvider } from './Context/ProducatContext.jsx';
+import { ProductProvider } from './Context/ProductContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
