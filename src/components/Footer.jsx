@@ -14,17 +14,17 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-50 text-gray-800 px-6 py-16 border-t border-gray-200">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10">
+    <footer className="bg-gray-50 text-gray-800 px-6 pt-16 border-t border-gray-200">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10 mb-6">
         {/* Brand */}
         <div className="md:col-span-2">
-            <Link to="/" className="inline-block mb-4 bg-gray-50 rounded ">
-              <img
-                src="/images/glocal.png"
-                alt="GlocalShipeComers"
-                className="h-20 w-auto  max-w-[740px] object-contain drop-shadow-md brightness-0"
-              />
-            </Link>
+          <Link to="/" className="inline-block mb-4 bg-gray-50 rounded ">
+            <img
+              src="/images/glocal.png"
+              alt="GlocalShipeComers"
+              className="h-20 w-auto  max-w-[740px] object-contain drop-shadow-md brightness-0"
+            />
+          </Link>
 
           <p className="text-gray-600 mb-6 text-sm leading-relaxed">
             Revolutionizing global logistics with cutting-edge technology and unparalleled service to connect markets worldwide.
@@ -78,17 +78,30 @@ const Footer = () => {
             Products
           </h4>
           <ul className="space-y-3">
-            {['Pricing', 'Case Studies', 'Features', 'Reviews', 'Updates'].map((item, i) => (
-              <li key={i}>
-                <a
-                  href="#"
-                  className="text-gray-600 hover:text-amber-600 transition-colors flex items-center group"
-                >
-                  <span className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                  {item}
-                </a>
-              </li>
-            ))}
+            <li>
+              <Link to="/" className="text-gray-600 hover:text-amber-600 transition-colors flex items-center group">
+                <span className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                Shop
+              </Link>
+            </li>
+            <li>
+              <Link to="/all-categories" className="text-gray-600 hover:text-amber-600 transition-colors flex items-center group">
+                <span className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                Features
+              </Link>
+            </li>
+            <li>
+              <Link to="/reviews" className="text-gray-600 hover:text-amber-600 transition-colors flex items-center group">
+                <span className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                Reviews
+              </Link>
+            </li>
+            <li>
+              <Link to="/updates" className="text-gray-600 hover:text-amber-600 transition-colors flex items-center group">
+                <span className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                Updates
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -98,17 +111,31 @@ const Footer = () => {
             Company
           </h4>
           <ul className="space-y-3">
-            {['About', 'Careers', 'Blog', 'News', 'Contact'].map((item, i) => (
-              <li key={i}>
-                <a
-                  href="#"
-                  className="text-gray-600 hover:text-amber-600 transition-colors flex items-center group"
-                >
-                  <span className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                  {item}
-                </a>
-              </li>
-            ))}
+            <li>
+              <Link to="/about" className="text-gray-600 hover:text-amber-600 transition-colors flex items-center group">
+                <span className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                About
+              </Link>
+            </li>
+           
+            <li>
+              <Link to="/vlog" className="text-gray-600 hover:text-amber-600 transition-colors flex items-center group">
+                <span className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                Vlog
+              </Link>
+            </li>
+            <li>
+              <Link to="/news" className="text-gray-600 hover:text-amber-600 transition-colors flex items-center group">
+                <span className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                News
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="text-gray-600 hover:text-amber-600 transition-colors flex items-center group">
+                <span className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -162,12 +189,17 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-200 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-        <p>
-          &copy; {new Date().getFullYear()} GlocalShipeComers. All rights reserved.
-          <a href="#" className="ml-4 hover:text-amber-600 transition-colors">Privacy Policy</a>
-          <a href="#" className="ml-4 hover:text-amber-600 transition-colors">Terms of Service</a>
-        </p>
+      <div className="border-t border-gray-200 py-4 text-sm text-gray-600">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-3">
+
+          {/* Left Side */}
+          
+
+          {/* Right Side */}
+          <div className="text-center md:text-right">
+            <span>All Rights Reserved 2025 Glocalship.</span>
+          </div>
+        </div>
       </div>
     </footer>
   );

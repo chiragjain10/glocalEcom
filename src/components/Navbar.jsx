@@ -5,28 +5,69 @@ import {
   FaHeart,
   FaBars,
   FaSearch,
-  FaTimes
+  FaTimes,
+  FaCrown,
+  FaGem,
+  FaPaintBrush,
+  FaBookOpen,
+  FaTshirt,
+  FaHome,
+  FaTags,
+  FaHeadphonesAlt,
+  FaGopuram
 } from 'react-icons/fa';
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useCart } from "../Context/CartContext";
+import { useWishlist } from "../Context/WishlistContext";
+import './navbar.css';
 
-const categories = [
+export const categories = [
   {
-    title: 'Audio-video',
-    subItems: ['Smartphones', 'Laptops', 'Headphones', 'Cameras']
+    title: 'Audio Video',
+    icon: <FaHeadphonesAlt />,
+    subItems: ['Smartphones', 'Laptops', 'Headphones', 'Cameras', 'Speakers', 'Microphones']
   },
   {
-    title: 'jewelry',
-    subItems: ['Men', 'Women', 'Kids', 'Accessories']
+    title: 'Jewelry',
+    icon: <FaGem />,
+    subItems: ['Necklaces', 'Earrings', 'Rings', 'Bracelets', 'Pendants', 'Anklets']
   },
   {
     title: 'Paintings',
-    subItems: ['Abstract', 'Landscape', 'Portrait', 'Still Life']
+    icon: <FaPaintBrush />,
+    subItems: ['Abstract', 'Landscape', 'Portrait', 'Still Life', 'Modern', 'Classical']
+  },
+  {
+    title: 'Statues',
+    icon: <FaGopuram />,
+    subItems: ['Brass', 'Stone', 'Wood', 'Ceramic', 'Metal', 'Resin']
   },
   {
     title: 'Books',
-    subItems: ['Fiction', 'Non-Fiction', 'Comics', 'Biographies']
+    icon: <FaBookOpen />,
+    subItems: ['Fiction', 'Non-Fiction', 'Comics', 'Biographies', 'Self-Help', 'Academic']
+  },
+  {
+    title: 'Clothing & More',
+    icon: <FaTshirt />,
+    subItems: ['Men', 'Women', 'Kids', 'Accessories', 'Footwear', 'Bags']
+  },
+  {
+    title: 'Home & Living',
+    icon: <FaHome />,
+    subItems: ['Furniture', 'Decor', 'Kitchen', 'Bathroom', 'Garden', 'Lighting']
+  },
+  {
+    title: 'Luxe',
+    icon: <FaCrown />,
+    subItems: ['Premium Items', 'Limited Edition', 'Exclusive', 'VIP Collection']
+  },
+  {
+    title: 'Best Deals',
+    icon: <FaTags />,
+    subItems: ['Flash Sales', 'Clearance', 'Seasonal Offers', 'Bundle Deals']
   }
 ];
 
@@ -40,6 +81,10 @@ const Navbar = () => {
   const searchRef = useRef(null);
   const mobileMenuRef = useRef(null);
   const navigate = useNavigate();
+  const { cart } = useCart();
+  const { wishlist } = useWishlist();
+  const wishlistCount = Array.isArray(wishlist) ? wishlist.length : 0;
+  const cartCount = Array.isArray(cart) ? cart.reduce((s, i) => s + (i.quantity || 1), 0) : 0;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -82,191 +127,291 @@ const Navbar = () => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-200 ${scrolled ? 'bg-white/95 shadow-md backdrop-blur-md py-2' : 'bg-white/90 backdrop-blur-sm py-3'}`}>
-      <nav className="flex items-center justify-between px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        {/* Mobile Menu Button */}
-        <div className="flex items-center lg:hidden">
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 rounded-lg text-gray-700 hover:bg-gray-100 focus:outline-none transition-colors duration-200"
-            aria-label="Menu"
-          >
-            {isMobileMenuOpen ? <FaTimes className="text-xl text-gray-600" /> : <FaBars className="text-xl text-gray-600" />}
-          </button>
-        </div>
-
-        {/* Logo */}
-        <div className="flex justify-center w-1/2 lg:w-auto 
-        ">
-          <div className="flex-shrink-0 relative overflow-visible">
-            <Link to="/" className="block focus:outline-none">
-              <img
-                src="/images/glocal.png"
-                alt="GlocalShipeComers"
-                className="h-10 lg:h-12 w-auto max-w-[400px] object-contain object-center  pb-0 drop-shadow-md brightness-0   translate-y-2 md:translate-y-3 lg:translate-y-4 transition-transform"
-              />
-            </Link>
+    <>
+      {/* Top Bar */}
+      <div className="top-bar">
+        <div className="top-bar-content">
+          <div className="top-bar-left">
+            <span className="top-bar-text">Shop for daily offers.</span>
+          </div>
+          <div className="top-bar-right">
+            <a href="tel:+1234567890" className="top-bar-link">📞 +1 (234) 567-890</a>
+            <a href="mailto:support@glocalship.com" className="top-bar-link">✉️ support@glocalship.com</a>
           </div>
         </div>
+      </div>
 
-
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 mt-2">
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              `relative ${isActive ? 'text-amber-500' : 'text-gray-700'} font-medium transition-colors duration-200 group`
-            }
-          >
-            About
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-amber-500 transition-all duration-200 group-hover:w-full"></span>
-          </NavLink>
-
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              `relative ${isActive ? 'text-amber-500' : 'text-gray-700'} font-medium transition-colors duration-200 group`
-            }
-          >
-            Contact
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-amber-500 transition-all duration-200 group-hover:w-full"></span>
-          </NavLink>
-
-          <div className="relative">
+      {/* Main Header */}
+      <header className={`main-header ${scrolled ? 'scrolled' : ''}`}>
+        <div className="header-container">
+          {/* Mobile Menu Button */}
+          <div className="mobile-menu-btn">
             <button
-              className="flex items-center hover:text-amber-500 transition-colors duration-200 font-medium"
-              onMouseEnter={() => setIsOpen(true)}
-              onMouseLeave={() => setIsOpen(false)}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="hamburger-btn"
+              aria-label="Menu"
             >
-              Categories
-              <IoIosArrowDown className={`ml-1 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+              <motion.div
+                animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="hamburger-line"
+              />
+              <motion.div
+                animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="hamburger-line"
+              />
+              <motion.div
+                animate={isMobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="hamburger-line"
+              />
             </button>
-            <AnimatePresence>
-              {isOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden z-50"
+          </div>
+
+          {/* Logo */}
+          <div className="logo-container">
+            <Link to="/" className="logo-link">
+              <div className="logo-wrapper">
+                <img
+                  src="/images/glocal.png"
+                  alt="GlocalShipeComers"
+                  className="logo-image"
+                />
+                <div className="logo-glow"></div>
+              </div>
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="desktop-nav">
+            <ul className="nav-list">
+              <li className="nav-item">
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    `nav-link ${isActive ? 'active' : ''}`
+                  }
+                >
+                  <span className="nav-text">Home</span>
+                  <div className="nav-underline"></div>
+                </NavLink>
+              </li>
+
+              <li className="nav-item dropdown">
+                <button
+                  className="dropdown-btn"
                   onMouseEnter={() => setIsOpen(true)}
                   onMouseLeave={() => setIsOpen(false)}
                 >
-                  <ul className="py-1">
-                    {categories.map((category, index) => (
-                      <li key={index}>
-                        <Link
-                          to={`/all-categories/${category.title.toLowerCase()}`}
-                          className="flex items-center px-4 py-3 hover:bg-amber-50 transition-colors duration-200 group"
-                        >
-                          <span className="group-hover:text-amber-600">{category.title}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="border-t border-gray-100 px-4 py-2 bg-gray-50">
-                    <Link
-                      to="/all-categories"
-                      className="text-sm text-amber-600 hover:text-amber-700 font-medium flex items-center"
+                  <span className="dropdown-text">Categories</span>
+                  <IoIosArrowDown className={`dropdown-arrow ${isOpen ? 'rotated' : ''}`} />
+                </button>
+
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 24 }}
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                      onMouseEnter={() => setIsOpen(true)}
+                      onMouseLeave={() => setIsOpen(false)}
+                      className="mega-menu-viewport"
                     >
-                      View all categories
-                      <IoIosArrowForward className="ml-1" />
-                    </Link>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
+                      <div className="mega-menu-panel">
+                        <div className="mega-menu-header">
+                          <span className="mega-menu-heading">Browse Categories</span>
+                          <span className="mega-menu-subheading">Handpicked collections</span>
+                        </div>
+                        <div className="mega-menu-grid">
+                          {categories.map((category, index) => (
+                            <Link
+                              key={index}
+                              to={`/all-categories/${category.title.toLowerCase()}`}
+                              className="mega-menu-link"
+                              onClick={() => setIsOpen(false)}
+                            >
+                              <motion.div
+                                whileHover={{ y: -4, scale: 1.02 }}
+                                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                                className="mega-menu-card"
+                              >
+                                <div className="mega-menu-icon">
+                                  <span className="mega-menu-icon-svg">{category.icon}</span>
+                                </div>
+                                <div className="mega-menu-content">
+                                  <span className="mega-menu-title">{category.title}</span>
+                                  <span className="mega-menu-subtitle">Explore {category.title}</span>
+                                </div>
+                              </motion.div>
+                            </Link>
+                          ))}
+                        </div>
+                        <div className="mega-menu-footer">
+                          <Link
+                            to="/all-categories"
+                            className="dropdown-footer-link"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            View all categories
+                            <IoIosArrowForward />
+                          </Link>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </li>
 
-        {/* Search and Icons */}
-        <div className="flex items-center space-x-4 gap-2">
-          {/* Mobile Search Button */}
-          <button
-            className="lg:hidden p-2 text-gray-600 hover:text-amber-500 transition-colors duration-200"
-            onClick={toggleSearch}
-            aria-label="Search"
-          >
-            {isSearchExpanded ? <FaTimes /> : <FaSearch />}
-          </button>
+              <li className="nav-item">
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    `nav-link ${isActive ? 'active' : ''}`
+                  }
+                >
+                  <span className="nav-text">About</span>
+                  <div className="nav-underline"></div>
+                </NavLink>
+              </li>
 
-          {/* Desktop Search */}
-          <form
-            className={`hidden lg:flex mt-2 items-center overflow-hidden ${isSearchExpanded ? 'w-64' : 'w-10'} bg-gray-100/80 hover:bg-gray-200/60 rounded-full transition-all duration-200`}
-            onSubmit={handleSearchSubmit}
-          >
+              <li className="nav-item">
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    `nav-link ${isActive ? 'active' : ''}`
+                  }
+                >
+                  <span className="nav-text">Contact</span>
+                  <div className="nav-underline"></div>
+                </NavLink>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Search and Icons */}
+          <div className="header-actions">
+            {/* Mobile Search Button */}
             <button
-              type="button"
-              className="p-2 text-gray-800 hover:text-amber-500 transition-colors duration-200"
+              className="mobile-search-btn"
               onClick={toggleSearch}
               aria-label="Search"
             >
-              <FaSearch />
+              <FaSearch className="search-icon" />
             </button>
-            <input
-              ref={searchRef}
-              type="text"
-              placeholder="Search luxury items..."
-              className={`bg-transparent border-none focus:outline-none text-gray-700 placeholder-gray-600 transition-all duration-200 ${isSearchExpanded ? 'w-full opacity-100 px-2' : 'w-0 opacity-0'}`}
-              value={searchQuery}
-              onChange={handleSearchChange}
-            />
-          </form>
 
-          {/* Desktop Icons */}
-          <div className="hidden lg:flex items-center space-x-3 sm:space-x-4 mt-2">
-            <NavLink
-              to="/wishlist"
-              className={({ isActive }) =>
-                `p-2 ${isActive ? 'text-amber-500' : 'text-gray-700'} hover:text-amber-500 transition-colors duration-200`
-              }
-            >
-              <FaHeart className="text-lg" />
-            </NavLink>
-            <NavLink
-              to="/cart"
-              className={({ isActive }) =>
-                `p-2 ${isActive ? 'text-amber-500' : 'text-gray-600'} hover:text-amber-500 transition-colors duration-200`
-              }
-            >
-              <FaShoppingCart className="text-lg" />
-            </NavLink>
-            <NavLink
-              to="/account"
-              className={({ isActive }) =>
-                `p-2 ${isActive ? 'text-amber-500 border-amber-400' : 'text-gray-600 border-gray-300'} hover:text-amber-500 transition-colors duration-200 rounded-full border hover:border-amber-400`
-              }
-            >
-              <FaUser className="text-lg" />
-            </NavLink>
+            {/* Desktop Search */}
+            <div className={`search-container ${isSearchExpanded ? 'expanded' : ''}`}>
+              <form
+                className="search-form"
+                onSubmit={handleSearchSubmit}
+              >
+                <button
+                  type="button"
+                  className="search-toggle-btn"
+                  onClick={toggleSearch}
+                  aria-label="Search"
+                >
+                  <FaSearch className="search-icon" />
+                </button>
+                <input
+                  ref={searchRef}
+                  type="text"
+                  placeholder="Search luxury items..."
+                  className="search-input"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                />
+                <button
+                  type="submit"
+                  className="search-submit-btn"
+                  aria-label="Submit search"
+                >
+                  <FaSearch className="search-icon" />
+                </button>
+              </form>
+            </div>
+
+            {/* Desktop Icons */}
+            <div className="action-icons">
+              <NavLink
+                to="/wishlist"
+                className={({ isActive }) =>
+                  `action-icon ${isActive ? 'active' : ''}`
+                }
+              >
+                <div className="icon-wrapper">
+                  <FaHeart className="action-icon-svg" />
+                  {wishlistCount > 0 && (
+                    <span className="notification-badge wishlist-badge">{wishlistCount}</span>
+                  )}
+                </div>
+              </NavLink>
+
+              <NavLink
+                to="/cart"
+                className={({ isActive }) =>
+                  `action-icon ${isActive ? 'active' : ''}`
+                }
+              >
+                <div className="icon-wrapper">
+                  <FaShoppingCart className="action-icon-svg" />
+                  {cart && cart.reduce((s, i) => s + (i.quantity || 1), 0) > 0 && (
+                    <span className="notification-badge cart-badge">
+                      {cart.reduce((s, i) => s + (i.quantity || 1), 0)}
+                    </span>
+                  )}
+                </div>
+              </NavLink>
+
+              <NavLink
+                to="/account"
+                className={({ isActive }) =>
+                  `action-icon ${isActive ? 'active' : ''}`
+                }
+              >
+                <div className="icon-wrapper">
+                  <FaUser className="action-icon-svg" />
+                </div>
+              </NavLink>
+            </div>
           </div>
         </div>
 
         {/* Mobile Search Expanded */}
-        {isSearchExpanded && (
-          <div className="absolute top-full left-0 w-full bg-white shadow-md lg:hidden">
-            <form
-              className="flex items-center p-3"
-              onSubmit={handleSearchSubmit}
+        <AnimatePresence>
+          {isSearchExpanded && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="mobile-search-expanded"
             >
-              <input
-                ref={searchRef}
-                type="text"
-                placeholder="Search luxury items..."
-                className="flex-1 border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400"
-                value={searchQuery}
-                onChange={handleSearchChange}
-              />
-              <button
-                type="submit"
-                className="bg-amber-500 text-white px-4 py-2 ms-3 rounded-r-lg hover:bg-amber-600 transition-colors duration-200"
+              <form
+                className="mobile-search-form"
+                onSubmit={handleSearchSubmit}
               >
-                <FaSearch />
-              </button>
-            </form>
-          </div>
-        )}
-      </nav>
+                <input
+                  ref={searchRef}
+                  type="text"
+                  placeholder="Search luxury items..."
+                  className="mobile-search-input"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                />
+                <button
+                  type="submit"
+                  className="mobile-search-submit"
+                >
+                  <FaSearch className="search-icon" />
+                </button>
+              </form>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -276,103 +421,152 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -300 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed top-0 left-0 h-screen w-64 bg-white shadow-xl z-50 lg:hidden"
+            className="mobile-menu"
             ref={mobileMenuRef}
           >
-            <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-              <Link to="/" className="text-xl font-playfair italic font-bold tracking-tight bg-gradient-to-r from-gray-800 to-amber-500 bg-clip-text text-transparent">
-                Glocalship<span className="text-amber-500">Ecommerce</span>
+            <div className="mobile-menu-header">
+              <Link to="/" className="mobile-logo">
+                <span className="mobile-logo-text">Glocalship</span>
+                <span className="mobile-logo-accent">Ecommerce</span>
               </Link>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 ms-2 mt-2 text-gray-600 hover:text-amber-500"
+                className="mobile-close-btn"
               >
-                <FaTimes className="text-lg" />
+                <FaTimes className="close-icon" />
               </button>
             </div>
-            <div className="p-4 h-[calc(100%-60px)] overflow-y-auto">
-              <ul className="space-y-2">
-                <li>
+
+            <div className="mobile-menu-content">
+              <ul className="mobile-nav-list">
+                <li className="mobile-nav-item">
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      `mobile-nav-link ${isActive ? 'active' : ''}`
+                    }
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Home
+                  </NavLink>
+                </li>
+
+                <li className="mobile-nav-item">
                   <NavLink
                     to="/about"
                     className={({ isActive }) =>
-                      `block px-4 py-3 rounded-lg ${isActive ? 'bg-amber-50 text-amber-600' : 'text-gray-700 hover:bg-gray-100'}`
+                      `mobile-nav-link ${isActive ? 'active' : ''}`
                     }
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     About
                   </NavLink>
                 </li>
-                <li>
+
+                <li className="mobile-nav-item">
                   <NavLink
                     to="/contact"
                     className={({ isActive }) =>
-                      `block px-4 py-3 rounded-lg ${isActive ? 'bg-amber-50 text-amber-600' : 'text-gray-700 hover:bg-gray-100'}`
+                      `mobile-nav-link ${isActive ? 'active' : ''}`
                     }
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Contact
                   </NavLink>
                 </li>
-                <li>
-                  <div className="border-t border-gray-200 my-2"></div>
-                </li>
-                {categories.map((category, index) => (
-                  <li key={index}>
+
+                <li className="mobile-nav-item">
+                  <div className="mobile-categories-header">
+                    <span>Categories</span>
+                  </div>
+                  {categories.map((category, index) => (
                     <NavLink
+                      key={index}
                       to={`/all-categories/${category.title.toLowerCase()}`}
                       className={({ isActive }) =>
-                        `block px-4 py-3 rounded-lg ${isActive ? 'bg-amber-50 text-amber-600' : 'text-gray-700 hover:bg-gray-100'}`
+                        `mobile-category-link ${isActive ? 'active' : ''}`
                       }
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
+                      <span className="mobile-category-icon">{category.icon}</span>
                       {category.title}
                     </NavLink>
-                  </li>
-                ))}
-                <li>
-                  <div className="border-t border-gray-200 my-2"></div>
+                  ))}
                 </li>
-                {/* Mobile Menu Icons */}
-                <li>
-                  <NavLink
-                    to="/wishlist"
-                    className={({ isActive }) =>
-                      `flex items-center px-4 py-3 rounded-lg ${isActive ? 'bg-amber-50 text-amber-600' : 'text-gray-700 hover:bg-gray-100'}`
-                    }
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <FaHeart className="mr-3" /> Wishlist
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/cart"
-                    className={({ isActive }) =>
-                      `flex items-center px-4 py-3 rounded-lg ${isActive ? 'bg-amber-50 text-amber-600' : 'text-gray-700 hover:bg-gray-100'}`
-                    }
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <FaShoppingCart className="mr-3" /> Cart
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/account"
-                    className={({ isActive }) =>
-                      `flex items-center px-4 py-3 rounded-lg ${isActive ? 'bg-amber-50 text-amber-600' : 'text-gray-700 hover:bg-gray-100'}`
-                    }
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <FaUser className="mr-3" /> Account
-                  </NavLink>
+
+                <li className="mobile-nav-item">
+                  <div className="mobile-actions">
+                    <NavLink
+                      to="/wishlist"
+                      className={({ isActive }) =>
+                        `mobile-action-link ${isActive ? 'active' : ''}`
+                      }
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <FaHeart className="mobile-action-icon" />
+                      Wishlist
+                      {wishlistCount > 0 && (
+                        <span className="mobile-count-pill wishlist-pill">{wishlistCount}</span>
+                      )}
+                    </NavLink>
+
+                    <NavLink
+                      to="/cart"
+                      className={({ isActive }) =>
+                        `mobile-action-link ${isActive ? 'active' : ''}`
+                      }
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <FaShoppingCart className="mobile-action-icon" />
+                      Cart
+                      {cart && cart.reduce((s, i) => s + (i.quantity || 1), 0) > 0 && (
+                        <span className="mobile-count-pill cart-pill">{cart.reduce((s, i) => s + (i.quantity || 1), 0)}</span>
+                      )}
+                    </NavLink>
+
+                    <NavLink
+                      to="/account"
+                      className={({ isActive }) =>
+                        `mobile-action-link ${isActive ? 'active' : ''}`
+                      }
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <FaUser className="mobile-action-icon" />
+                      Account
+                    </NavLink>
+                  </div>
                 </li>
               </ul>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+      {/* Bottom Mobile Nav */}
+      <nav className="mobile-bottom-nav">
+        <NavLink to="/" className={({ isActive }) => `bottom-item ${isActive ? 'active' : ''}`}>
+          <FaHome className="bottom-icon" />
+          <span className="bottom-label">Home</span>
+        </NavLink>
+        <NavLink to="/all-categories" className={({ isActive }) => `bottom-item ${isActive ? 'active' : ''}`}>
+          <FaTags className="bottom-icon" />
+          <span className="bottom-label">Categories</span>
+        </NavLink>
+        <NavLink to="/wishlist" className={({ isActive }) => `bottom-item ${isActive ? 'active' : ''}`}>
+          <span className="bottom-icon-wrapper">
+            <FaHeart className="bottom-icon" />
+            {wishlistCount > 0 && <span className="bottom-badge wishlist">{wishlistCount}</span>}
+          </span>
+          <span className="bottom-label">Wishlist</span>
+        </NavLink>
+        <NavLink to="/cart" className={({ isActive }) => `bottom-item ${isActive ? 'active' : ''}`}>
+          <span className="bottom-icon-wrapper">
+            <FaShoppingCart className="bottom-icon" />
+            {cartCount > 0 && <span className="bottom-badge cart">{cartCount}</span>}
+          </span>
+          <span className="bottom-label">Cart</span>
+        </NavLink>
+      </nav>
+    </>
   );
 };
 

@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaUser, FaBoxOpen, FaHeart, FaMapMarkerAlt, FaSignOutAlt, FaEdit, FaPlus, FaArrowRight } from "react-icons/fa";
 import { MdPayment } from "react-icons/md";
+import { useAuth } from "../Context/AuthContext";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const UserDashboard = () => {
+    const navigate = useNavigate();
+    const { user, loading, logout } = useAuth();
     // State for active tab
     const [activeTab, setActiveTab] = useState("profile");
 
@@ -48,16 +53,13 @@ const UserDashboard = () => {
         }
     ]);
 
-    // Profile state
+    // Profile state - will be populated from Firebase user data
     const [profile, setProfile] = useState({
-        name: "Arpit Kumar",
-        email: "arpit@example.com",
+        name: user?.displayName || "User",
+        email: user?.email || "",
         phone: "+91-9876543210",
         dob: "January 15, 1990"
     });
-
-    // Authentication state
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
 
     // New address form state
     const [newAddress, setNewAddress] = useState({
@@ -84,6 +86,17 @@ const UserDashboard = () => {
         { id: "payment", label: "Payment Methods", icon: <MdPayment className="text-lg" /> },
         { id: "logout", label: "Logout", icon: <FaSignOutAlt className="text-lg" /> },
     ];
+
+    // Update profile when user changes
+    React.useEffect(() => {
+        if (user) {
+            setProfile(prev => ({
+                ...prev,
+                name: user.displayName || "User",
+                email: user.email || ""
+            }));
+        }
+    }, [user]);
 
     // Address management functions
     const handleAddAddress = () => {
@@ -135,14 +148,18 @@ const UserDashboard = () => {
     };
 
     // Logout function
-    const handleLogout = () => {
-        setIsLoggedIn(false);
-        setActiveTab("logout");
+    const handleLogout = async () => {
+        try {
+            await logout();
+            navigate("/LogInPage");
+        } catch (error) {
+            console.error("Logout error:", error);
+        }
     };
 
     // Render tab content
     const renderTabContent = () => {
-        if (!isLoggedIn && activeTab !== "logout") {
+        if (!user && activeTab !== "logout") {
             return (
                 <div className="flex flex-col items-center justify-center py-20 space-y-6 mt-15">
                     <div className="w-20 h-20 rounded-full bg-red-100 flex items-center justify-center mb-6">
@@ -152,10 +169,7 @@ const UserDashboard = () => {
                     <p className="text-gray-600 mb-6">You need to be logged in to view this page.</p>
                     <button
                         className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-amber-400 to-amber-500 text-white rounded-md hover:from-amber-500 hover:to-amber-600 transition-all shadow-md"
-                        onClick={() => {
-                            setIsLoggedIn(true);
-                            setActiveTab("profile");
-                        }}
+                        onClick={() => navigate("/login")}
                     >
                         Login <FaArrowRight className="ml-1" />
                     </button>
@@ -200,9 +214,10 @@ const UserDashboard = () => {
                                             <input
                                                 type="email"
                                                 value={profile.email}
-                                                onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                                                className="w-full p-2 border rounded"
+                                                disabled
+                                                className="w-full p-2 border rounded bg-gray-100"
                                             />
+                                            <p className="text-xs text-gray-500 mt-1">Email cannot be changed</p>
                                         </div>
                                         <div>
                                             <label className="block text-gray-700 mb-1">Phone</label>
@@ -556,10 +571,7 @@ const UserDashboard = () => {
                         <p className="text-gray-600 mb-6">You have been securely logged out of your account.</p>
                         <button
                             className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-amber-400 to-amber-500 text-white rounded-md hover:from-amber-500 hover:to-amber-600 transition-all shadow-md"
-                            onClick={() => {
-                                setIsLoggedIn(true);
-                                setActiveTab("profile");
-                            }}
+                            onClick={() => navigate("/login")}
                         >
                             Login Again <FaArrowRight className="ml-1" />
                         </button>
@@ -570,6 +582,15 @@ const UserDashboard = () => {
                 return null;
         }
     };
+
+    // Show loading state
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-gray-50 pt-12 pb-8 flex items-center justify-center">
+                <LoadingSpinner size="large" text="Loading..." />
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 pt-12 pb-8">
@@ -583,7 +604,7 @@ const UserDashboard = () => {
                                     <FaUser className="text-xl text-amber-600" />
                                 </div>
                                 <div className="leading-tight m-0">
-                                    {isLoggedIn ? (
+                                    {user ? (
                                         <>
                                             <h2 className="font-bold text-gray-800 leading-snug ">{profile.name}</h2>
                                             <p className="text-sm text-gray-500 leading-snug pb-4">Premium Member</p>

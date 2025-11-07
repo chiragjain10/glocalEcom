@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { FaMapMarkerAlt, FaEnvelope, FaPhone ,FaClock,FaUser, FaClipboardList, FaShoppingBag} from 'react-icons/fa';
+
+import { FaMapMarkerAlt, FaEnvelope, FaPhone, FaClock, FaInstagram, FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
+
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -11,227 +13,484 @@ const ContactUs = () => {
     phone: '',
   });
 
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     console.log(formData);
-    // TODO: Add submission logic (e.g., API call)
+    setIsSubmitting(false);
+    // TODO: Add actual submission logic
   };
 
   return (
-    <section className="contact-section" style={{background:"bg-gray-50  py-16 px-4 "}}>
-      {/* <div className="container-fluid" style={{ marginBottom: "40px" }}> */}
-        <h2 style={{ textAlign: "center", color: "black" }}>Connect With Artisan</h2>
-        <p style={{ textAlign: "center", color: "black" }}>
-          Have a question about a handicraft Product or want to collaborate with <br />traditional artisan
-        </p>
-      {/* </div> */}
-
-      <div className="container my-5">
-        <div className="contact-container d-flex flex-wrap justify-content-between">
-
-          {/* Left: Contact Form */}
-          <div className="contact-form col-md-6 mb-4">
-            <h3 className="fw-bold text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">Send us a message</h3>
-            <p className="text-muted">We typically respond within 24 hours</p>
-
-            <form onSubmit={handleSubmit}>
-              <div className="row mb-3">
-                <div className="col">
-                  <label className="form-label">First Name*</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Your first name"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="col">
-                  <label className="form-label">Last Name*</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Your last name"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">Email*</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  placeholder="your@email.com"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">Subject</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="General Inquiry"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">Message*</label>
-                <textarea
-                  className="form-control"
-                  rows="4"
-                  placeholder="Tell us about your inquiry..."
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <button type="submit" className="btn-submit">
-                Send Message
-              </button>
-            </form>
-          </div>
-
-          {/* Right: Contact Info */}
-          <div className="contact-info col-md-5 mt-md-0 mt-5">
-            <h3>Our Information</h3>
-              <p className="text-muted">
-            Visit our workshop in Bikaner or reach out through any of these channels.
-            Our team of traditional artisans and customer support specialists are here to assist you.
-          </p>
-            <ul className="list-unstyled" >
-              <li className="mb-3" style={{background:"linear-gradient(to bottom, #fbe2c3)", width:"100%", height:"100%"}}>
-                <FaMapMarkerAlt style={{color:"#d97706"}} />
-                WorkShop Location
-                <br/>
-                                
-                  Craft Street, Bikaner, Rajasthan 334001, India<br />
-                  Near Junagarh Fort, opposite Heritage Museum
-                
-
-              </li>
-              <br/>
-              <li className="mb-3"style={{background:"linear-gradient(to bottom, #fbe2c3", width:"100%", height:"100%"}}>
-                <FaEnvelope style={{color:"#d97706"}} />
-                Email adderess
-                <br/>
-                support@kalabazaar.in (General inquiries)<br />
-                  orders@kalabazaar.in (Purchase questions)<br />
-                  artisans@kalabazaar.in (Collaborations)
-
-              </li>
-              <br/>
-              <li className="mb-3"style={{background:"linear-gradient(to bottom, #fbe2c3)", width:"100%", height:"100%"}}>
-                <FaPhone style={{color:"#d97706"}} />
-                Contact Number
-                <br/> 
-                +91 1234-567-890<br />
-                +91 9876-543-210
-
-              </li>
-                <br/>
-              <li className="mb-3"style={{background:"linear-gradient(to bottom, #fbe2c3)", width:"100%", height:"100%"}}>
-                  <FaClock style={{color:"#d97706"}} />
-                <h6 className="fw-bold mb-1">Business Hours</h6>
-                <p className="mb-0">
-                  Monday - Saturday: 10AM - 7PM<br />
-                  Sunday: Closed (Artisan rest day)<br />
-                  <span className="text-danger">Workshop visits by appointment only</span>
-                </p>
-
-              </li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-         <div className="container my-5 text-center"style={{background:"white"}}>
-      {/* Section Heading */}
-      <h2 className="fw-bold" style={{background:"bg-gray-50  py-16 px-4"}}>Visit Our Workshop</h2>
-      <p className="text-muted mb-4">
-        Our workshop in Bikaner is open for visitors by appointment. See our artisans create traditional
-        handicrafts using centuries-old techniques.
-      </p>
-
-      {/* Google Map */}
-      <div className="mb-5">
-        <iframe
-          title="Workshop Location"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14237.161414122237!2d73.29796279826402!3d28.022934769029904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x393fbd8f7c43c2c9%3A0x36b79a1f6c832c62!2sJunagarh%20Fort!5e0!3m2!1sen!2sin!4v1691594785586!5m2!1sen!2sin"
-          width="100%"
-          height="400"
-          style={{ border: 0, borderRadius: '10px', boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
-
-      {/* Feature Cards */}
-      <div className="row text-start">
-        <div className="col-md-4 mb-4">
-          <div className="p-4 bg-white rounded shadow-sm h-100">
-            <div className="d-flex align-items-center mb-2">
-              <FaClipboardList className="text-warning fs-3 me-2" />
-              <h5 className="mb-0">Workshop Tours</h5>
-            </div>
-            <p className="text-muted mb-0">
-              Book a guided tour to see our artisans at work and explore the traditional methods we preserve.
-            </p>
-          </div>
-        </div>
-
-        <div className="col-md-4 mb-4">
-          <div className="p-4 bg-white rounded shadow-sm h-100">
-            <div className="d-flex align-items-center mb-2">
-              <FaUser className="text-warning fs-3 me-2" />
-              <h5 className="mb-0">Meet the Artisans</h5>
-            </div>
-            <p className="text-muted mb-0">
-              Schedule a session with our master artisans for personalized interaction and learning.
-            </p>
-          </div>
-        </div>
-
-        <div className="col-md-4 mb-4">
-          <div className="p-4 bg-white rounded shadow-sm h-100">
-            <div className="d-flex align-items-center mb-2">
-              <FaShoppingBag className="text-warning fs-3 me-2" />
-              <h5 className="mb-0">Workshop Shop</h5>
-            </div>
-            <p className="text-muted mb-0">
-              Visit our on-site shop featuring exclusive pieces not available online — straight from the source.
-            </p>
-          </div>
-        </div>
-      </div>
+    <div className="contact-page">
+      {/* Hero Section */}
+      <section className="custom-hero">
+  <div className="overlay"></div>
+  <div className="hero-content">
+    <div className="hero-text">
+      <h1>Get in Touch</h1>
+      <p>We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
     </div>
-      {/* Footer */}
-      <footer className="contact-footer text-center py-3">
-        <h4>
-          <span className="fw-bold">Glocalship</span>
-          <span className="text-warning">Ecommerce</span>
-        </h4>
-      </footer>
-    </section>
+  </div>
+</section>
+
+
+
+      {/* Main Contact Section */}
+      <section className="main-contact-section">
+        <div className="container">
+          <div className="contact-grid">
+            {/* Contact Form */}
+            <div className="contact-form-section">
+              <h2>Send Message</h2>
+
+              <form onSubmit={handleSubmit} className="contact-form">
+                <div className="form-row">
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      required
+                      placeholder="First Name"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      required
+                      placeholder="Last Name"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      placeholder="Email Address"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="Phone Number"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="Subject"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    placeholder="Your message..."
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className={`submit-btn ${isSubmitting ? 'submitting' : ''}`}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </button>
+              </form>
+            </div>
+
+            {/* Contact Information */}
+            <div className="contact-info-section">
+              <h2>Contact Info</h2>
+
+              <div className="contact-cards">
+                <div className="contact-card">
+                  <div className="card-icon">
+                    <FaMapMarkerAlt />
+                  </div>
+                  <div className="card-content">
+                    <h4>Address</h4>
+                    <p>Craft Street, Bikaner, Rajasthan 334001, India</p>
+                  </div>
+                </div>
+
+                <div className="contact-card">
+                  <div className="card-icon">
+                    <FaEnvelope />
+                  </div>
+                  <div className="card-content">
+                    <h4>Email</h4>
+                    <p>hello@glocalship.com</p>
+                  </div>
+                </div>
+
+                <div className="contact-card">
+                  <div className="card-icon">
+                    <FaPhone />
+                  </div>
+                  <div className="card-content">
+                    <h4>Phone</h4>
+                    <p>+91 1234-567-890</p>
+                  </div>
+                </div>
+
+                <div className="contact-card">
+                  <div className="card-icon">
+                    <FaClock />
+                  </div>
+                  <div className="card-content">
+                    <h4>Hours</h4>
+                    <p>Mon - Sat: 10AM - 7PM</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Social Media */}
+              <div className="social-section">
+                <h4>Follow Us</h4>
+                <div className="social-links">
+                  <a href="#" className="social-link">
+                    <FaInstagram />
+                  </a>
+                  <a href="#" className="social-link">
+                    <FaFacebook />
+                  </a>
+                  <a href="#" className="social-link">
+                    <FaTwitter />
+                  </a>
+                  <a href="#" className="social-link">
+                    <FaLinkedin />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="map-section">
+        <div className="container">
+          <div className="map-container">
+            <iframe
+              title="Workshop Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14237.161414122237!2d73.29796279826402!3d28.022934769029904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x393fbd8f7c43c2c9%3A0x36b79a1f6c832c62!2sJunagarh%20Fort!5e0!3m2!1sen!2sin!4v1691594785586!5m2!1sen!2sin"
+              width="100%"
+              height="300"
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      <style jsx>{`
+        .contact-page {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          line-height: 1.6;
+          color: #1a1a1a;
+          background: #fafafa;
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+          background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+          color: white;
+          padding: 4rem 0;
+          text-align: center;
+        }
+
+        .hero-content h1 {
+          font-size: 3rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+          letter-spacing: -0.02em;
+        }
+
+        .hero-content p {
+          font-size: 1.125rem;
+          opacity: 0.9;
+          max-width: 500px;
+          margin: 0 auto;
+        }
+
+        /* Main Contact Section */
+        .main-contact-section {
+          padding: 4rem 0;
+        }
+
+        .contact-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          align-items: start;
+        }
+
+        .contact-form-section h2,
+        .contact-info-section h2 {
+          font-size: 1.875rem;
+          font-weight: 600;
+          margin-bottom: 2rem;
+          color: #1a1a1a;
+        }
+
+        /* Contact Form */
+        .contact-form {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .form-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+          width: 100%;
+          padding: 0.875rem 1rem;
+          border: 1px solid #e5e7eb;
+          border-radius: 8px;
+          font-size: 0.875rem;
+          transition: all 0.2s ease;
+          background: white;
+          color: #1a1a1a;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+          outline: none;
+          border-color: #f59e0b;
+          box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+          color: #9ca3af;
+        }
+
+        .form-group textarea {
+          resize: vertical;
+          min-height: 100px;
+        }
+
+        .submit-btn {
+          background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+          color: white;
+          border: none;
+          padding: 0.875rem 2rem;
+          border-radius: 8px;
+          font-size: 0.875rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          margin-top: 0.5rem;
+        }
+
+        .submit-btn:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .submit-btn:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+          transform: none;
+        }
+
+        /* Contact Info Section */
+        .contact-cards {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          margin-bottom: 2rem;
+        }
+
+        .contact-card {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          padding: 1.5rem;
+          background: white;
+          border-radius: 12px;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          transition: all 0.2s ease;
+        }
+
+        .contact-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-icon {
+          background: linear-gradient(135deg, #fbbf24, #f59e0b);
+          color: white;
+          width: 40px;
+          height: 40px;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1rem;
+          flex-shrink: 0;
+        }
+
+        .card-content h4 {
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: #1a1a1a;
+          margin-bottom: 0.25rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .card-content p {
+          color: #6b7280;
+          font-size: 0.875rem;
+          margin: 0;
+        }
+
+        /* Social Section */
+        .social-section h4 {
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: #1a1a1a;
+          margin-bottom: 1rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .social-links {
+          display: flex;
+          gap: 0.75rem;
+        }
+
+        .social-link {
+          width: 40px;
+          height: 40px;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 1rem;
+          transition: all 0.2s ease;
+          text-decoration: none;
+        }
+
+        .social-link:hover {
+          transform: translateY(-2px);
+        }
+
+        .social-link:nth-child(1) { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .social-link:nth-child(2) { background: #1877f2; }
+        .social-link:nth-child(3) { background: #1da1f2; }
+        .social-link:nth-child(4) { background: #0077b5; }
+
+        /* Map Section */
+        .map-section {
+          padding: 2rem 0 4rem;
+        }
+
+        .map-container {
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .container {
+            padding: 0 1rem;
+          }
+
+          .hero-content h1 {
+            font-size: 2.25rem;
+          }
+
+          .contact-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+          }
+
+          .form-row {
+            grid-template-columns: 1fr;
+          }
+
+          .main-contact-section {
+            padding: 3rem 0;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero-section {
+            padding: 3rem 0;
+          }
+
+          .hero-content h1 {
+            font-size: 2rem;
+          }
+
+          .hero-content p {
+            font-size: 1rem;
+          }
+
+          .contact-form-section h2,
+          .contact-info-section h2 {
+            font-size: 1.5rem;
+          }
+        }
+      `}</style>
+    </div>
   );
 };
 

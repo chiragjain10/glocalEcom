@@ -37,7 +37,7 @@ const AccordionItem = ({ item, isOpen, onClick }) => {
   }, [isOpen]);
 
   return (
-    <div className="p-3 border-l-3 rounded border-amber-400 bg-white/70 backdrop-blur-sm">
+    <div className="px-3 border-l-3 rounded border-amber-400 bg-white/70 backdrop-blur-sm">
       <button
         onClick={onClick}
         className="w-full flex justify-between items-center py-4 text-left focus:outline-none cursor-pointer"
@@ -77,8 +77,11 @@ const Accordion = () => {
   };
 
   return (
-    <section className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className=" mx-auto">
+
+    <div className=" bg-gray-50">
+    <section className=" bg-gray-50 py-12 sm:px-6 lg:px-">
+      <div className="max-w-7xl mx-auto">
+
         {/* Heading Outside the Flex Container */}
         <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">
@@ -89,7 +92,10 @@ const Accordion = () => {
             Questions
           </span>
         </h2>
-          <div className="w-20 h-1.5 bg-amber-500 mx-auto mb-10"></div>
+
+          <div className="w-32 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full shadow-lg mb-10" />
+
+
         </div>
 
         {/* Content + Image Side-by-Side */}
@@ -119,6 +125,7 @@ const Accordion = () => {
         </div>
       </div>
     </section>
+    </div>
   );
 };
 

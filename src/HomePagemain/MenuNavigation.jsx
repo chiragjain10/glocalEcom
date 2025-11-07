@@ -6,6 +6,106 @@ import {
 } from "react-icons/fa";
 
 export const categories = [
+ 
+  {
+    title: "Jewelry",
+    icon: <FaGem />,
+    subItems: [
+      { title: "Hindu",
+        subSubItems: [
+          "Bracelets", "Earrings","Gods","Navratna","Ganesha","Gayatri","Goddess","Krishna","Necklaces","Om","Pendants","Rings","Rosary","Sikh", "Hanuman","Shiva", "Gita", "Puja", "Mantra", "More Hindu"
+        ] },
+      { title: "pendants",
+        subSubItems:[
+          "Amber","Amethyst","Carnelian","Calcedony",
+        ]
+       },
+      { title: "Earrings" }
+    ]
+  },
+  {
+    title: "Pottery",
+    icon: <FaGem />,
+    subItems: [
+      { title: "Hindu",
+        subSubItems: [
+          "Bracelets", "Earrings","Gods","Navratna","Ganesha","Gayatri","Goddess","Krishna","Necklaces","Om","Pendants","Rings","Rosary","Sikh", "Hanuman","Shiva", "Gita", "Puja", "Mantra", "More Hindu"
+        ] },
+      { title: "pendants",
+        subSubItems:[
+          "Amber","Amethyst","Carnelian","Calcedony",
+        ]
+       },
+      { title: "Earrings" }
+    ]
+  },
+  {
+    title: "Textiles",
+    icon: <FaGem />,
+    subItems: [
+      { title: "Hindu",
+        subSubItems: [
+          "Bracelets", "Earrings","Gods","Navratna","Ganesha","Gayatri","Goddess","Krishna","Necklaces","Om","Pendants","Rings","Rosary","Sikh", "Hanuman","Shiva", "Gita", "Puja", "Mantra", "More Hindu"
+        ] },
+      { title: "pendants",
+        subSubItems:[
+          "Amber","Amethyst","Carnelian","Calcedony",
+        ]
+       },
+      { title: "Earrings" }
+    ]
+  },
+  {
+    title: "Fashion",
+    icon: <FaGem />,
+    subItems: [
+      { title: "Hindu",
+        subSubItems: [
+          "Bracelets", "Earrings","Gods","Navratna","Ganesha","Gayatri","Goddess","Krishna","Necklaces","Om","Pendants","Rings","Rosary","Sikh", "Hanuman","Shiva", "Gita", "Puja", "Mantra", "More Hindu"
+        ] },
+      { title: "pendants",
+        subSubItems:[
+          "Amber","Amethyst","Carnelian","Calcedony",
+        ]
+       },
+      { title: "Earrings" }
+    ]
+  },
+  {
+    title: "Home Decor",
+    icon: <FaGem />,
+    subItems: [
+      { title: "Hindu",
+        subSubItems: [
+          "Bracelets", "Earrings","Gods","Navratna","Ganesha","Gayatri","Goddess","Krishna","Necklaces","Om","Pendants","Rings","Rosary","Sikh", "Hanuman","Shiva", "Gita", "Puja", "Mantra", "More Hindu"
+        ] },
+      { title: "pendants",
+        subSubItems:[
+          "Amber","Amethyst","Carnelian","Calcedony",
+        ]
+       },
+      { title: "Earrings" }
+    ]
+  },
+  {
+    title: "Paintings",
+    icon: <FaPaintBrush />,
+    subItems: [
+      { title: "Mughal" },
+      { title: "Tanjore" },
+      { title: "Miniature" }
+    ]
+  },
+
+  {
+    title: "Statues",
+    icon: <FaGopuram />,
+    subItems: [
+      { title: "Brass" },
+      { title: "Stone" },
+      { title: "Wood" }
+    ]
+  },
   {
     title: "Audio Video",
     icon: <FaHeadphonesAlt />,
@@ -31,40 +131,6 @@ export const categories = [
       { title: "Dance" },
       { title: "Culture" },
       { title: "MP3" },
-    ]
-  },
-  {
-    title: "Jewelry",
-    icon: <FaGem />,
-    subItems: [
-      { title: "Hindu",
-        subSubItems: [
-          "Bracelets", "Earrings","Gods","Navratna","Ganesha","Gayatri","Goddess","Krishna","Necklaces","Om","Pendants","Rings","Rosary","Sikh", "Hanuman","Shiva", "Gita", "Puja", "Mantra", "More Hindu"
-        ] },
-      { title: "pendants",
-        subSubItems:[
-          "Amber","Amethyst","Carnelian","Calcedony",
-        ]
-       },
-      { title: "Earrings" }
-    ]
-  },
-  {
-    title: "Paintings",
-    icon: <FaPaintBrush />,
-    subItems: [
-      { title: "Mughal" },
-      { title: "Tanjore" },
-      { title: "Miniature" }
-    ]
-  },
-  {
-    title: "Statues",
-    icon: <FaGopuram />,
-    subItems: [
-      { title: "Brass" },
-      { title: "Stone" },
-      { title: "Wood" }
     ]
   },
   {

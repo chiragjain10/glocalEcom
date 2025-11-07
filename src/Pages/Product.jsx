@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
-import { ProductContext } from "../Context/ProductContext"; // Adjust path as necessary
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
+import { useProducts } from "../Context/ProductContext";
+import { useCart } from "../Context/CartContext";
 import {
   FaChevronDown,
   FaHeart,
@@ -16,27 +17,42 @@ import { FiTruck } from "react-icons/fi";
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const { products, getProductById, loading, error } = useProducts();
+  const product = getProductById(id);
+  const { addToCart } = useCart();
   const navigate = useNavigate();
 
-  const { products, addToCart } = useContext(ProductContext);
-  const product = products.find((p) => p.id === parseInt(id));
 
   const [showDetails, setShowDetails] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
 
-  // Normalize images array from different possible keys
-  const images =
-    product?.imgs && Array.isArray(product.imgs)
-      ? product.imgs
-      : product?.image
-      ? Array.isArray(product.image)
-        ? product.image
-        : [product.image]
-      : [];
+
+  const images = product?.images || [];
 
   const selectedImage = images[selectedIndex] || "";
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="p-6 text-lg bg-white rounded-lg shadow-md border">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-500 mx-auto mb-4"></div>
+          Loading product...
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="p-6 text-red-600 text-lg bg-white rounded-lg shadow-md border border-red-100">
+          Error: {error}
+        </div>
+      </div>
+    );
+  }
 
   if (!product) {
     return (
@@ -54,7 +70,7 @@ const ProductDetails = () => {
       ? product.price
       : Number(String(product.price).replace(/[^\d.]/g, "")) || 0;
 
-  // Updated addToCart: supports silent alert and optional redirect
+  // Add to cart using context; context persists to Firestore or localStorage
   const handleAddToCart = (e, { silent = false, redirectToCart = true } = {}) => {
     e?.preventDefault?.();
     e?.stopPropagation?.();
@@ -66,30 +82,10 @@ const ProductDetails = () => {
       image: selectedImage || images[0] || "",
       quantity,
     };
-
     try {
-      if (typeof addToCart === "function") {
-        addToCart(cartItem, quantity);
-      } else {
-        const cartItems = JSON.parse(localStorage.getItem("cart") || "[]");
-        const existingIndex = cartItems.findIndex((item) => item.id === cartItem.id);
-
-        if (existingIndex >= 0) {
-          cartItems[existingIndex].quantity += quantity;
-        } else {
-          cartItems.push(cartItem);
-        }
-
-        localStorage.setItem("cart", JSON.stringify(cartItems));
-      }
-
-      if (!silent) {
-        alert(`${product.title} added to cart!`);
-      }
-      if (redirectToCart) {
-        navigate("/cart");
-      }
-      console.log("Add to cart successful:", cartItem);
+      addToCart(cartItem, quantity);
+      if (!silent) alert(`${product.title} added to cart!`);
+      if (redirectToCart) navigate("/cart");
     } catch (error) {
       console.error("Failed to add to cart:", error);
       alert("Failed to add to cart. Please try again.");
@@ -112,43 +108,49 @@ const ProductDetails = () => {
           {/* Left: Image Gallery */}
           <div className="w-full lg:w-1/2">
             {/* Thumbnails + Main Image */}
-            <div className="flex flex-col-reverse sm:flex-row gap-4">
-              {/* Thumbnails Column */}
-              <div className="flex sm:flex-col gap-2 sm:max-h-[400px] overflow-y-auto pr-1">
-                {images.map((img, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedIndex(index)}
-                    className={`flex-shrink-0 focus:outline-none transition-all ${
-                      selectedIndex === index
-                        ? "ring-2 ring-amber-500"
-                        : "hover:ring-1 hover:ring-gray-300"
-                    } rounded-md overflow-hidden border border-gray-200 bg-white p-1`}
-                  >
-                    <img
-                      src={img}
-                      alt={`Thumbnail ${index + 1}`}
-                      className="w-16 h-16 object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
+            {images.length > 0 ? (
+              <div className="flex flex-col-reverse sm:flex-row gap-4">
+                {/* Thumbnails Column */}
+                <div className="flex sm:flex-col gap-2 sm:max-h-[400px] overflow-y-auto pr-1">
+                  {images.map((img, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedIndex(index)}
+                      className={`flex-shrink-0 focus:outline-none transition-all ${
+                        selectedIndex === index
+                          ? "ring-2 ring-amber-500"
+                          : "hover:ring-1 hover:ring-gray-300"
+                      } rounded-md overflow-hidden border border-gray-200 bg-white p-1`}
+                    >
+                      <img
+                        src={img}
+                        alt={`Thumbnail ${index + 1}`}
+                        className="w-16 h-16 object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
 
-              {/* Main Image */}
-              <div className="flex-1 bg-white p-4 rounded-lg border border-gray-200">
-                {selectedImage ? (
+
+                {/* Main Image */}
+                <div className="flex-1 bg-white p-4 rounded-lg border border-gray-200">
+
                   <img
                     src={selectedImage}
                     alt={product.title}
                     className="w-full h-auto max-h-[400px] object-contain"
                   />
-                ) : (
-                  <div className="w-full h-[300px] flex items-center justify-center text-sm text-gray-400">
-                    No Image Available
-                  </div>
-                )}
+
+                </div>
+
               </div>
-            </div>
+            ) : (
+              <div className="bg-white p-4 rounded-lg border border-gray-200">
+                <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <span className="text-gray-500">No images available</span>
+                </div>
+              </div>
+            )}
 
             {/* Features Section */}
             <div className="mt-6 grid grid-cols-3 gap-3">
@@ -201,8 +203,14 @@ const ProductDetails = () => {
 
               {/* Price Section */}
               <div className="flex items-center mb-4">
-                <span className="text-2xl font-bold text-amber-600">{product.price}</span>
-                <span className="text-sm text-gray-500 ml-2 line-through">₹{Math.round(priceNum * 1.2)}</span>
+
+                <span className="text-2xl font-bold text-amber-600">
+                  ₹{product.price}
+                </span>
+                <span className="text-sm text-gray-500 ml-2 line-through">
+                  ₹{Math.round(product.price * 1.2)}
+                </span>
+
                 <span className="text-xs font-medium text-white bg-green-500 ml-2 px-1.5 py-0.5 rounded">
                   20% OFF
                 </span>

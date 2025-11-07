@@ -49,13 +49,16 @@ const TestimonialSlider = () => {
   };
 
   return (
-    <section className="py-16 px-4  bg-gray-50">
+
+    <div className=" bg-gray-50">
+    <section className=" max-w-7xl mx-auto py-16   bg-gray-50">
       <div className="container mx-auto">
         <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">
                                  What Our Customers Say
                         </h2>
-                        <div className="w-20 h-1.5 bg-amber-500 mx-auto"></div>
+                        <div className="w-32 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full shadow-lg" />
+
                     </div>
         
         <Slider {...settings} className="testimonial-slider">
@@ -78,6 +81,7 @@ const TestimonialSlider = () => {
         </Slider>
       </div>
     </section>
+    </div>
   );
 };
 

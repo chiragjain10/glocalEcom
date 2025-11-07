@@ -6,21 +6,17 @@ const About = () => {
     return (
         <div className="bg-white text-gray-800">
             {/* Hero Section with Parallax Effect */}
-            <div className="relative bg-amber-50 py-28 px-4 sm:px-8 lg:px-20 overflow-hidden">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1585016396082-5c5baebd29e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-20"></div>
-                <div className="max-w-5xl mx-auto text-center relative z-10">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-700 mb-4 md:mb-6 font-serif">
-                        Celebrating India's Artistic Soul
-                    </h1>
-                    <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
-                        Where centuries-old craftsmanship meets contemporary design
-                    </p>
-                    <div className="w-24 h-1.5 bg-gradient-to-r from-amber-400 to-amber-500 mx-auto mb-10"></div>
-                    <button className="bg-gradient-to-r from-amber-400 to-amber-500 text-white px-8 py-4 rounded-full transition-all font-medium text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                        Discover Our Story 
-                    </button>
+            <section className="custom-hero about-hero">
+                <div className="overlay"></div>
+                <div className="hero-content">
+                    <div className="hero-text">
+                        <h1>Celebrating India's Artistic Soul</h1>
+                        <p>Where centuries-old craftsmanship meets contemporary design</p>
+                        <a href="/about" className="hero-button">Discover Our Story</a>
+                    </div>
                 </div>
-            </div>
+            </section>
+
 
             {/* Cultural Journey Timeline */}
             <div className="py-20 px-4 sm:px-8 lg:px-20 max-w-7xl mx-auto">

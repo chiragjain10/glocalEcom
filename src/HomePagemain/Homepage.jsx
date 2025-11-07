@@ -1,9 +1,7 @@
-
-import React from "react";
-import Navbar from "../components/Navbar.jsx";
-import Footer from "../components/Footer.jsx";
 import Banner from "./Banner.jsx";
+import HomepageCetegories from "./HomepageCetegories.jsx";
 import ProductCategories from "./ProductCategories.jsx";
+import { categories } from "../components/Navbar.jsx";
 import FeaturedProducts from "./FeaturedProducts.jsx";
 import TestimonialSlider from "./Testimonials.jsx";
 import WhyChooseUs from "./WhyChooseUs.jsx";
@@ -19,11 +17,12 @@ const Homepage = () => {
     <div>
       <Popup />
       <Banner />
-      <WhyChooseUs />
       <ProductCategories />
       <TrendingProducts />
+      <HomepageCetegories categories={categories} />
       <NewArrival />
       <FeaturedProducts />
+      <WhyChooseUs />
       <OfferSection />
       <TestimonialSlider />
       <Accordion />

@@ -33,25 +33,26 @@ const categories = [
 
 const ProductCategories = () => {
   return (
-    <section className="py-10 px-4 md:px-10 bg-gray-50">
-      <div className="mb-6 text-center slider-heading-row">
-        <div className="slider-icon text-white text-2xl">✧</div>
-        <h2 className="slider-heading ">
+
+    <div className="w-full px-5 bg-gray-50">
+    <section className="max-w-7xl mx-auto py-10 ">
+      <div className="mb-6 text-center">
+        <h2 className="slider-heading mb-4">
           Explore Our Categories
         </h2>
-      </div>
-      
+        <div className="w-32 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full shadow-lg" />
+      </div>      
       <Swiper
         spaceBetween={20}
         slidesPerView={1}
         autoplay={{ delay: 2500, disableOnInteraction: false }}
-        className="custom-swiper px-4 mt-5 pb-14" // 👈 more bottom padding
+        className="custom-swiper px-4 mt-5 pb-14"
         breakpoints={{
           640: { slidesPerView: 2 },
           768: { slidesPerView: 3 },
           1024: { slidesPerView: 4 },
         }}
-        modules={[Autoplay]} // Removed Pagination module
+        modules={[Autoplay]}
       >
         {categories.map((cat, index) => (
           <SwiperSlide key={index}>
@@ -66,7 +67,7 @@ const ProductCategories = () => {
                 <h3 className="text-lg font-semibold italic text-white drop-shadow-lg">{cat.name}</h3>
                 <div className="flex justify-center mt-4">
                   <Link 
-                    to="/all-categories" 
+                    to={`/all-categories/${encodeURIComponent(cat.name.toLowerCase())}`}
                     className="relative inline-flex items-center gap-1 text-white bg-gradient-to-r from-amber-400 to-amber-500 px-4 py-1 rounded-md text-sm font-bold transition-all duration-300 hover:shadow-md hover:from-amber-500 hover:to-amber-600"
                   >
                     <span>Shop</span>
@@ -79,6 +80,7 @@ const ProductCategories = () => {
         ))}
       </Swiper>
     </section>
+    </div>
   );
 };
 

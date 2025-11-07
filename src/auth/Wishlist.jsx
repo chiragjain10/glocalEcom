@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useWishlist } from "../HomePagemain/WishlistContext";
+import { useWishlist } from "../Context/WishlistContext";
 import { FiX } from "react-icons/fi"; // ❌ Cross icon
 
 const Wishlist = () => {
