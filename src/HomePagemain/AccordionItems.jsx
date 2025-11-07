@@ -40,7 +40,7 @@ const AccordionItem = ({ item, isOpen, onClick }) => {
     <div className="px-3 border-l-3 rounded border-amber-400 bg-white/70 backdrop-blur-sm">
       <button
         onClick={onClick}
-        className="w-full flex justify-between items-center py-4 text-left focus:outline-none cursor-pointer"
+        className="w-full flex justify-between items-center py-3 text-left focus:outline-none cursor-pointer"
       >
         <span className="text-lg font-medium text-gray-800">
           {item.question}
