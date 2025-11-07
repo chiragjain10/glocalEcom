@@ -29,6 +29,13 @@ const ContactUs = () => {
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     console.log(formData);
+
+    const phoneNumber = '919555144777';
+    const text = `New Contact Inquiry:\nName: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nPhone: ${formData.phone || '-'}\nSubject: ${formData.subject || '-'}\nMessage: ${formData.message}`;
+    const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`;
+
+    window.open(waUrl, '_blank');
+
     setIsSubmitting(false);
     // TODO: Add actual submission logic
   };
@@ -150,7 +157,7 @@ const ContactUs = () => {
                   </div>
                   <div className="card-content">
                     <h4>Address</h4>
-                    <p>Craft Street, Bikaner, Rajasthan 334001, India</p>
+                    <p>Online Store, Worldwide</p>
                   </div>
                 </div>
 
@@ -170,7 +177,7 @@ const ContactUs = () => {
                   </div>
                   <div className="card-content">
                     <h4>Phone</h4>
-                    <p>+91 1234-567-890</p>
+                    <p>+91 95551 44777</p>
                   </div>
                 </div>
 
@@ -180,13 +187,13 @@ const ContactUs = () => {
                   </div>
                   <div className="card-content">
                     <h4>Hours</h4>
-                    <p>Mon - Sat: 10AM - 7PM</p>
+                    <p>24/7 Support</p>
                   </div>
                 </div>
               </div>
 
               {/* Social Media */}
-              <div className="social-section">
+              {/* <div className="social-section">
                 <h4>Follow Us</h4>
                 <div className="social-links">
                   <a href="#" className="social-link">
@@ -202,25 +209,8 @@ const ContactUs = () => {
                     <FaLinkedin />
                   </a>
                 </div>
-              </div>
+              </div> */}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Map Section */}
-      <section className="map-section">
-        <div className="container">
-          <div className="map-container">
-            <iframe
-              title="Workshop Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14237.161414122237!2d73.29796279826402!3d28.022934769029904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x393fbd8f7c43c2c9%3A0x36b79a1f6c832c62!2sJunagarh%20Fort!5e0!3m2!1sen!2sin!4v1691594785586!5m2!1sen!2sin"
-              width="100%"
-              height="300"
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
           </div>
         </div>
       </section>

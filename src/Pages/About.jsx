@@ -23,216 +23,79 @@ const About = () => {
                 <section className="mb-28">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">
-                            Our Cultural Journey
+                            About Us
                         </h2>
                         <div className="w-20 h-1.5 bg-amber-500 mx-auto"></div>
                     </div>
 
-                    <div className="relative">
-                        {/* Timeline bar */}
-                        <div className="hidden md:block absolute left-1/2 h-full w-1 bg-amber-100 transform -translate-x-1/2"></div>
-
-                        {/* Timeline items */}
-                        {[
-                            {
-                                year: "2010",
-                                title: "The Beginning",
-                                content: "Founded in a small Jaipur workshop with just 5 artisans specializing in blue pottery.",
-                                icon: "✋"
-                            },
-                            {
-                                year: "2013",
-                                title: "First Expansion",
-                                content: "Added textile weavers from Varanasi and wood carvers from Saharanpur to our family.",
-                                icon: "🧵",
-                                flip: true
-                            },
-                            {
-                                year: "2016",
-                                title: "National Recognition",
-                                content: "Featured in India Today as one of the top 10 social enterprises preserving heritage crafts.",
-                                icon: "🏆"
-                            },
-                            {
-                                year: "2019",
-                                title: "Global Reach",
-                                content: "Shipped our first international order, taking Indian craftsmanship to 15 new countries.",
-                                icon: "🌍",
-                                flip: true
-                            },
-                            {
-                                year: "2023",
-                                title: "Present Day",
-                                content: "Supporting over 500 artisan communities while reviving 45 endangered art forms.",
-                                icon: "🎨"
-                            }
-                        ].map((item, index) => (
-                            <div key={index} className={`mb-12 md:mb-16 md:flex md:items-center ${item.flip ? "md:flex-row-reverse" : ""}`}>
-                                <div className={`md:w-5/12 ${item.flip ? "md:pl-8" : "md:pr-8"} mb-4 md:mb-0`}>
-                                    <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-amber-500">
-                                        <h3 className="text-xl font-bold text-gray-800 mb-2">{item.title}</h3>
-                                        <p className="text-gray-700">{item.content}</p>
-                                    </div>
-                                </div>
-                                <div className="hidden md:block md:w-2/12 text-center">
-                                    <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mx-auto text-white text-2xl shadow-lg">
-                                        {item.icon}
-                                    </div>
-                                </div>
-                                <div className={`md:w-5/12 ${item.flip ? "md:text-right md:pr-8" : "md:text-left md:pl-8"}`}>
-                                    <span className="text-3xl font-bold text-amber-600">{item.year}</span>
-                                </div>
-                            </div>
-                        ))}
+                    <div className="max-w-4xl mx-auto text-center">
+                        <h3 className="text-2xl md:text-3xl font-bold mb-4">GlocalShip House</h3>
+                        <p className="text-gray-700 leading-relaxed mb-6">
+                            GlocalShip House has been at the heart of the global book trade for over 13 years, proudly serving as a trusted wholesaler and supplier of books across the world. With a legacy built on passion for literature, knowledge, and education, we have established ourselves as a reliable source for quality titles spanning all genres and disciplines.
+                        </p>
+                        <p className="text-gray-700 leading-relaxed">
+                            Founded with the vision of making books accessible across borders, GlocalShip House has grown into a dynamic international presence with operations in the United Kingdom (GlocalShip House Ltd) and the United States (GlocalShip House). Over the decades, we’ve formed strong partnerships with leading distributors and publishers globally, allowing us to offer an extensive catalogue of books from renowned publishers worldwide.
+                        </p>
                     </div>
                 </section>
 
                 {/* Artisan Showcase with Carousel Effect */}
                 <section className="mb-28">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">
-                            Voices from Our Community
-                        </h2>
-                        <p className="text-gray-600 max-w-3xl mx-auto">
-                            Meet the talented hands and hearts behind our products
-                        </p>
-                        <div className="w-20 h-1.5 bg-amber-500 mx-auto mt-4"></div>
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">What We Do</h2>
+                        <div className="w-20 h-1.5 bg-amber-500 mx-auto"></div>
                     </div>
-
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {[
-                            {
-                                name: "Laxmi Bai",
-                                craft: "Block Printing • Rajasthan",
-                                quote: "This platform gave me the confidence to experiment with traditional designs while staying true to our roots.",
-                                image: "https://images.unsplash.com/photo-1593104547489-5cf65d062dfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            },
-                            {
-                                name: "Rajesh Kumar",
-                                craft: "Dhokra Metal Craft • Chhattisgarh",
-                                quote: "My family's 200-year-old craft was dying until we connected with this initiative. Now we train 15 young artisans.",
-                                image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            },
-                            {
-                                name: "Fatima Begum",
-                                craft: "Zardozi Embroidery • Hyderabad",
-                                quote: "The fair pricing model allows me to focus on quality without worrying about feeding my family.",
-                                image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            }
-                        ].map((artisan, index) => (
-                            <div key={index} className="group relative bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                                <div className="relative h-72 overflow-hidden">
-                                    <img
-                                        src={artisan.image}
-                                        alt={artisan.name}
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                                </div>
-                                <div className="p-6">
-                                    <h3 className="text-xl font-bold text-gray-800">{artisan.name}</h3>
-                                    <p className="text-amber-600 mb-3">{artisan.craft}</p>
-                                    <p className="text-gray-700 italic">"{artisan.quote}"</p>
-                                </div>
-                                <div className="absolute top-4 right-4 bg-amber-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                                    Artisan Story
-                                </div>
-                            </div>
-                        ))}
+                    <div className="grid md:grid-cols-3 gap-6">
+                        <div className="bg-white p-6 rounded-xl shadow-sm">
+                            <h3 className="text-lg font-semibold mb-2">Wholesale Distribution</h3>
+                            <p className="text-gray-700 text-sm">Supplying books in bulk to retailers, institutions, and libraries globally.</p>
+                        </div>
+                        <div className="bg-white p-6 rounded-xl shadow-sm">
+                            <h3 className="text-lg font-semibold mb-2">International Sourcing</h3>
+                            <p className="text-gray-700 text-sm">Leveraging our global network to source titles directly from the UK and the US.</p>
+                        </div>
+                        <div className="bg-white p-6 rounded-xl shadow-sm">
+                            <h3 className="text-lg font-semibold mb-2">Customized Supply Solutions</h3>
+                            <p className="text-gray-700 text-sm">Catering to e-commerce platforms, bookstores, educational institutions, and government libraries.</p>
+                        </div>
                     </div>
                 </section>
 
                 {/* Craftsmanship Process */}
-                <section className="mb-28 bg-gradient-to-br from-amber-50 to-amber-100 rounded-3xl p-12">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">
-                            The Artisan's Process
-                        </h2>
-                        <p className="text-gray-600 max-w-3xl mx-auto">
-                            Each piece undergoes a meticulous journey from raw material to finished masterpiece
-                        </p>
-                        <div className="w-20 h-1.5 bg-amber-500 mx-auto mt-4"></div>
-                    </div>
-
-                    <div className="grid md:grid-cols-4 gap-6">
-                        {[
-                            { icon: <FaLeaf className="text-3xl mb-3" />, title: "Material Sourcing", description: "Locally harvested natural materials from ethical suppliers" },
-                            { icon: <FaHistory className="text-3xl mb-3" />, title: "Traditional Techniques", description: "Centuries-old methods passed down through generations" },
-                            { icon: <FaHandsHelping className="text-3xl mb-3" />, title: "Artisan Crafting", description: "Skilled hands shaping each piece with precision and care" },
-                            { icon: <FaAward className="text-3xl mb-3" />, title: "Quality Check", description: "Rigorous inspection ensuring perfection in every detail" }
-                        ].map((step, index) => (
-                            <div key={index} className="bg-white p-6 rounded-xl text-center shadow-sm hover:shadow-md transition-all">
-                                <div className="text-amber-600 flex justify-center">{step.icon}</div>
-                                <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-                                <p className="text-gray-700 text-sm">{step.description}</p>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="mt-12 grid md:grid-cols-3 gap-8">
-                        <div className="bg-white p-6 rounded-xl shadow-sm">
-                            <h3 className="text-lg font-semibold mb-3 flex items-center">
-                                <FaRupeeSign className="text-amber-600 mr-2" />
-                                Fair Pricing Model
-                            </h3>
-                            <p className="text-gray-700">
-                                Our transparent pricing ensures artisans receive 3-4x more than local market rates while keeping products affordable for customers.
-                            </p>
+                <section className="mb-28 bg-gradient-to-br from-amber-50 to-amber-100 rounded-3xl p-8 md:p-12">
+                    <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                        <div>
+                            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">Our Commitment</h2>
+                            <p className="text-gray-700 mb-4">At GlocalShip House, we believe books are more than products — they are gateways to learning, imagination, and transformation. Our mission is to deliver exceptional service, curated content, and a seamless supply chain that connects books to those who seek them, anywhere in the world.</p>
+                            <ul className="list-disc pl-5 text-gray-700 space-y-2">
+                                <li>Decades of experience in the global book trade</li>
+                                <li>Strong partnerships with leading publishers and distributors</li>
+                                <li>Reliable service tailored to each client</li>
+                            </ul>
                         </div>
-                        <div className="bg-white p-6 rounded-xl shadow-sm">
-                            <h3 className="text-lg font-semibold mb-3 flex items-center">
-                                <FaShippingFast className="text-amber-600 mr-2" />
-                                Global Logistics
-                            </h3>
-                            <p className="text-gray-700">
-                                We've developed specialized packaging to protect delicate crafts during international shipping, with carbon-neutral delivery options.
-                            </p>
-                        </div>
-                        <div className="bg-white p-6 rounded-xl shadow-sm">
-                            <h3 className="text-lg font-semibold mb-3 flex items-center">
-                                <FaHandsHelping className="text-amber-600 mr-2" />
-                                Community Impact
-                            </h3>
-                            <p className="text-gray-700">
-                                15% of profits fund education and healthcare initiatives in artisan communities, creating holistic development.
-                            </p>
+                        <div>
+                            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">Global Reach, Local Expertise</h2>
+                            <p className="text-gray-700">Whether you’re a bookstore in Europe, a university in Asia, or a public library in North America, we bring decades of experience and a commitment to excellence in every transaction. Our team blends deep industry knowledge with a passion for books, ensuring that each client receives the attention and support they deserve.</p>
                         </div>
                     </div>
                 </section>
 
                 {/* Cultural Heritage Gallery */}
                 <section className="mb-28">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">
-                            India's Living Heritage
-                        </h2>
-                        <p className="text-gray-600 max-w-3xl mx-auto">
-                            Explore the regional diversity of crafts we preserve
-                        </p>
-                        <div className="w-20 h-1.5 bg-amber-500 mx-auto mt-4"></div>
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4 font-serif">Key Highlights</h2>
+                        <div className="w-20 h-1.5 bg-amber-500 mx-auto"></div>
                     </div>
-
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {[
-                            { region: "Kashmir", craft: "Pashmina Weaving", image: "https://images.unsplash.com/photo-1591085686350-798c0f9faa7f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-                            { region: "Rajasthan", craft: "Blue Pottery", image: "https://images.unsplash.com/photo-1585016396082-5c5baebd29e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-                            { region: "Gujarat", craft: "Kutch Embroidery", image: "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-                            { region: "West Bengal", craft: "Terracotta", image: "https://images.unsplash.com/photo-1584898171485-98a743b7a3a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-                            { region: "Kerala", craft: "Coir Crafts", image: "https://images.unsplash.com/photo-1589384473379-95a5c1369e0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-                            { region: "Odisha", craft: "Pattachitra", image: "https://images.unsplash.com/photo-1589384473379-95a5c1369e0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-                            { region: "Punjab", craft: "Phulkari", image: "https://images.unsplash.com/photo-1589384473379-95a5c1369e0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-                            { region: "Tamil Nadu", craft: "Tanjore Painting", image: "https://images.unsplash.com/photo-1589384473379-95a5c1369e0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" }
-                        ].map((item, index) => (
-                            <div key={index} className="relative group overflow-hidden rounded-lg aspect-square">
-                                <img
-                                    src={item.image}
-                                    alt={`${item.region} ${item.craft}`}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-4">
-                                    <h3 className="text-white font-semibold">{item.region}</h3>
-                                    <p className="text-amber-300 text-sm">{item.craft}</p>
-                                </div>
+                            { label: "13+ Years", desc: "Industry Experience" },
+                            { label: "Global", desc: "Wholesale Reach" },
+                            { label: "UK & USA", desc: "Operations" },
+                            { label: "Trusted", desc: "By Libraries & Institutions" }
+                        ].map((stat, index) => (
+                            <div key={index} className="bg-white rounded-xl p-6 text-center shadow-sm">
+                                <div className="text-2xl font-bold text-amber-600">{stat.label}</div>
+                                <div className="text-gray-700 text-sm">{stat.desc}</div>
                             </div>
                         ))}
                     </div>
@@ -255,21 +118,6 @@ const About = () => {
                                 Support Our Mission
                             </button>
                         </div>
-                    </div>
-                </section>
-
-                {/* Press & Recognition */}
-                <section className="mb-16">
-                    <div className="text-center mb-12">
-                        <h3 className="text-sm uppercase tracking-wider text-amber-600 mb-2">Featured In</h3>
-                        <div className="w-20 h-1 bg-amber-500 mx-auto"></div>
-                    </div>
-                    <div className="flex flex-wrap justify-center gap-8 md:gap-16 items-center">
-                        {["Vogue India", "Architectural Digest", "The Hindu", "CNBC", "Forbes India"].map((brand, index) => (
-                            <div key={index} className="text-gray-500 font-serif text-xl font-medium hover:text-amber-600 transition-colors">
-                                {brand}
-                            </div>
-                        ))}
                     </div>
                 </section>
             </div>

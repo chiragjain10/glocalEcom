@@ -16,6 +16,8 @@ import Footer from './components/Footer';
 import User from './user/User';
 import Checkout from './HomePagemain/CheckOut';
 import PaymentPage from './HomePagemain/PaymentPage';
+import PaynmemntSuccess from './Pages/PaynmemntSuccess';
+import PaynmemntFaild from './Pages/PaynmemntFaild';
 import About from './Pages/About';
 import Reviews from './Pages/Reviews';
 import Updates from './Pages/Updates';
@@ -55,7 +57,6 @@ function App() {
                     <Route path="/vlog" element={<Vlog />} />
                     <Route path="/news" element={<News />} />
                     <Route path="/contact" element={<ContactUs />} />
-                    {/* Optional direct route to the homepage categories grid */}
                     <Route path="/home-categories" element={<HomepageCetegories />} />
                     <Route path="/wishlist" element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
                     <Route path="/admin" element={<AdminDashboard />} />
@@ -63,6 +64,8 @@ function App() {
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/checkout/:id" element={<Checkout />} />
                     <Route path="/payment" element={<PaymentPage />} />
+                    <Route path="/payment-success" element={<PaynmemntSuccess />} />
+                    <Route path="/payment-failed" element={<PaynmemntFaild />} />
                     <Route path="/account" element={<ProtectedRoute><User /></ProtectedRoute>} />
                     <Route path="/signup" element={<SignUpPage />} />
                     <Route path="/login" element={<LogInPage />} />

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { FaCheckCircle, FaCreditCard, FaMoneyBillWave, FaUpload, FaSpinner } from 'react-icons/fa';
 import { FiChevronRight, FiCheck } from 'react-icons/fi';
 import { useAuth } from '../Context/AuthContext';
+import { ensureUserFromCheckout, placeCODOrder, placePaidOrder } from '../Context/PlaceOrder';
 import { db, storage } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -16,10 +17,36 @@ const PaymentPage = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [uploadedImages, setUploadedImages] = useState([]);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [razorpayLoaded, setRazorpayLoaded] = useState(false);
 
   // Get order data from checkout
   const order = location.state?.order;
   const fromCheckout = location.state?.fromCheckout;
+
+  // Load Razorpay script
+  useEffect(() => {
+    const loadRazorpay = () => {
+      return new Promise((resolve) => {
+        const script = document.createElement('script');
+        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+        script.onload = () => {
+          setRazorpayLoaded(true);
+          resolve(true);
+        };
+        script.onerror = () => {
+          console.error('Razorpay script failed to load');
+          resolve(false);
+        };
+        document.body.appendChild(script);
+      });
+    };
+
+    if (!window.Razorpay) {
+      loadRazorpay();
+    } else {
+      setRazorpayLoaded(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (!fromCheckout || !order) {
@@ -65,78 +92,108 @@ const PaymentPage = () => {
     return Promise.all(uploadPromises);
   };
 
-  const processOrder = async () => {
+  const processCODOrder = async () => {
     setIsProcessing(true);
     setUploadProgress(0);
-
     try {
-      // Upload images first
       const imageUrls = await uploadImagesToFirebase();
       setUploadProgress(50);
 
-      // Create order document in Firestore
-      const orderData = {
-        userId: user?.uid || 'guest',
-        userEmail: user?.email || order.shipping.email,
-        orderId: order.id,
-        items: order.items,
-        shipping: order.shipping,
-        pricing: order.pricing,
-        paymentMethod: paymentMethod,
-        status: paymentMethod === 'cod' ? 'pending' : 'processing',
-        imageUrls: imageUrls,
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
-        // Add tracking info
-        trackingStatus: 'order_placed',
-        trackingHistory: [
-          {
-            status: 'order_placed',
-            timestamp: new Date(),
-            description: 'Order has been placed successfully'
-          }
-        ]
-      };
-
-      // Add to orders collection
-      const docRef = await addDoc(collection(db, 'orders'), orderData);
-      
-      // Add to parcels collection for tracking
-      const parcelData = {
-        userId: user?.uid || 'guest',
-        parcelId: order.id,
-        fullName: order.shipping.fullName,
-        phone: order.shipping.phone,
-        email: order.shipping.email,
-        pickupAddress: order.shipping.address,
-        dropAddress: `${order.shipping.city}, ${order.shipping.state} ${order.shipping.zipCode}`,
-        weight: order.items.reduce((sum, item) => sum + (item.weight || 1), 0),
-        description: `Order #${order.id} - ${order.items.length} items`,
-        status: 'received',
-        imageUrl: imageUrls[0] || null,
-        createdAt: serverTimestamp(),
-        orderRef: docRef.id
-      };
-
-      await addDoc(collection(db, 'parcels'), parcelData);
-
+      const { trackingId } = await placeCODOrder({ user, order, files: uploadedImages });
       setUploadProgress(100);
 
-      // Show success and redirect
-      setTimeout(() => {
-        navigate('/', { 
-          state: { 
-            orderSuccess: true, 
-            orderId: order.id 
-          } 
-        });
-      }, 2000);
-
+      navigate('/payment-success', {
+        state: { orderId: order.id, trackingId, paymentId: 'COD' }
+      });
     } catch (error) {
       console.error('Error processing order:', error);
       alert('Failed to process order. Please try again.');
     } finally {
       setIsProcessing(false);
+    }
+  };
+
+  const processOnlinePayment = async () => {
+    if (!razorpayLoaded) {
+      alert('Payment gateway is still loading. Please wait a moment and try again.');
+      return;
+    }
+
+    const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
+    
+    if (!razorpayKey) {
+      alert('Payment gateway configuration error. Please try Cash on Delivery or contact support.');
+      console.error('Razorpay Key ID missing. Please add VITE_RAZORPAY_KEY_ID to your .env file');
+      return;
+    }
+
+    try {
+      setIsProcessing(true);
+
+      // First create order in your backend or directly proceed with payment
+      const amountPaise = Math.round(Number(order.pricing.total || 0) * 100);
+
+      const paymentResponse = await openRazorpay({
+        key: razorpayKey,
+        amount: amountPaise,
+        name: 'GlocalShip',
+        description: `Order #${order.id}`,
+        prefill: {
+          name: order.shipping.fullName,
+          email: order.shipping.email,
+          contact: order.shipping.phone || ''
+        },
+        notes: {
+          order_id: String(order.id),
+          items_count: String(order.items.length)
+        },
+        methodPref: paymentMethod
+      });
+
+      // After successful payment, upload images and create Firestore docs
+      const imageUrls = await uploadImagesToFirebase();
+
+      const { trackingId } = await placePaidOrder({
+        user,
+        order,
+        files: uploadedImages,
+        gateway: 'razorpay',
+        paymentDetails: { ...paymentResponse, method: paymentMethod }
+      });
+
+      setUploadProgress(100);
+      navigate('/payment-success', {
+        state: {
+          orderId: order.id,
+          trackingId,
+          paymentId: paymentResponse?.razorpay_payment_id
+        }
+      });
+    } catch (err) {
+      console.error('Payment failed/cancelled:', err);
+      if (err?.message !== 'dismissed') {
+        alert('Payment was not completed. Please try again.');
+      }
+      navigate('/payment-failed', {
+        state: { orderId: order.id, reason: err?.error?.description || err?.message || 'Payment not completed' }
+      });
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const processOrder = async () => {
+    // Create account automatically for guest users using checkout email
+    try {
+      if (!user) {
+        await ensureUserFromCheckout(order?.shipping || {});
+      }
+    } catch {}
+
+    if (paymentMethod === 'cod') {
+      await processCODOrder();
+    } else {
+      await processOnlinePayment();
     }
   };
 
@@ -149,9 +206,23 @@ const PaymentPage = () => {
       color: 'text-green-500'
     },
     {
+      id: 'upi',
+      name: 'UPI',
+      description: 'Pay via UPI apps (GPay, PhonePe, BHIM)',
+      icon: FaCreditCard,
+      color: 'text-blue-500'
+    },
+    {
       id: 'card',
       name: 'Credit/Debit Card',
       description: 'Secure payment with your card',
+      icon: FaCreditCard,
+      color: 'text-blue-500'
+    },
+    {
+      id: 'netbanking',
+      name: 'Net Banking',
+      description: 'Pay via your bank account',
       icon: FaCreditCard,
       color: 'text-blue-500'
     }
@@ -212,6 +283,7 @@ const PaymentPage = () => {
               </div>
             </div>
 
+            {/* Rest of your JSX remains the same */}
             {/* Image Upload Section */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Upload Product Images (Optional)</h2>
@@ -239,7 +311,6 @@ const PaymentPage = () => {
                 </label>
               </div>
 
-              {/* Display uploaded images */}
               {uploadedImages.length > 0 && (
                 <div className="mt-4">
                   <h3 className="text-sm font-medium text-gray-700 mb-2">Uploaded Images:</h3>
@@ -329,9 +400,22 @@ const PaymentPage = () => {
                 </div>
               )}
 
+              {paymentMethod !== 'cod' && (
+                <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
+                  <div className="flex items-center gap-2 text-blue-800">
+                    <FaCheckCircle className="h-5 w-5" />
+                    <span className="text-sm font-medium">Razorpay Secure Checkout</span>
+                  </div>
+                  <p className="text-xs text-blue-700 mt-1">
+                    {!razorpayLoaded && "Loading payment gateway..."}
+                    {razorpayLoaded && `Pay with ${paymentMethod.toUpperCase()} • Cards • NetBanking • Wallets`}
+                  </p>
+                </div>
+              )}
+
               <button
                 onClick={processOrder}
-                disabled={isProcessing}
+                disabled={isProcessing || (paymentMethod !== 'cod' && !razorpayLoaded)}
                 className="w-full bg-amber-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-amber-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition duration-200"
               >
                 {isProcessing ? (
@@ -339,12 +423,16 @@ const PaymentPage = () => {
                     <FaSpinner className="w-5 h-5 animate-spin" />
                     Processing Order...
                   </span>
+                ) : paymentMethod !== 'cod' && !razorpayLoaded ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <FaSpinner className="w-5 h-5 animate-spin" />
+                    Loading Payment...
+                  </span>
                 ) : (
                   `Place Order - ₹${order.pricing.total.toLocaleString()}`
                 )}
               </button>
 
-              {/* Upload Progress */}
               {isProcessing && uploadProgress > 0 && (
                 <div className="mt-4">
                   <div className="flex justify-between text-sm text-gray-600 mb-1">
@@ -376,5 +464,42 @@ const PaymentPage = () => {
     </div>
   );
 };
+
+// Open Razorpay Checkout and resolve with payment ids on success
+function openRazorpay({ key, amount, name, description, prefill, notes, methodPref }) {
+  return new Promise((resolve, reject) => {
+    if (!window.Razorpay) {
+      reject(new Error('Razorpay SDK not loaded'));
+      return;
+    }
+
+    const options = {
+      key,
+      amount,
+      currency: 'INR',
+      name,
+      description,
+      prefill,
+      notes,
+      theme: { color: '#f59e0b' },
+      modal: { 
+        ondismiss: () => reject(new Error('Payment cancelled by user'))
+      },
+      handler: function (response) {
+        resolve({
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_order_id: response.razorpay_order_id,
+          razorpay_signature: response.razorpay_signature
+        });
+      }
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.on('payment.failed', (response) => {
+      reject(new Error(response.error.description || 'Payment failed'));
+    });
+    rzp.open();
+  });
+}
 
 export default PaymentPage;

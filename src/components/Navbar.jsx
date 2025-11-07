@@ -135,7 +135,7 @@ const Navbar = () => {
             <span className="top-bar-text">Shop for daily offers.</span>
           </div>
           <div className="top-bar-right">
-            <a href="tel:+1234567890" className="top-bar-link">📞 +1 (234) 567-890</a>
+            <a href="tel:+919555144777" className="top-bar-link">📞+919555144777</a>
             <a href="mailto:support@glocalship.com" className="top-bar-link">✉️ support@glocalship.com</a>
           </div>
         </div>
@@ -204,7 +204,7 @@ const Navbar = () => {
                   onMouseEnter={() => setIsOpen(true)}
                   onMouseLeave={() => setIsOpen(false)}
                 >
-                  <span className="dropdown-text">Categories</span>
+                  <span className="dropdown-text">Shop</span>
                   <IoIosArrowDown className={`dropdown-arrow ${isOpen ? 'rotated' : ''}`} />
                 </button>
 
