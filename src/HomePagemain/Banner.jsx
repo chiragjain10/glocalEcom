@@ -122,7 +122,7 @@ const Banner = () => {
       "badge": "New Collection",
       "testimonial": {
         "text": "The quality and attention to detail in these textiles is remarkable.",
-        "author": "— Sarah J., Fashion Designer"
+        "author": "— Sarah J., Clothing Designer"
       },
       "stats": {
         "patterns": "30+",
@@ -168,15 +168,15 @@ const Banner = () => {
     },
     {
       "img": "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "title": "Artisan Fashion | Handcrafted Apparel",
+      "title": "Artisan Clothing | Handcrafted Apparel",
       "subtitle": "Ethically produced clothing and accessories with unique traditional techniques",
       "highlight": "Fair Trade • Sustainable Production",
-      "buttonText": "View Fashion",
+      "buttonText": "View Clothing",
       "icon": <GiHand className="text-amber-500 text-4xl" />,
       "badge": "Eco-Friendly",
       "testimonial": {
         "text": "The quality and unique designs make these pieces stand out in my wardrobe.",
-        "author": "— Jessica L., Fashion Blogger"
+        "author": "— Jessica L., Clothing Blogger"
       },
       "stats": {
         "collections": "Seasonal",

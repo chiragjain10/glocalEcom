@@ -10,6 +10,8 @@ import {
   ChevronUpIcon,
   ChevronDownIcon
 } from '@heroicons/react/outline';
+import { formatCurrency, calculateDiscountPercentage } from '../lib/pricing';
+import { CATEGORY_OPTIONS, CATEGORY_MAP } from '../constants/categoryData';
 
 const ProductManagement = () => {
   const { products, loading, error, deleteProduct, fetchProducts } = useProducts();
@@ -20,6 +22,7 @@ const ProductManagement = () => {
   const [editingProduct, setEditingProduct] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [selectedProductType, setSelectedProductType] = useState('');
   const [sortBy, setSortBy] = useState('createdAt');
   const [sortOrder, setSortOrder] = useState('desc');
@@ -31,18 +34,13 @@ const ProductManagement = () => {
     fetchProducts();
   }, []);
 
-  const categories = [
-    'Pottery',
-    'Textiles',
-    'Jewelry',
-    'Home Decor',
-    'Kitchen & Dining',
-    'Furniture',
-    'Art & Craft',
-    'Fashion',
-    'Beauty & Wellness',
-    'Books & Stationery'
-  ];
+  const categoryOptions = CATEGORY_OPTIONS;
+  const availableSubcategories = selectedCategory ? (CATEGORY_MAP[selectedCategory]?.subcategories || []) : [];
+
+  const handleCategoryChange = (value) => {
+    setSelectedCategory(value);
+    setSelectedSubcategory('');
+  };
 
   const handleEdit = (product) => {
     setEditingProduct(product);
@@ -95,8 +93,9 @@ const ProductManagement = () => {
                              product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
                              product.category.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesCategory = !selectedCategory || product.category === selectedCategory;
+        const matchesSubcategory = !selectedSubcategory || product.subcategory === selectedSubcategory;
         const matchesProductType = !selectedProductType || product.productTypes?.includes(selectedProductType);
-        return matchesSearch && matchesCategory && matchesProductType;
+        return matchesSearch && matchesCategory && matchesSubcategory && matchesProductType;
       })
       .sort((a, b) => {
         let aValue = a[sortBy];
@@ -245,12 +244,26 @@ const ProductManagement = () => {
           <div className="w-full lg:w-48">
             <select
               value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
+              onChange={(e) => handleCategoryChange(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
             >
               <option value="">All Categories</option>
-              {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
+              {categoryOptions.map(category => (
+                <option key={category.value} value={category.value}>{category.label}</option>
+              ))}
+            </select>
+          </div>
+          {/* Subcategory Filter */}
+          <div className="w-full lg:w-48">
+            <select
+              value={selectedSubcategory}
+              onChange={(e) => setSelectedSubcategory(e.target.value)}
+              disabled={!selectedCategory}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent disabled:bg-gray-100 disabled:text-gray-500"
+            >
+              <option value="">{selectedCategory ? 'All Subcategories' : 'Select category first'}</option>
+              {availableSubcategories.map((subcategory) => (
+                <option key={subcategory.value} value={subcategory.value}>{subcategory.label}</option>
               ))}
             </select>
           </div>
@@ -336,10 +349,16 @@ const ProductManagement = () => {
                   Category
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Subcategory
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Product Types
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Price
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Discount
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Stock
@@ -393,12 +412,38 @@ const ProductManagement = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                      {product.subcategory || 'N/A'}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
                       {product.productTypes?.join(', ') || 'N/A'}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    ₹{product.price}
+                    <div className="flex flex-col">
+                      <span className="font-semibold text-gray-900">
+                        {formatCurrency(product.price) || `₹${product.price}`}
+                      </span>
+                      {product.maxPrice && product.maxPrice > product.price && (
+                        <span className="text-xs text-gray-500 line-through">
+                          {formatCurrency(product.maxPrice) || `₹${product.maxPrice}`}
+                        </span>
+                      )}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {(() => {
+                      const discount = calculateDiscountPercentage(product.price, product.maxPrice);
+                      return discount ? (
+                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+                          {discount}% OFF
+                        </span>
+                      ) : (
+                        <span className="text-gray-400">—</span>
+                      );
+                    })()}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {product.stock}

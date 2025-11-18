@@ -8,6 +8,7 @@ import {
   ArrowUpIcon,
   ArrowDownIcon
 } from '@heroicons/react/outline';
+import { CATEGORY_OPTIONS, CATEGORY_MAP } from '../constants/categoryData';
 
 const ProductForm = ({ onClose, editProduct = null }) => {
   const { addProduct, updateProduct, loading } = useProducts();
@@ -15,7 +16,9 @@ const ProductForm = ({ onClose, editProduct = null }) => {
     title: editProduct?.title || '',
     description: editProduct?.description || '',
     price: editProduct?.price || '',
+    maxPrice: editProduct?.maxPrice || '',
     category: editProduct?.category || '',
+    subcategory: editProduct?.subcategory || '',
     stock: editProduct?.stock || '',
     rating: editProduct?.rating || '4.5',
     images: editProduct?.images || [],
@@ -31,24 +34,13 @@ const ProductForm = ({ onClose, editProduct = null }) => {
   const fileInputRef = useRef(null);
   const [dragActive, setDragActive] = useState(false);
 
-  const categories = [
-    'Pottery',
-    'Textiles',
-    'Jewelry',
-    'Home Decor',
-    'Kitchen & Dining',
-    'Furniture',
-    'Art & Craft',
-    'Fashion',
-    'Beauty & Wellness',
-    'Books & Stationery'
-  ];
-
   const productTypes = [
     { key: 'newArrivals', label: 'New Arrivals' },
     { key: 'trending', label: 'Trending Products' },
     { key: 'bestsellers', label: 'Bestsellers' }
   ];
+
+  const availableSubcategories = CATEGORY_MAP[formData.category]?.subcategories || [];
 
   const validateForm = useCallback(() => {
     const newErrors = {};
@@ -57,11 +49,18 @@ const ProductForm = ({ onClose, editProduct = null }) => {
     if (!formData.description.trim()) newErrors.description = 'Product description is required';
     if (!formData.price) newErrors.price = 'Product price is required';
     if (!formData.category) newErrors.category = 'Product category is required';
+    if (!formData.subcategory) newErrors.subcategory = 'Subcategory is required';
     if (!formData.stock) newErrors.stock = 'Stock quantity is required';
     if (formData.images.length === 0) newErrors.images = 'At least one product image is required';
     if (formData.productTypes.length === 0) newErrors.productTypes = 'At least one product type is required';
     
     if (formData.price && isNaN(formData.price)) newErrors.price = 'Price must be a valid number';
+    if (formData.maxPrice && isNaN(formData.maxPrice)) newErrors.maxPrice = 'Maximum price must be a valid number';
+    if (formData.price && formData.maxPrice && !isNaN(formData.price) && !isNaN(formData.maxPrice)) {
+      if (parseFloat(formData.maxPrice) <= parseFloat(formData.price)) {
+        newErrors.maxPrice = 'Maximum price must be greater than the current price';
+      }
+    }
     if (formData.stock && isNaN(formData.stock)) newErrors.stock = 'Stock must be a valid number';
     if (formData.rating && (formData.rating < 0 || formData.rating > 5)) newErrors.rating = 'Rating must be between 0 and 5';
 
@@ -205,6 +204,9 @@ const ProductForm = ({ onClose, editProduct = null }) => {
       const productData = {
         ...formData,
         price: parseFloat(formData.price),
+        ...(formData.maxPrice
+          ? { maxPrice: parseFloat(formData.maxPrice) }
+          : { maxPrice: null }),
         stock: parseInt(formData.stock),
         rating: parseFloat(formData.rating),
         priceFormatted: `₹${formData.price}`,
@@ -232,14 +234,30 @@ const ProductForm = ({ onClose, editProduct = null }) => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
+    setFormData(prev => {
+      if (name === 'category') {
+        const shouldKeepSubcategory = prev.category === value;
+        return {
+          ...prev,
+          category: value,
+          subcategory: shouldKeepSubcategory ? prev.subcategory : '',
+        };
+      }
+      return {
+        ...prev,
+        [name]: type === 'checkbox' ? checked : value
+      };
+    });
     
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+    if (name === 'category' && errors.subcategory) {
+      setErrors(prev => ({ ...prev, subcategory: '' }));
+    }
+    if (name === 'maxPrice' && errors.maxPrice) {
+      setErrors(prev => ({ ...prev, maxPrice: '' }));
     }
   };
 
@@ -297,8 +315,8 @@ const ProductForm = ({ onClose, editProduct = null }) => {
           )}
 
           {/* Basic Information */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="md:col-span-2">
               <label htmlFor="product-title" className="block text-sm font-medium text-gray-700 mb-2">
                 Product Title *
               </label>
@@ -333,12 +351,35 @@ const ProductForm = ({ onClose, editProduct = null }) => {
                 }`}
               >
                 <option value="">Select category</option>
-                {categories.map(category => (
-                  <option key={category} value={category}>{category}</option>
+                {CATEGORY_OPTIONS.map(category => (
+                  <option key={category.value} value={category.value}>{category.label}</option>
                 ))}
               </select>
               {errors.category && (
                 <p className="mt-1 text-sm text-red-600">{errors.category}</p>
+              )}
+            </div>
+            <div>
+              <label htmlFor="product-subcategory" className="block text-sm font-medium text-gray-700 mb-2">
+                Subcategory *
+              </label>
+              <select
+                id="product-subcategory"
+                name="subcategory"
+                value={formData.subcategory}
+                onChange={handleInputChange}
+                disabled={!formData.category}
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all ${
+                  errors.subcategory ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                } ${!formData.category ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+              >
+                <option value="">{formData.category ? 'Select subcategory' : 'Select category first'}</option>
+                {availableSubcategories.map(subcategory => (
+                  <option key={subcategory.value} value={subcategory.value}>{subcategory.label}</option>
+                ))}
+              </select>
+              {errors.subcategory && (
+                <p className="mt-1 text-sm text-red-600">{errors.subcategory}</p>
               )}
             </div>
           </div>
@@ -365,7 +406,7 @@ const ProductForm = ({ onClose, editProduct = null }) => {
           </div>
 
           {/* Pricing & Stock */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
               <label htmlFor="product-price" className="block text-sm font-medium text-gray-700 mb-2">
                 Price (₹) *
@@ -388,6 +429,32 @@ const ProductForm = ({ onClose, editProduct = null }) => {
               </div>
               {errors.price && (
                 <p className="mt-1 text-sm text-red-600">{errors.price}</p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="product-max-price" className="block text-sm font-medium text-gray-700 mb-2">
+                Maximum Price (Optional)
+              </label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">₹</span>
+                <input
+                  id="product-max-price"
+                  type="number"
+                  name="maxPrice"
+                  value={formData.maxPrice}
+                  onChange={handleInputChange}
+                  step="0.01"
+                  min="0"
+                  className={`w-full pl-8 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all ${
+                    errors.maxPrice ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                  }`}
+                  placeholder="0.00"
+                />
+              </div>
+              <p className="mt-1 text-xs text-gray-500">Used to show discounts (original price).</p>
+              {errors.maxPrice && (
+                <p className="mt-1 text-sm text-red-600">{errors.maxPrice}</p>
               )}
             </div>
 

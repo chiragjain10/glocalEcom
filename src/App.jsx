@@ -61,9 +61,9 @@ function App() {
                     <Route path="/wishlist" element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
                     <Route path="/admin" element={<AdminDashboard />} />
                     <Route path="/cart" element={<AddtoCart />} />
-                    <Route path="/checkout" element={<Checkout />} />
-                    <Route path="/checkout/:id" element={<Checkout />} />
-                    <Route path="/payment" element={<PaymentPage />} />
+                    <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+                    <Route path="/checkout/:id" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+                    <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
                     <Route path="/payment-success" element={<PaynmemntSuccess />} />
                     <Route path="/payment-failed" element={<PaynmemntFaild />} />
                     <Route path="/account" element={<ProtectedRoute><User /></ProtectedRoute>} />

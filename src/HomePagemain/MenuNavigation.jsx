@@ -56,7 +56,7 @@ export const categories = [
     ]
   },
   {
-    title: "Fashion",
+    title: "Clothing",
     icon: <FaGem />,
     subItems: [
       { title: "Hindu",

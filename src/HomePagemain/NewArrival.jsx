@@ -5,6 +5,7 @@ import { useProducts } from "../Context/ProductContext";
 import { useWishlist } from "../Context/WishlistContext";
 import { useCart } from "../Context/CartContext";
 import { toastCart } from "../components/ui/use-toast";
+import { formatCurrency, calculateDiscountPercentage } from "../lib/pricing";
 
 const NewArrival = () => {
   const [visibleCards, setVisibleCards] = useState(4);
@@ -111,6 +112,10 @@ const NewArrival = () => {
         >
           {newArrivalItems.map((item) => {
             const isInWishlist = wishlist?.some((w) => w.id === item.id);
+            const discount = calculateDiscountPercentage(item.price, item.maxPrice);
+            const displayPrice = formatCurrency(item.price) || `₹${item.price ?? 0}`;
+            const displayMaxPrice = formatCurrency(item.maxPrice);
+            const showMaxPrice = discount && displayMaxPrice;
 
             return (
               <div
@@ -132,8 +137,18 @@ const NewArrival = () => {
                     </div>
                   )}
 
-                  <div className="absolute top-3 right-3 bg-white/90 px-3 py-1 rounded-full shadow-sm">
-                    <span className="font-bold text-gray-900">₹{item.price}</span>
+                  <div className="absolute top-3 right-3 flex flex-col items-end gap-1">
+                    <div className="bg-white/90 px-3 py-1 rounded-full shadow-sm">
+                      <span className="font-bold text-gray-900">{displayPrice}</span>
+                      {showMaxPrice && (
+                        <span className="ml-2 text-xs text-gray-500 line-through">{displayMaxPrice}</span>
+                      )}
+                    </div>
+                    {discount && (
+                      <span className="bg-green-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full shadow">
+                        {discount}% OFF
+                      </span>
+                    )}
                   </div>
 
                   {/* Action Icons */}

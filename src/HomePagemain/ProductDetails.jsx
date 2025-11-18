@@ -18,6 +18,7 @@ import {
   FaTimes
 } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
+import { formatCurrency, calculateDiscountPercentage } from "../lib/pricing";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -35,6 +36,10 @@ const ProductDetails = () => {
 
   // Find product by ID
   const product = products.find((p) => p.id === parseInt(id));
+  const discount = calculateDiscountPercentage(product?.price, product?.maxPrice);
+  const displayPrice = formatCurrency(product?.price) || (product?.price ? `₹${product.price}` : null);
+  const displayMaxPrice = formatCurrency(product?.maxPrice);
+  const showMaxPrice = discount && displayMaxPrice;
 
   useEffect(() => {
     if (product && product.images && product.images.length > 0) {
@@ -246,7 +251,19 @@ const ProductDetails = () => {
             </div>
 
             {/* Price */}
-            <div className="text-4xl font-bold text-amber-500">₹{product.price}</div>
+            <div className="flex items-center gap-4">
+              <div className="text-4xl font-bold text-amber-500">
+                {displayPrice || '₹0'}
+              </div>
+              {showMaxPrice && (
+                <span className="text-2xl text-gray-400 line-through">{displayMaxPrice}</span>
+              )}
+              {discount && (
+                <span className="bg-green-100 text-green-700 font-semibold px-3 py-1 rounded-full text-sm">
+                  {discount}% OFF
+                </span>
+              )}
+            </div>
 
             {/* Description */}
             <p className="text-gray-700 text-lg leading-relaxed">{product.description}</p>
@@ -343,6 +360,12 @@ const ProductDetails = () => {
             {/* Additional Info */}
             <div className="pt-6 border-t border-gray-200">
               <div className="grid grid-cols-2 gap-4 text-sm">
+                {showMaxPrice && (
+                  <div>
+                    <span className="text-gray-500">Max Price:</span>
+                    <span className="text-gray-700 font-medium ml-2 line-through">{displayMaxPrice}</span>
+                  </div>
+                )}
                 <div>
                   <span className="text-gray-500">Category:</span>
                   <span className="text-gray-700 font-medium ml-2">{product.category || 'General'}</span>

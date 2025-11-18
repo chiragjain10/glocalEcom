@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
-// import { createUserWithEmailAndPassword, updateProfile } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { sendSignupEmail } from "../lib/email";
 
 
 const SignUpPage = () => {
@@ -54,6 +54,15 @@ const SignUpPage = () => {
       await updateProfile(userCredential.user, {
         displayName: formData.fullName
       });
+
+      try {
+        await sendSignupEmail({
+          fullName: formData.fullName,
+          email: formData.email
+        });
+      } catch (emailError) {
+        console.error("Signup welcome email failed:", emailError);
+      }
 
       navigate("/account"); // Redirect to user dashboard after successful signup
     } catch (error) {
