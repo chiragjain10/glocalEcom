@@ -25,9 +25,14 @@ import './navbar.css';
 
 export const categories = [
   {
-    title: 'Audio Video',
-    icon: <FaHeadphonesAlt />,
-    subItems: ['Smartphones', 'Laptops', 'Headphones', 'Cameras', 'Speakers', 'Microphones']
+    title: 'Pottery',
+    icon: <FaPaintBrush />, 
+    subItems: ['Ceramic', 'Clay Pots', 'Handmade Pots', 'Designer Pottery', 'Planters']
+  },
+  {
+    title: 'Handicrafts',
+    icon: <FaGopuram />,
+    subItems: ['Wooden Crafts', 'Metal Crafts', 'Handmade Decor', 'Traditional Art', 'Weavings']
   },
   {
     title: 'Jewelry',
@@ -35,14 +40,9 @@ export const categories = [
     subItems: ['Necklaces', 'Earrings', 'Rings', 'Bracelets', 'Pendants', 'Anklets']
   },
   {
-    title: 'Paintings',
-    icon: <FaPaintBrush />,
-    subItems: ['Abstract', 'Landscape', 'Portrait', 'Still Life', 'Modern', 'Classical']
-  },
-  {
-    title: 'Statues',
-    icon: <FaGopuram />,
-    subItems: ['Brass', 'Stone', 'Wood', 'Ceramic', 'Metal', 'Resin']
+    title: 'Clothing',
+    icon: <FaTshirt />,
+    subItems: ['Men', 'Women', 'Kids', 'Ethnic Wear', 'Western Wear', 'Accessories']
   },
   {
     title: 'Books',
@@ -50,25 +50,11 @@ export const categories = [
     subItems: ['Fiction', 'Non-Fiction', 'Comics', 'Biographies', 'Self-Help', 'Academic']
   },
   {
-    title: 'Clothing & More',
-    icon: <FaTshirt />,
-    subItems: ['Men', 'Women', 'Kids', 'Accessories', 'Footwear', 'Bags']
-  },
-  {
-    title: 'Home & Living',
-    icon: <FaHome />,
-    subItems: ['Furniture', 'Decor', 'Kitchen', 'Bathroom', 'Garden', 'Lighting']
-  },
-  {
-    title: 'Luxe',
-    icon: <FaCrown />,
-    subItems: ['Premium Items', 'Limited Edition', 'Exclusive', 'VIP Collection']
-  },
-  {
-    title: 'Best Deals',
-    icon: <FaTags />,
-    subItems: ['Flash Sales', 'Clearance', 'Seasonal Offers', 'Bundle Deals']
+    title: 'Statues',
+    icon: <FaGopuram />,
+    subItems: ['Brass', 'Stone', 'Wood', 'Ceramic', 'Metal', 'Resin']
   }
+  
 ];
 
 const Navbar = () => {

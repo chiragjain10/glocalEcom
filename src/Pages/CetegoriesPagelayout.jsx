@@ -16,22 +16,22 @@ import { formatCurrency, calculateDiscountPercentage } from '../lib/pricing';
 // Icon mapping for categories
 const CATEGORY_ICONS = {
   'Pottery': <FaGem />,
-  'Textiles': <FaGem />,
+  // 'Textiles': <FaGem />,
   'Handicrafts': <FaGem />,
   'Jewelry': <FaGem />,
-  'Home Decor': <FaHome />,
-  'Kitchen & Dining': <FaHome />,
-  'Furniture': <FaHome />,
-  'Art & Craft': <FaPaintBrush />,
+  // 'Home Decor': <FaHome />,
+  // 'Kitchen & Dining': <FaHome />,
+  // 'Furniture': <FaHome />,
+  // 'Art & Craft': <FaPaintBrush />,
   'Clothing': <FaTshirt />,
-  'Beauty & Wellness': <FaGem />,
+  // 'Beauty & Wellness': <FaGem />,
   'Books': <FaBookOpen />,
-  'Audio Video': <FaHeadphonesAlt />,
-  'Paintings': <FaPaintBrush />,
+  // 'Audio Video': <FaHeadphonesAlt />,
+  // 'Paintings': <FaPaintBrush />,
   'Statues': <FaGopuram />,
-  'Clothing & More': <FaTshirt />,
-  'Home & Living': <FaHome />,
-  'Luxe': <FaCrown />,
+  // 'Clothing & More': <FaTshirt />,
+  // 'Home & Living': <FaHome />,
+  // 'Luxe': <FaCrown />,
   'Best Deals': <FaTags />
 };
 
